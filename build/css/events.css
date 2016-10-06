@@ -3,7 +3,20 @@
 }
 
 .ourbutton{
-    background-color: #337ab7;
+    background-color: #971b2f;
+}
+
+.ournav{
+  background-color: #971b2f;
+  color: #ffffff;
+}
+
+.centering{
+  text-align: center;
+}
+
+.activepill{
+  background-color: #cccccc;
 }
 
 /* Style the list */
@@ -13,7 +26,7 @@ ul.tab {
     padding: 0;
     overflow: hidden;
     border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: #971b2f;
 }
 
 /* Float the list items side by side */
