@@ -1,0 +1,14 @@
+.next-events-list li:hover{
+  background-color: #E7E7E7;
+  -webkit-text-fill-color: #7D223E;
+}
+.next-events-list {
+  list-style-type: none;
+}
+.panel-body-title {
+  border-bottom-width: 10px;
+  border-color: lightgray;
+}
+.card {
+  padding-bottom: 10px;
+}
