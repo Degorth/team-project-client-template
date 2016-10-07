@@ -1,24 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UGo!</title>
-  <!-- Bootstrap's CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="css/upcoming.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UGo!</title>
+    <!-- Bootstrap's CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/upcoming.css" rel="stylesheet">
 </head>
+
 <body>
-  <!--Tabbed Nav Bar-->
-  <ul class="tab">
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Home</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Schedule</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Upcoming</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">I'm Bored</font></a></li>
-    <li class="active ournav"><a href="eventsmain.html" class="tablinks"><font color="#ffffff">Events</font></a></li>
-  </ul>
-  <hr>
+    <!--Tabbed Nav Bar-->
+    <ul class="tab">
+        <li class="ournav">
+            <a href="#" class="tablinks">
+                <font color="#ffffff">Home</font>
+            </a>
+        </li>
+        <li class="ournav">
+            <a href="#" class="tablinks">
+                <font color="#ffffff">Schedule</font>
+            </a>
+        </li>
+        <li class="active ournav">
+            <a href="#" class="tablinks">
+                <font color="#ffffff">Upcoming</font>
+            </a>
+        </li>
+        <li class="ournav">
+            <a href="#" class="tablinks">
+                <font color="#ffffff">I'm Bored</font>
+            </a>
+        </li>
+        <li class="ournav">
+            <a href="eventsmain.html" class="tablinks">
+                <font color="#ffffff">Events</font>
+            </a>
+        </li>
+    </ul>
+    <!--Delimination Line-->
+    <hr>
+    <div class="col-md-offset-3 col-centered">
+        <div class="container">
+            <h3>Upcoming Events:</h3>
+            <p> Check out new events coming soon near you </p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Activity </th>
+                        <th>Organizer <button type="button" class "btn btn-default"><span class ="glyphicon glyphicon-resize-vertical"></button></th>
+                        <th>Time <button type="button" class "btn btn-default"><span class ="glyphicon glyphicon-resize-vertical"></button></th>
+                        <th>Rating <button type="button" class "btn btn-default"><span class ="glyphicon glyphicon-resize-vertical"></button></th>
+                        <th>Description </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cybersecurity Talk</td>
+                        <td>ACM Cybersecurity Club</td>
+                        <td>6:00pm-7:00pm</td>
+                        <td>4/5</td>
+                        <td>Description</td>
+                    </tr>
+                    <tr>
+                        <td>Activity</td>
+                        <td>Organizer</td>
+                        <td>Time</td>
+                        <td>Rating</td>
+                        <td>Description</td>
+                    </tr>
+                    <tr>
+                        <td>Activity</td>
+                        <td>Organizer</td>
+                        <td>Time</td>
+                        <td>Rating</td>
+                        <td>Description</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
