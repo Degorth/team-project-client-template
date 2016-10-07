@@ -25,6 +25,10 @@ ul.nav li {
   margin:5px;
 }
 
+ul.nav li.active-class > a{
+  color:white;
+}
+
 
 .btn-primary {
     background: #9F3156;
