@@ -1,0 +1,64 @@
+.formfields{
+    font-size: 18px;
+}
+
+.ourbutton{
+    background-color: #971b2f;
+}
+
+.ournav{
+  background-color: #971b2f;
+  color: #ffffff;
+}
+
+.centering{
+  text-align: center;
+}
+
+.activepill{
+  background-color: #cccccc;
+}
+
+.col-centered {
+  margin: 0 auto;
+}
+
+.btn-default {
+  color: #ffffff;
+  background:  #cccccc;
+  border: ;
+}
+.glyphicon-resize-vertical {
+  color: #ffffff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+/* Style the list */
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #971b2f;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {background-color: #ddd;}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {background-color: #ccc;}
