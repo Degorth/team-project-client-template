@@ -1,0 +1,8 @@
+upcomingscrn:
+This is the page that shows all of the events that will be coming up in the near
+future. It will show the activity name, the organizer and the picture associated
+with that club or even and the time/date when this will occur. Furthermore, it
+will contain a rating based on either the user's preference or the average
+rating of the other users who have attended this event in the past. There will
+also be a short description which will end with a link to the event's page. The
+columns having to do with organizer, time, date, and rating will be sortable. 
