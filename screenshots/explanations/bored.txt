@@ -1,7 +1,0 @@
-Bored:
-The bored page is laid out with one randomly generated event in the center
-of the page. This event panel includes the event name, location, event holders,
-and contact information. Below this panel are two buttons, one to add the event
-to your schedule, and another to generate another event to attend. The generated
-events are soon-to-come events, so that the user can use this page to find something
-to do in a moment's time.

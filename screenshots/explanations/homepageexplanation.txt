@@ -1,6 +1,0 @@
-homepage scrn:
-The homepage screen is pretty straightforward. It contains the head nav bar.
-It also has two panels. The first panel tells the user what events they have
-scheduled for later that day. It contains links to those events UGOEvent pages.
-The second panel prompts the user to review events they've attended in the past
-but have not yet reviewed.
