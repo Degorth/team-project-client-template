@@ -1,0 +1,6 @@
+schedule:
+Schedule is organized into several rows. Displaying today's events, this week's
+events, next week's events, and future events. Each even has its own 'tile' which
+contains: the picture relating to the event if there is one, the start time, the name
+of the organization presenting, the name of the event, a link to the full event description,
+and a brief description. When no events are found, it will return a link to sign up for events.
