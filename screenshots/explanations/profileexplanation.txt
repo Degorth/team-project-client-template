@@ -1,0 +1,15 @@
+User Profile Page:
+	This page displays the user profile as viewed by the profile owner. 
+	it includes the profile picture, name, what groups the user is a 
+	member of, their contact info, who their friends are, and a brief 
+	view of their upcoming schedule. Links are provided to change the 
+	profile picture, change what groups the user is a part of, manage 
+	friends, and edit the user's schedule.
+
+Organization Profile Page:
+	This page is similar to the user profile, but displays information 
+	regarding an organization. Displayed on this page are the 
+	organization's emblem, name, description, primary contact info, 
+	group members, and schedule of events owned by this organization. 
+	Links are provided to edit the picture, description, members, and 
+	alter the schedule.
