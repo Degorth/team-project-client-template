@@ -20,10 +20,19 @@ ul.nav li.active-class, li:hover {
   background-color: #BC5279;
 }
 
-ul.nav li {
-  -webkit-text-fill-color: #7D223E;
+ul.nav li > a{
+  -webkit-text-fill-color: #971b2f;
   margin:5px;
 }
+
+ul.nav li.active-class > a{
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+ul.nav li:hover >a {
+    -webkit-text-fill-color: #ffffff !important;
+}
+
 
 
 .btn-primary {
