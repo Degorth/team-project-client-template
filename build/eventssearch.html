@@ -1,42 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UGo!</title>
-  <!-- Bootstrap's CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="css/events.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UGo!</title>
+    <!-- Bootstrap's CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/events.css" rel="stylesheet">
+    <link href="css/template.css" rel="stylesheet">
+    <link href="css/homepage.css" rel="stylesheet">
+    <link href="css/schedule.css" rel="stylesheet">
 </head>
+
 <body>
-  <!--Tabbed Nav Bar-->
-  <ul class="tab">
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Home</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Schedule</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Upcoming</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">I'm Bored</font></a></li>
-    <li class="active ournav"><a href="eventsmain.html" class="tablinks"><font color="#ffffff">Events</font></a></li>
-  </ul>
-  <!--Pill Buttons-->
-  <ul class="nav nav-pills">
-    <li class="activepill"><a href="#"><font color="#ffffff">Search Events</font></a></li>
-    <li><a href="eventscreate.html">Create Event</a></li>
-  </ul>
-  <!--Delimination Line-->
-  <hr>
-  <!--Search bar-->
-  <input id="eventsearchbar" class="eventsearchbar" value="Karate" type="search" placeholder="Search by tags or event name">
-  <hr>
-  <div class="searchresult">
-    <img src="img/iskf.jpg" width="150px" />
-     Umass' branch of International Shotokan Karate Federation.
-    <div>Umass Shotokan Karate</div>
-    <form action="eventspage.html">
-      <input type="submit" value="View Event Page"/>
-    </form>
-  </div>
-  <hr>
+    <!--Beginning of navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">UGo</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">My Schedule</a></li>
+                <li><a href="#">Upcoming</a></li>
+                <li><a href="#">I'm Bored</a></li>
+                <li class="active-class"><a href="#">Events</a></li>
+            </ul>
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-primary">
+          <span class="glyphicon glyphicon-user"></span> My Profile</button>
+                <button type="button" class="btn btn-primary">
+          <span class="glyphicon glyphicon-asterisk"></span> I'm Bored</button>
+            </div>
+        </div>
+    </nav>
+    <!--end of navbar-->
+    <!--Pill Buttons-->
+    <ul class="nav nav-pills">
+        <li class="activepill">
+            <a href="#">
+                <font color="#ffffff">Search Events</font>
+            </a>
+        </li>
+        <li><a href="eventscreate.html">Create Event</a></li>
+    </ul>
+    <!--Delimination Line-->
+    <hr>
+    <!--Search bar-->
+    <input id="eventsearchbar" class="eventsearchbar" value="Karate" type="search" placeholder="Search by tags or event name">
+    <hr>
+    <div class="searchresult">
+        <img src="img/iskf.jpg" width="150px" /> Umass' branch of International Shotokan Karate Federation.
+        <div>Umass Shotokan Karate</div>
+        <form action="eventspage.html">
+            <input type="submit" value="View Event Page" />
+        </form>
+    </div>
+    <hr>
 </body>
+
 </html>

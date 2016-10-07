@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UGo!</title>
-  <!-- Bootstrap's CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="css/events.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UGo!</title>
+    <!-- Bootstrap's CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/events.css" rel="stylesheet">
+    <link href="css/template.css" rel="stylesheet">
+    <link href="css/homepage.css" rel="stylesheet">
+    <link href="css/schedule.css" rel="stylesheet">
 </head>
+
 <body>
-  <!--Tabbed Nav Bar-->
-  <ul class="tab">
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Home</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Schedule</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">Upcoming</font></a></li>
-    <li class="ournav"><a href="#" class="tablinks"><font color="#ffffff">I'm Bored</font></a></li>
-    <li class="active ournav"><a href="eventsmain.html" class="tablinks"><font color="#ffffff">Events</font></a></li>
-  </ul>
-  <!--Pill Buttons-->
-  <ul class="nav nav-pills">
-    <li><a href="eventssearch.html">Search Events</a></li>
-    <li class="activepill"><a href="#"><font color="#ffffff">Create Event</font></a></li>
-  </ul>
-  <!--Delimination Line-->
-  <hr>
-  <!--New event creation form-->
-  <form>
-    <div class="formfields"> Event Name: </div>
-    <textarea rows="1" placeholder=""></textarea>
-    <br>
-    <div class="formfields"> Event Organizer: </div>
-    <textarea rows="1" placeholder=""></textarea>
-    <br>
-    <div class="formfields"> Event Location: </div>
-    <textarea rows="1" placeholder=""></textarea>
-    <br>
-    <div class="formfields"> Event Info: </div>
-    <textarea rows="4" col="150" placeholder=""></textarea>
-    <br>
-    <div class="formfields"> Contact Info: </div>
-    <textarea rows="1" placeholder=""></textarea>
-    <br>
-    <button type="submit"> Submit </button>
-  </form>
+    <!--Beginning of navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">UGo</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">My Schedule</a></li>
+                <li><a href="#">Upcoming</a></li>
+                <li><a href="#">I'm Bored</a></li>
+                <li class="active-class"><a href="#">Events</a></li>
+            </ul>
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-user"></span> My Profile</button>
+                <button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-asterisk"></span> I'm Bored</button>
+            </div>
+        </div>
+    </nav>
+    <!--end of navbar-->
+    <!--Pill Buttons-->
+    <ul class="nav nav-pills">
+        <li><a href="eventssearch.html">Search Events</a></li>
+        <li class="activepill">
+            <a href="#">
+                <font color="#ffffff">Create Event</font>
+            </a>
+        </li>
+    </ul>
+    <!--Delimination Line-->
+    <hr>
+    <!--New event creation form-->
+    <form>
+        <div class="formfields"> Event Name: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Organizer: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Location: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Info: </div>
+        <textarea rows="4" col="150" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Contact Info: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <button type="submit"> Submit </button>
+    </form>
 </body>
+
 </html>
