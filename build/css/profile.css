@@ -14,3 +14,7 @@ ul.info {
 div.vertical-line {
   border-right: 1px solid #ccc;
 }
+
+.indent {
+	margin-left: 20px;
+}
