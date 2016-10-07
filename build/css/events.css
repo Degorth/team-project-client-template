@@ -67,3 +67,12 @@ textarea{
 h4.info {
   display: inline-block;
 }
+
+ul.info {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+div.vertical-line {
+  border-right: 1px solid #ccc;
+}
