@@ -37,15 +37,37 @@
       </div>
   </nav>
   <!--end of navbar-->
+  </nav>
     <!--Pill Buttons-->
     <ul class="nav nav-pills">
         <li><a href="eventssearch.html">Search Events</a></li>
-        <li><a href="eventscreate.html">Create Event</a></li>
+        <li class="activepill">
+            <a href="#">
+                <font color="#ffffff">Create Event</font>
+            </a>
+        </li>
     </ul>
     <!--Delimination Line-->
     <hr>
-    <!--page in a page show event info page-->
-    <iframe src="eventspageinfo.html" height="800" width="1000"></iframe>
+    <!--New event creation form-->
+    <form>
+        <div class="formfields"> Event Name: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Organizer: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Location: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Info: </div>
+        <textarea rows="4" col="150" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Contact Info: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <button type="submit"> Submit </button>
+    </form>
 </body>
 
 </html>

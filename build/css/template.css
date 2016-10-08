@@ -49,6 +49,17 @@ ul.nav li>a:hover {
     border: none;
 }
 
+.btn-secondary {
+    background: gray;
+    -webkit-text-fill-color: black;
+    border: none;
+}
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+    background: lightgray;
+    -webkit-text-fill-color: gray;
+    border: none;
+}
+
 body {
     background-color: #F7F7F7;
 }
