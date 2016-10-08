@@ -50,14 +50,25 @@ ul.nav li>a:hover {
 }
 
 .btn-secondary {
-    background: gray;
+    background: lightgray;
     -webkit-text-fill-color: black;
     border: none;
 }
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
-    background: lightgray;
-    -webkit-text-fill-color: gray;
+    background: gray;
+    -webkit-text-fill-color: black;
     border: none;
+}
+
+.btn-tertiary {
+    background: #BC5279;
+    -webkit-text-fill-color: #F7F7F7;
+    border-color: #9F3156;
+}
+.btn-tertiary:hover, .btn-tertiary:focus, .btn-tertiary:active, .btn-tertiary.active, .open>.dropdown-toggle.btn-tertiary {
+    background: lightgray;
+    -webkit-text-fill-color: #F7F7F7;
+    border-color: gray;
 }
 
 body {

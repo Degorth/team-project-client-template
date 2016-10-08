@@ -26,7 +26,7 @@
               <li><a href="schedule.html">My Schedule</a></li>
               <li><a href="upcoming.html">Upcoming</a></li>
               <li><a href="bored.html">I'm Bored</a></li>
-              <li class="active-class"><a href="eventsmain.html">Events</a></li>
+              <li class="active-class"><a href="eventssearch.html">Events</a></li>
           </ul>
           <div class="btn-group-vertical pull-right" role="group">
               <a class="btn btn-primary" href="profileuser.html" role="button">
@@ -37,28 +37,77 @@
       </div>
   </nav>
   <!--end of navbar-->
-    <!--Pill Buttons-->
-    <ul class="nav nav-pills">
-        <li class="activepill">
-            <a href="#">
-                <font color="#ffffff">Search Events</font>
-            </a>
-        </li>
-        <li><a href="eventscreate.html">Create Event</a></li>
-    </ul>
-    <!--Delimination Line-->
-    <hr>
     <!--Search bar-->
-    <input id="eventsearchbar" class="eventsearchbar" value="Karate" type="search" placeholder="Search by tags or event name">
-    <hr>
-    <div class="searchresult">
-        <img src="img/iskf.jpg" width="150px" /> Umass' branch of International Shotokan Karate Federation.
-        <div>Umass Shotokan Karate</div>
-        <form action="eventspage.html">
-            <input type="submit" value="View Event Page" />
-        </form>
+    <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Event/Organization Description">
+      </div>
+      <div class="form-check">
+        <label for="form-check">Occurring On</label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Mon
+        </label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Tue
+        </label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Wed
+        </label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Thurs
+        </label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Fri
+        </label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Sat
+        </label>
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Sun
+        </label>
+      </div>
+      <div class="form-group row">
+        <label for="example-time-input" class="col-xs-2 col-form-label">Occurring After</label>
+        <div class="col-xs-10">
+          <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-time-input" class="col-xs-2 col-form-label">Before</label>
+        <div class="col-xs-10">
+          <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-secondary btn-block">Find Events!</button>
+    </form>
+  </div>
+</div>
+<hr>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="searchresult">
+              <img src="img/iskf.jpg" width="150px"/> Umass' branch of International Shotokan Karate Federation.
+              <div>Umass Shotokan Karate</div>
+              <a class="btn btn-secondary" href="eventspageinfo.html" role="button">
+              <span class="glyphicon glyphicon-hand-up"></span> View Event Page</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <hr>
 </body>
 
 </html>
