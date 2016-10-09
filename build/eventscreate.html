@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UGo!</title>
+    <!-- Boostrap JS and JQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.map"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
     <!-- Bootstrap's CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -63,32 +69,48 @@
                 <input type="event_loc" class="form-control" id="event_loc" placeholder="Enter A Location For This Event">
                 </input>
               </div>
-              <div class="form-group row">
-                <label for="event-datetime-local-input" class="col-xs-2 col-form-label">Date and time</label>
-                <div class="col-xs-10">
-                  <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="event-datetime-local-input">
+              <!-- Here we begin the collapsable group -->
+            <div id="EventTimesChoice">
+              <button class="btn dropdown" data-toggle="collapse" data-target="#one_time_event" data-parent="#EventTimesChoice">
+                One-Time Event
+              </button>
+              <button class="btn dropdown" data-toggle="collapse" data-target="#regular_event" data-parent="#EventTimesChoice">
+                Regular Event
+              </button>
+            <div class="accordion-group">
+              <div class="collapse" id="one_time_event">
+                <div class="form-group row">
+                  <label for="event-datetime-local-input" class="col-xs-2 col-form-label">Date and time</label>
+                  <div class="col-xs-10">
+                    <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="event-datetime-local-input">
+                  </div>
                 </div>
               </div>
-              <form class="form-inline">
-                <div class="form-group row">
-                  <label for="example-month-input" class="col-xs-2 col-form-label">Week Day</label>
-                <div class="col-xs-10">
-                  <select class="form-control" id="OrganizerSelect">
-                    <option>Mon</option>
-                    <option>Tue</option>
-                    <option>Wed</option>
-                    <option>Thurs</option>
-                    <option>Fri</option>
-                    <option>Sat</option>
-                    <option>Sun</option>
-                  </select>
-                  </div>
-                    <label for="example-time-input" class="col-xs-2 col-form-label">Time</label>
-                  <div class="col-xs-10">
-                    <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-                  </div>
+              <div class="collapse" id="regular_event">
+                <form class="form-inline">
+                  <div class="form-group row">
+                    <label for="example-month-input" class="col-xs-2 col-form-label">Week Day</label>
+                    <div class="col-xs-10">
+                      <select class="form-control" id="OrganizerSelect">
+                        <option>Mon</option>
+                        <option>Tue</option>
+                        <option>Wed</option>
+                        <option>Thurs</option>
+                        <option>Fri</option>
+                        <option>Sat</option>
+                        <option>Sun</option>
+                      </select>
+                    </div>
+                      <label for="example-time-input" class="col-xs-2 col-form-label">Time</label>
+                      <div class="col-xs-10">
+                        <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                      </div>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
+            </div>
+              <!-- Collapsable group ended -->
               <div class="form-group">
                 <label for="eventDesc">Description of This Event</label>
                 <textarea class="form-control" id="event_desc" rows="3">
