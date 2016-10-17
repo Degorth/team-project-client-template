@@ -11,9 +11,12 @@
     <script src="js/jquery.min.map"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/imagelist.js"></script>
+
 
     <!-- Bootstrap's CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="css/events.css" rel="stylesheet">
     <link href="css/template.css" rel="stylesheet">
@@ -113,34 +116,23 @@
                   <input class="form-control" type="email" value="example@umass.com" id="event-email-input">
                 </div>
               </div>
+
+              <hr>
+              <h4> Add Some Photos . . . </h4>
+              <input type="file" accept='image/*' onchange="readURL(this);"/>
+
+              <ul id="imagelist" class="image-list">
+              </ul>
+            </form>
+          </div>
+          <div class="panel-footer">
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoModal">
-                  <span class="glyphicon glyphicon-camera"></span> Add a Photo</button>
                   <a class="btn btn-primary" href="#" role="button">
                   <span class="glyphicon glyphicon-hand-up"></span> Submit Event</a>
                 </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="photoModalLabel">Choose a Photo . . .</h4>
-          </div>
-          <div class="modal-body">
-            <input type="file" id="files" name="files[]" multiple />
-            <output id="image_list"></output>
-            <button type="button" class="btn btn-primary" id="pinPhoto">
-              <span class="glyphicon glyphicon-pushpin"></span> Pin Photo
-            </button>
-          </div>
+            </div>
         </div>
       </div>
     </div>

@@ -54,6 +54,23 @@ ul.tab li a:focus, .active {background-color: #ccc;}
   width: 800px;
 }
 
+ul.image-list li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+  float: left;
+}
+
+li.imageWrap {
+  display:inline-block;position:relative;
+}
+
+.image-button {
+  position:absolute;
+  top:0;
+  right:10%;
+}
+
 textarea{
   resize:none;
   width: 800px;
