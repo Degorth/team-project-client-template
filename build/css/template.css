@@ -71,6 +71,24 @@ ul.nav li>a:hover {
     border-color: gray;
 }
 
+ul.image-list li, ul.member-list li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+  float: left;
+}
+
+li.imageWrap {
+  display:inline-block;
+  position:relative;
+}
+
+.image-button {
+  position:absolute;
+  top:0;
+  right:10%;
+}
+
 body {
     background-color: #F7F7F7;
 }

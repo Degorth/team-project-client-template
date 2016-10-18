@@ -11,6 +11,9 @@
     <script src="js/jquery.min.map"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="groupscreate.js"></script>
+
+
 
     <!-- Bootstrap's CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -68,12 +71,20 @@
                 </div>
               </div>
             </form>
+
+            <hr>
+
+            <h4> Who's In This Group?
+              <button class="btn btn-primary pull-right" onclick="addMember();"> Add a Member</button>
+            </h4>
+            
+            <ul class="member-list" id="memberList">
+            </ul>
+
           </div>
           <div class="panel-footer">
             <div class="form-group row">
               <div class="offset-sm-2 col-sm-10">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoModal">
-                  <span class="glyphicon glyphicon-camera"></span> Add a Photo</button>
                   <a class="btn btn-primary" href="#" role="button">
                     <span class="glyphicon glyphicon-hand-up"></span> Submit Event</a>
                   </div>
@@ -84,23 +95,8 @@
           <div class="col-md-1">
           </div>
         </div>
-        <!--add photo modal -->
-        <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="photoModalLabel">Choose a Photo . . .</h4>
-              </div>
-              <div class="modal-body">
-                <input type="file" id="files" name="files[]" multiple />
-                <output id="image_list"></output>
-                <button type="button" class="btn btn-primary" id="pinPhoto">
-                  <span class="glyphicon glyphicon-pushpin"></span> Pin Photo
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
+
     </body>
     </html>
