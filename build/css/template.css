@@ -7,17 +7,22 @@
 }
 
 .navbar-default {
-    background-color: #F7F7F7;
+   background-color: white;
+  /*
     border-radius: 20px;
     border-color: #9F3156;
     border-width: 10px;
+    */
     padding: 10px;
 }
 
 ul.nav li.active-class {
+  /*
     border-radius: 10px;
     -webkit-text-fill-color: #F7F7F7;
     background-color: #BC5279;
+    */
+    border-bottom: thick solid #9F3156
 }
 
 ul.nav li>a {
@@ -26,16 +31,24 @@ ul.nav li>a {
 }
 
 ul.nav li.active-class>a {
+  /*
     -webkit-text-fill-color: #ffffff;
+    */
+    font-weight: bold
 }
 
 ul.nav li:hover {
+  /*
     background-color: #757575;
     border-radius: 10px;
+  */
+    border-bottom: thick solid #9F3156
+
 }
 
 ul.nav li>a:hover {
-    -webkit-text-fill-color: #ffffff !important;
+    -webkit-text-fill-color: #9F3156 !important;
+    font-weight: bold
 }
 
 .btn-primary {
