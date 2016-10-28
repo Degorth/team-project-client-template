@@ -6,9 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UGo!</title>
+    <!-- Boostrap JS and JQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.map"></script>
+    <script src="js/bootstrap.min.js"></script>
+
     <!-- Bootstrap's CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
+    <link href="css/template.css" rel="stylesheet">
     <link href="css/events.css" rel="stylesheet">
 </head>
 
@@ -40,15 +46,38 @@
             <h4>Contact Info:</h4> <a href="#">fakeemail@umass.edu</a> <br>
         </div>
         <hr>
-        <div class="row centering">
-            <div class="col-md-6">
-                <button type="submit" onclick="alert('This option is not yet supported')">Add to Schedule</button>
-            </div>
-            <div class="col-md-6">
-                <button type="submit" onclick="alert('This option is not yet supported')">Write a Review</button>
-            </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4>See More From This Group...</h4>
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#genericModal">
+              <span class="glyphicon glyphicon-calendar"></span> View Events</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#genericModal">
+                <span class="glyphicon glyphicon-user"></span> View Members</button>
+          </div>
+          <div class="col-md-4">
+              <a class="btn btn-primary" href="#" role="button">
+                <span class="glyphicon glyphicon-edit"></span> Add to Schedule</a>
+              <a class="btn btn-primary" href="#" role="button">
+                <span class="glyphicon glyphicon-pencil"></span> Write a Review</a>
+          </div>
         </div>
     </div>
 </body>
+
+<div class="modal fade" id="genericModal" tabindex="-1" role="dialog" aria-labelledby="genericModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">View Events/Members</h4>
+      </div>
+      <div class="modal-body">
+        <p>Something . . .</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 </html>

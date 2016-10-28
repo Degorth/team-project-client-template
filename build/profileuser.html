@@ -1,83 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UGo!</title>
-  <!-- Bootstrap's CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="css/profile.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" conent="width=device-width, initial-scale=1">
+    <title>UGo</title>
+    <!-- Boostrap JS and JQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.map"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/template.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
+
+    <link href="css/homepage.css" rel="stylesheet">
 </head>
-<body  style="background-color: #F7F7F7">
-  <!--User Profile Page-->
-  <div class="container"> 
-    <div class="row">
-      <div class="col-md-4">
-        <img src="img/identicon.png" width="250px" />
-      </div>
-      <div class="col-md-8">
-        <div class="row">
-          <h3><strong>Name:</strong> James Coyne</h3>
-        </div>
-        <div class="row">
-          <h3><strong>Member of:</strong></h3>
-          <ul class="info indent">
-            <h4>
-            <li><a href="#">Group 1</a></li>
-            <li><a href="#">Group 2</a></li>
-            <li><a href="#">Group 3</a></li>
-            </h4>
-          </ul>
-        </div>
-        <br />
-        <div class="row centering">
-          <div class="col-md-5">
-            <button type="submit" onclick="alert('This option is not yet supported')">Change Picture</button>
-          </div>
-          <div class="col-md-5">  
-            <button type="submit" onclick="alert('This option is not yet supported')">Manage Groups</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="row centering">
-      <div class="col-md-6 vertical-line">
-        <ul class="info">
-          <li><p><h4 class="info">Contact Info:</h4> <a href=#>text@sample.com</a></p></li>
-          <li>
-            <h4 class="info">Friends:</h4>
-            <ul class="info">
-              <li><a href="#">Friend 1</a></li>
-              <li><a href="#">Friend 2</a></li>
-              <li><a href="#">Friend 3</a></li>
+
+<body>
+    <!--Beginning of navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">UGOEvent</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="schedule.html">My Schedule</a></li>
+                <li><a href="upcoming.html">Upcoming</a></li>
+                <li><a href="bored.html">I'm Bored</a></li>
+                <li><a href="eventssearch.html">Events</a></li>
             </ul>
-          </li>
-        </ul>
+            <div class="btn-group-vertical pull-right" role="group">
+                <a class="btn btn-primary" href="profileuser.html" role="button">
+                  <span class="glyphicon glyphicon-user"></span> My Profile</a>
+                <a class="btn btn-primary" href="eventscreate.html" role="button">
+                  <span class="glyphicon glyphicon-plus"></span> Create A New Event</a>
+            </div>
+        </div>
+    </nav>
+    <!--end of navbar-->
+    <div class="row">
+      <div class="col-md-1">
       </div>
-      <div class="col-md-6">
-        <ul class="info">
-          <li><h4 class="info">Your schedule:</h4></li>
-          <li><em><a href="#">Event 1</a> by <a href="#">Group 1</a> at 
-            <strong>5:30pm Today <a href="#">3 friends attended.</a></strong></em></li>
-          <li><a href="#">Event 2</a> by <a href="#">Group 2</a> at 
-            <strong>12:30pm Tomorrow</strong></li>
-          <li><a href="#">Event 3</a> by <a href="#">Group 3</a> at 
-            <strong>3:00pm Wednesday <a href="#">1 friend attending.</a></strong></li>
-        </ul>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="card">
+                <img class="card-img-top" src="img/identicon.png" id="profile-image" width="250px" alt="Personal Photo">
+                <div class="card-block">
+                  <p class="card-text"></p>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#photoModal">
+                      <span class="glyphicon glyphicon-camera"></span> Edit Photo
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-7">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <a class="btn btn-secondary pull-right" href="#" role="button">
+                <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                <h4> My Name </h4>
+                <h5> Contact Info : </h5><p> email@umass.edu </p>
+                <h5> Interests : </h5><p> Karate, Cats </p>
+              </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="btn-group pull-right" role="group">
+                <a class="btn btn-secondary" href="profileorg.html" role="button">
+                <span class="glyphicon glyphicon-hand-up"></span> Manage My Groups</a>
+                <a class="btn btn-primary" href="groupscreate.html" role="button">
+                <span class="glyphicon glyphicon-plus"></span> Create A New Event Group</a>
+              </div>
+                <h4> My Groups </h4>
+                <ul>
+                  <li> Group 1</li>
+                  <li> Group 2</li>
+                  <li> Group 3</li>
+                </ul>
+              </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <hr>
-    <div class="row centering">
-      <div class="col-md-6">
-        <button type="submit" onclick="alert('This option is not yet supported')">Manage Friends</button>
+
+      <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="photoModalLabel">Choose a Photo . . .</h4>
+            </div>
+            <div class="modal-body">
+              <input type="file" id="files" name="files[]" multiple />
+              <img src="img/identicon.png" id="profile-img-thumbnail" width="150px" alt="Profile Image"></img>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="pin-profile-photo" class="btn btn-primary">
+                <span class="glyphicon glyphicon-pushpin"></span> Pin Photo
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <button type="submit" onclick="alert('This option is not yet supported')">Edit schedule</button>
-      </div>
-    </div>
-  </div>
-</body>
+
+    </body>
 </html>

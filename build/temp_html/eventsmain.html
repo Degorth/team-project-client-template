@@ -8,8 +8,11 @@
   <!-- Bootstrap's CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom CSS -->
+  <link href="css/events.css" rel="stylesheet">
   <link href="css/template.css" rel="stylesheet">
+  <link href="css/schedule.css" rel="stylesheet">
 </head>
+
 <body>
   <!--Beginning of navbar-->
   <nav class="navbar navbar-default">
@@ -22,7 +25,7 @@
               <li><a href="schedule.html">My Schedule</a></li>
               <li><a href="upcoming.html">Upcoming</a></li>
               <li><a href="bored.html">I'm Bored</a></li>
-              <li><a href="eventssearch.html">Events</a></li>
+              <li class="active-class"><a href="eventssearch.html">Events</a></li>
           </ul>
           <div class="btn-group-vertical pull-right" role="group">
               <a class="btn btn-primary" href="profileuser.html" role="button">
@@ -33,9 +36,12 @@
       </div>
   </nav>
   <!--end of navbar-->
+  <!--Pill Buttons-->
+  <ul class="nav nav-pills">
+    <li class="nav item"><a href="eventssearch.html">Search Events</a></li>
+    <li class="nav item"><a href="eventscreate.html">Create Event</a></li>
+  </ul>
   <!--Delimination Line-->
   <hr>
-  <!-- Show Profile Page -->
-  <iframe src="profileuser.html" height="800" width="100%" frameborder="0">Are you using netscape? Your browser doesn't support iframes.</iframe>
 </body>
 </html>

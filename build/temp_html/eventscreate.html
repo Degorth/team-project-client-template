@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UGo!</title>
     <!-- Bootstrap's CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/events.css" rel="stylesheet">
-    <link href="css/template.css" rel="stylesheet">
-    <link href="css/schedule.css" rel="stylesheet">
+    <link href="../css/events.css" rel="stylesheet">
+    <link href="../css/template.css" rel="stylesheet">
+    <link href="../css/schedule.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
               <li><a href="schedule.html">My Schedule</a></li>
               <li><a href="upcoming.html">Upcoming</a></li>
               <li><a href="bored.html">I'm Bored</a></li>
-              <li class="active-class"><a href="eventssearch.html">Events</a></li>
+              <li class="active-class"><a href="eventsmain.html">Events</a></li>
           </ul>
           <div class="btn-group-vertical pull-right" role="group">
               <a class="btn btn-primary" href="profileuser.html" role="button">
@@ -37,15 +37,37 @@
       </div>
   </nav>
   <!--end of navbar-->
+  </nav>
     <!--Pill Buttons-->
     <ul class="nav nav-pills">
         <li><a href="eventssearch.html">Search Events</a></li>
-        <li><a href="eventscreate.html">Create Event</a></li>
+        <li class="activepill">
+            <a href="#">
+                <font color="#ffffff">Create Event</font>
+            </a>
+        </li>
     </ul>
     <!--Delimination Line-->
     <hr>
-    <!--page in a page show event info page-->
-    <iframe src="eventspageinfo.html" height="800" width="1000"></iframe>
+    <!--New event creation form-->
+    <form>
+        <div class="formfields"> Event Name: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Organizer: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Location: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Event Info: </div>
+        <textarea rows="4" col="150" placeholder=""></textarea>
+        <br>
+        <div class="formfields"> Contact Info: </div>
+        <textarea rows="1" placeholder=""></textarea>
+        <br>
+        <button type="submit"> Submit </button>
+    </form>
 </body>
 
 </html>

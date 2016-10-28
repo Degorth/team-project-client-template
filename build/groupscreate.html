@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UGo!</title>
+    <!-- Boostrap JS and JQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.map"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/groupscreate.js"></script>
+
+
+
+    <!-- Bootstrap's CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/events.css" rel="stylesheet">
+    <link href="css/template.css" rel="stylesheet">
+    <link href="css/schedule.css" rel="stylesheet">
+</head>
+
+<body>
+  <!--Beginning of navbar-->
+  <nav class="navbar navbar-default">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="#">UGOEvent</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li><a href="homepage.html">Home</a></li>
+              <li><a href="schedule.html">My Schedule</a></li>
+              <li><a href="upcoming.html">Upcoming</a></li>
+              <li><a href="bored.html">I'm Bored</a></li>
+              <li class="active-class"><a href="eventssearch.html">Events</a></li>
+          </ul>
+          <div class="btn-group-vertical pull-right" role="group">
+              <a class="btn btn-primary" href="profileuser.html" role="button">
+                <span class="glyphicon glyphicon-user"></span> My Profile</a>
+              <a class="btn btn-primary" href="eventscreate.html" role="button">
+                <span class="glyphicon glyphicon-plus"></span> Create A New Event</a>
+          </div>
+      </div>
+  </nav>
+  <!--end of navbar-->
+
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="eventName">Organization Name</label>
+                <input type="event_name" class="form-control" id="event_name" placeholder="Enter A Name for This Organization">
+                </input>
+              </div>
+              <div class="form-group">
+                <label for="eventDesc">Description of This Organization</label>
+                <textarea class="form-control" id="event_desc" rows="5">
+                </textarea>
+              </div>
+              <div class="form-group row">
+                <label for="event-email-input" class="col-xs-2 col-form-label">Contact Info</label>
+                <div class="col-xs-10">
+                  <input class="form-control" type="email" value="example@umass.com" id="event-email-input">
+                </div>
+              </div>
+            </form>
+
+            <hr>
+
+            <h4> Who's In This Group?
+              <button class="btn btn-primary pull-right" onclick="addMember();"> Add a Member</button>
+            </h4>
+
+            <ul class="member-list" id="memberList">
+            </ul>
+
+          </div>
+          <div class="panel-footer">
+            <div class="form-group row">
+              <div class="offset-sm-2 col-sm-10">
+                  <a class="btn btn-primary" href="#" role="button">
+                    <span class="glyphicon glyphicon-hand-up"></span> Submit Event</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
+
+
+
+    </body>
+    </html>
