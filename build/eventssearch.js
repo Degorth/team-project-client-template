@@ -5,7 +5,7 @@ export default class eventssearch extends React.Component {
   render(){
     return(
       <div>
-        
+
       <div className="row">
     <div className="col-md-1"></div>
     <div className="col-md-10">
