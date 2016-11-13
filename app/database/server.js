@@ -1,5 +1,4 @@
 import {readDocument, writeDocument, addDocument} from './database.js';
-
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
@@ -59,14 +58,29 @@ function emulateServerReturn(data, cb) {
     var number = 3;
     var i = 1;
     var result = {};
+    var eventData;
     while (i < number) {
-
+      eventData = readDocument('Events', i);
+      result.push(eventData);
+      i = i+1;
     }
-
+    emulateServerReturn(result,cb)
   }
 
   export function searchEvents(searchInput) {
-
+    var number = 3;
+    var i = 1;
+    var result = {};
+    var eventData;
+    var searchString = searchInput.trim().toLowerCase();
+    while (i < number) {
+      eventData = readDocument('Events', i);
+      if (searchString.match(eventData.name)) {
+        result.push(eventData);
+      }
+      i = i+1;
+    }
+    emulateServerReturn(result,cb)
   }
 
 }
