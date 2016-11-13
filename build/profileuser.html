@@ -17,6 +17,10 @@
     <link href="css/profile.css" rel="stylesheet">
 
     <link href="css/homepage.css" rel="stylesheet">
+
+    <script src="//fb.me/react-15.0.0.js"></script>
+<script src="//fb.me/react-dom-15.0.0.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.min.js"></script>
 </head>
 
 <body>
@@ -79,13 +83,12 @@
                 <a class="btn btn-primary" href="groupscreate.html" role="button">
                 <span class="glyphicon glyphicon-plus"></span> Create A New Event Group</a>
               </div>
-                <h4> My Groups </h4>
-                <ul>
-                  <li> Group 1</li>
-                  <li> Group 2</li>
-                  <li> Group 3</li>
-                </ul>
+              <div id = 'my-groups'>
+                <script type="text/babel">
+                  ReactDOM.render(<h1>Hello World</h1>, document.getElementById('my-groups'));
+                </script>
               </div>
+            </div>
           </div>
         </div>
       </div>
