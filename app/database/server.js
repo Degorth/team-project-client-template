@@ -19,8 +19,11 @@ function emulateServerReturn(data, cb) {
       "photo": filepath,
       "events": event_ids[]
     };
+    // Write the new group to the document
     newGroup = addDocument('Groups', newGroup);
+    // Fetch the associated user
     var userData = readDocument('Users', owner_id);
+    // add the new group to the user Data
     userData.groups.unshift(newGroup._id);
     emulateServerReturn(newGroup, cb);
   }
@@ -43,17 +46,27 @@ function emulateServerReturn(data, cb) {
     // add the new event to the group Data
     groupData.events.unshift(newEvent._id);
     // Write back to the document the new group data
-    writeDocument('Groups',groupData)
+    writeDocument('Groups',groupData);
     emulateServerReturn(newEvent, cb);
   }
 
-  export function getUpcomingEvents(input) {
+  export function getScheduledEvents(user_id) {
+    var userData = readDocument('Users',user_id);
+    emulateServerReturn(userData.events,cb);
+  }
+
+  export function getUpcomingEvents() {
+    var number = 3;
+    var i = 1;
+    var result = {};
+    while (i < number) {
+
+    }
 
   }
 
-  export function searchEvents(input) {
-    
-  }
+  export function searchEvents(searchInput) {
 
+  }
 
 }

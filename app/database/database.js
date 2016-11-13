@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var data ={
+var events_data ={
   "Events": {
     "1": {
       "_id": 1,
