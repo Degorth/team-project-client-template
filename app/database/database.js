@@ -12,7 +12,7 @@ var events_data ={
       "start": 1478803334000,
       "length": 7200000,
       "offset": 604800000 //Weekly recurrence
-    }
+    },
     "2": {
       "_id": 2,
       "name": "Pentesting Lab Training",
@@ -22,7 +22,7 @@ var events_data ={
       "start": 1478962800000, //Sat, Nov. 12 2016
       "length": 18000000, //5 hours long
       "offset": 604800000 //Weekly recurrence
-    }
+    },
     "3": {
       "_id": 3,
       "name": "Game Hobbyists' League",
@@ -32,7 +32,7 @@ var events_data ={
       "start": 1478736000000,
       "length": 18000000, //5 hrs
       "offset": 604800000
-    }
+    },
     "4": {
       "_id": 4,
       "name": "Pentesting Club Meetings",
@@ -42,7 +42,7 @@ var events_data ={
       "start": 1478930400000, //Thur, Nov. 10 2016
       "length": 5400000, //1.5 hours long
       "offset": 604800000 //Weekly recurrence
-  }
+  },
   "Users": {
     "1": {
       "_id": 1,
@@ -52,7 +52,7 @@ var events_data ={
       "interests": [], //array of strings for now later hopefully tags for classifying groups
       "photo": "<filepath>",
       "events": [1, 3] //subscribed events by id
-    }
+    },
     "2": {
       "_id": 2,
       "name": "Gregory Gregorivic",
@@ -60,8 +60,8 @@ var events_data ={
       "groups": [3] ,
       "interests": [] ,
       "photo": "<filepath>",
-      "events": [3] ,
-    }
+      "events": [3]
+    },
     "3": {
       "_id": 3,
       "name": "Optimus Prime",
@@ -71,7 +71,7 @@ var events_data ={
       "photo": "<filepath>",
       "events": [1, 2, 4]
     }
-  }
+  },
   "Groups": {
      "1": {
       "_id": 1,
@@ -81,7 +81,7 @@ var events_data ={
       "desc": "The Umass Shotokan Karate Club is a long standing branch of the Internation Shotokan Karate Federation. We are the 6th club founded though the organization in the United States and have been at this university for over 40 years!",
       "photo": "../build/img/iskf.jpeg",
       "events": [1] //events owned by id
-    }
+    },
     "2": {
       "_id": 2,
       "owner": 3,
@@ -90,7 +90,7 @@ var events_data ={
       "desc": "The Umass Penetration Testing Club is a new club, founded in the beginning of Fall 2016 with hopes of competing in CCDC in march of 2017",
       "photo": "<filepath>",
       "events": [2, 4]
-    }
+    },
     "3": {
       "_id": 3,
       "owner": 2,
@@ -101,6 +101,7 @@ var events_data ={
       "events": [3]
     }
   }
+}
 }
 
 var data = JSON.parse(localStorage.getItem('events_data'));
