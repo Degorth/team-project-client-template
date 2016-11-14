@@ -1,5 +1,5 @@
 import React from 'react';
-import eventSqDisp from 'eventSqDisp.js';
+import eventSqDisp from './eventSqDisp.js';
 
 export default class Schedule extends React.Component {
     render() {
