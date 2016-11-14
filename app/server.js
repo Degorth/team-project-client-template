@@ -68,9 +68,11 @@ function emulateServerReturn(data, cb) {
     }
     emulateServerReturn(result, cb);
   }
-  
+
 
   export function searchEvents(searchInput,days,after,before, cb) {
+    emulateServerReturn(null,cb)
+    /*
     var number = 3;
     var i = 1;
     var result = {};
@@ -87,6 +89,7 @@ function emulateServerReturn(data, cb) {
       i = i+1;
     }
     emulateServerReturn(result,cb)
+    */
   }
 
   export function getUserData(user_id, cb) {
