@@ -87,3 +87,10 @@ function emulateServerReturn(data, cb) {
     }
     emulateServerReturn(result,cb)
   }
+
+  export function getUserData(user_id, cb) {
+    var data = {}
+    var user = readDocument('Users', user_id)
+    result.push(user);
+    emulateServerReturn(data, cb);
+  }

@@ -72,7 +72,7 @@ var startData ={
       "name": "Optimus Prime",
       "email": "oprime@umass.edu",
       "groups": [1, 2] ,
-      "interests": [] ,
+      "interests": ["karate", "games"] ,
       "photo": "<filepath>",
       "events": [1, 2, 4]
     }
