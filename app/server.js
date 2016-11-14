@@ -68,6 +68,7 @@ function emulateServerReturn(data, cb) {
     }
     emulateServerReturn(result, cb);
   }
+  
 
   export function searchEvents(searchInput,days,after,before, cb) {
     var number = 3;

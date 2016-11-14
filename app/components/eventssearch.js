@@ -13,6 +13,7 @@ export default class EventsSearch extends React.Component {
           "before": undefined
       }
   }
+  
 
   handleChange(checkbox, day){
     if (checkbox.checked)

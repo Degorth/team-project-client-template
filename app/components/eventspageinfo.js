@@ -16,6 +16,7 @@ export default class eventspageinfo extends React.Component {
         "offset": props.offset //Weekly recurrence
       }
   }
+  
 
   render() {
     return(
