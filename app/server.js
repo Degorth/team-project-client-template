@@ -4,11 +4,12 @@ import {readDocument, writeDocument, addDocument} from './database.js';
  * some time in the future with data.
  */
 function emulateServerReturn(data, cb) {
-  setTimeout(() => {
-    cb(data);
-  }, 4);
+    setTimeout(() => {
+      cb(data);
+    }, 4);
+  }
 
-  export function postNewGroup(id,owner_id,name,email,description,filepath,event_ids[],cb) {
+  export function postNewGroup(id,owner_id,name,email,description,filepath,event_ids, cb) {
     var newGroup = {
       "_id": id,
       "owner": owner_id, //managing user
@@ -16,7 +17,7 @@ function emulateServerReturn(data, cb) {
       "email": email, //main email for group
       "desc": description,
       "photo": filepath,
-      "events": event_ids[]
+      "events": event_ids
     };
     // Write the new group to the document
     newGroup = addDocument('Groups', newGroup);
@@ -27,19 +28,18 @@ function emulateServerReturn(data, cb) {
     emulateServerReturn(newGroup, cb);
   }
 
-  export function postNewEvent(id,name,desc,owner,loc,start,length,offset,cb) {
+  export function postNewEvent(name,desc,owner_id,loc,start,length,offset,cb) {
     var newEvent = {
-      "_id": id,
-      "name": owner_id, //managing user
-      "desc": name,
-      "owner": email, //main email for group
-      "loc": description,
-      "start": filepath,
-      "length": length
-      "offset": offset
+      "name" : name,
+      "desc": desc,
+      "owner":owner_id,
+      "loc" : loc,
+      "start" : start,
+      "length": length,
+      "offset":offset
     };
     // Write the new event to the document
-    newEvent = addDocument('Event', newEvent);
+    newEvent = addDocument('Events', newEvent);
     // Fetch the associated group
     var groupData = readDocument('Groups', owner_id);
     // add the new event to the group Data
@@ -49,12 +49,13 @@ function emulateServerReturn(data, cb) {
     emulateServerReturn(newEvent, cb);
   }
 
-  export function getScheduledEvents(user_id) {
+  export function getScheduledEvents(user_id, cb) {
     var userData = readDocument('Users',user_id);
-    emulateServerReturn(userData.events,cb);
+    var events = userData.events.map((event_id)=>readDocument('Events',event_id));
+    emulateServerReturn(events,cb);
   }
 
-  export function getUpcomingEvents() {
+  export function getUpcomingEvents(cb) {
     var number = 3;
     var i = 1;
     var result = {};
@@ -64,10 +65,10 @@ function emulateServerReturn(data, cb) {
       result.push(eventData);
       i = i+1;
     }
-    emulateServerReturn(result,cb)
+    emulateServerReturn(result, cb);
   }
 
-  export function searchEvents(searchInput) {
+  export function searchEvents(searchInput, cb) {
     var number = 3;
     var i = 1;
     var result = {};
@@ -82,5 +83,3 @@ function emulateServerReturn(data, cb) {
     }
     emulateServerReturn(result,cb)
   }
-
-}
