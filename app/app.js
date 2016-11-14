@@ -58,7 +58,7 @@ class Navbar extends React.Component {
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="#">UGOEvent</a>
+                        <Link className="navbar-brand" to='/'>UGo</Link>
                     </div>
                     <ul className="nav navbar-nav">
                         <li>
