@@ -5,19 +5,19 @@ import {readDocument, writeDocument, addDocument} from './database.js';
  */
 function emulateServerReturn(data, cb) {
     setTimeout(() => {
-      cb(data);
+        cb(data);
     }, 4);
-  }
+}
 
-  export function postNewGroup(id,owner_id,name,email,description,filepath,event_ids, cb) {
+export function postNewGroup(id, owner_id, name, email, description, filepath, event_ids, cb) {
     var newGroup = {
-      "_id": id,
-      "owner": owner_id, //managing user
-      "name": name,
-      "email": email, //main email for group
-      "desc": description,
-      "photo": filepath,
-      "events": event_ids
+        "_id": id,
+        "owner": owner_id, //managing user
+        "name": name,
+        "email": email, //main email for group
+        "desc": description,
+        "photo": filepath,
+        "events": event_ids
     };
     // Write the new group to the document
     newGroup = addDocument('Groups', newGroup);
@@ -26,8 +26,27 @@ function emulateServerReturn(data, cb) {
     // add the new group to the user Data
     userData.groups.unshift(newGroup._id);
     emulateServerReturn(newGroup, cb);
-  }
+}
 
+export function postNewEvent(eventToPost, cb) {
+    //This Function takes an event JSON and writes it to the server. See Eventscreat.js
+    var blankEvent = {
+        data: {
+            eventName: "",
+            organizer: "",
+            loc: "",
+            onetime: "",
+            datetime: "",
+            reoccuring: "",
+            weekday: "",
+            time: "",
+            desc: "",
+            contactInfo: ""
+        }
+    };
+    emulateServerReturn(blankEvent, cb);
+}
+/*
   export function postNewEvent(name,desc,owner_id,loc,start,length,offset,cb) {
     var newEvent = {
       "name" : name,
@@ -48,30 +67,30 @@ function emulateServerReturn(data, cb) {
     writeDocument('Groups',groupData);
     emulateServerReturn(newEvent, cb);
   }
+  */
 
-  export function getScheduledEvents(user_id, cb) {
-    var userData = readDocument('Users',user_id);
-    var events = userData.events.map((event_id)=>readDocument('Events',event_id));
+export function getScheduledEvents(user_id, cb) {
+    var userData = readDocument('Users', user_id);
+    var events = userData.events.map((event_id) => readDocument('Events', event_id));
     //events = events.forEach((event) => event.owner = readDocument('Groups',event.owner));
-    emulateServerReturn(events,cb);
-  }
+    emulateServerReturn(events, cb);
+}
 
-  export function getUpcomingEvents(cb) {
+export function getUpcomingEvents(cb) {
     var number = 3;
     var i = 1;
     var result = {};
     var eventData;
     while (i < number) {
-      eventData = readDocument('Events', i);
-      result.push(eventData);
-      i = i+1;
+        eventData = readDocument('Events', i);
+        result.push(eventData);
+        i = i + 1;
     }
     emulateServerReturn(result, cb);
-  }
+}
 
-
-  export function searchEvents(searchInput,days,after,before, cb) {
-    emulateServerReturn(null,cb)
+export function searchEvents(searchInput, days, after, before, cb) {
+    emulateServerReturn(null, cb)
     /*
     var number = 3;
     var i = 1;
@@ -90,11 +109,11 @@ function emulateServerReturn(data, cb) {
     }
     emulateServerReturn(result,cb)
     */
-  }
+}
 
-  export function getUserData(user_id, cb) {
+export function getUserData(user_id, cb) {
     var data = {}
     var user = readDocument('Users', user_id)
     result.push(user);
     emulateServerReturn(data, cb);
-  }
+}
