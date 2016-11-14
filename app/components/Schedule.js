@@ -1,9 +1,20 @@
 import React from 'react';
-import eventSqDisp from 'eventSqDisp.js';
+import eventSqDisp from './eventSqDisp.js';
+import {getScheduledEvents} from 'server.js';
 
 export default class Schedule extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      "events":[]
+    }
+  }
+  componentWillMount(){
+    getScheduledEvents(1,(ret) => this.setState({"events":ret}));
+  }
+
     render() {
-        var todayList = [];
+        var todayList = this.state.events;
         var thisWeekList = [];
         var nextWeekList = [];
         var futureList = [];
