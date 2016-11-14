@@ -6,7 +6,7 @@ import {IndexRoute, Router, Route, browserHistory} from 'react-router';
 class App extends React.Component {
     render() {
         return (
-          <div />
+          <h1> TEST </h1>
         )
     }
 }

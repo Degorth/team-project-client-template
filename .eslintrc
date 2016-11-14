@@ -21,10 +21,15 @@
     "node": true,
     "commonjs": true
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "rules": {
-    "react/no-unknown-property": 1
+    "react/no-unknown-property": 1,
+    "react/jsx-no-duplicate-props": [1, { "ignoreCase": true }],
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-deprecated": [1, {"react": "0.14.6"}],
+    "react/no-direct-mutation-state": 1,
+    "react/no-is-mounted": 1
   }
 }
