@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default class eventssearch extends React.Component {
+export default class EventsSearch extends React.Component {
   render(){
     return(
       <div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default class eventscreate extends React.Component {
+export default class EventsCreate extends React.Component {
 
 render (){
 
 return (
   <div className="row">
-    
+
     <div className="col-md-1">
     </div>
     <div className="col-md-10">

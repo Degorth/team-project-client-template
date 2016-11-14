@@ -2,17 +2,54 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {IndexRoute, Link, Router, Route, browserHistory} from 'react-router';
 
-import bored from './components/bored.js';
+import Bored from './components/bored.js';
 import Schedule from './components/schedule.js';
 //import upcoming from './components/upcoming.js';
-import homepage from './components/homepage.js';
-import eventssearch from './components/eventssearch.js';
-import eventscreate from './components/eventscreate.js';
+import Homepage from './components/homepage.js';
+import EventsSearch from './components/eventssearch.js';
+import EventsCreate from './components/eventscreate.js';
 //import profileuser from './components/profileuser.js';
+import UnimplementedReactComponent from './components/UnimplementedReactComponent.js';
+
+class boredContainer extends React.Component{
+  render(){
+    return(<Bored />);
+  }
+}
 
 class ScheduleContainer extends React.Component{
   render(){
     return(<Schedule user={1}/>);
+  }
+}
+
+class upcomingContainer extends React.Component{
+  render(){
+    return(<UnimplementedReactComponent/>);
+  }
+}
+
+class homepageContainer extends React.Component{
+  render(){
+    return(<Homepage/>);
+  }
+}
+
+class eventssearchContainer extends React.Component{
+  render(){
+    return(<EventsSearch/>);
+  }
+}
+
+class eventscreateContainer extends React.Component{
+  render(){
+    return(<EventsCreate/>);
+  }
+}
+
+class profileuserContainer extends React.Component{
+  render(){
+    return(<UnimplementedReactComponent/>);
   }
 }
 const Navbar = () => (
@@ -37,29 +74,17 @@ class Container extends React.Component {
     )
   }
 }
+
 ReactDOM.render((
     <Router history={browserHistory}>
       <Route path='/' component={Container}>
-        <IndexRoute component={homepage} />
+        <IndexRoute component={homepageContainer} />
+        <Route path='/upcoming' component={upcomingContainer}></Route>
         <Route path='/schedule' component={ScheduleContainer}></Route>
-        <Route path='/bored' component={bored}></Route>
-        <Route path='/eventssearch' component={eventssearch}></Route>
-        <Route path='/eventscreate' component={eventscreate}></Route>
+        <Route path='/bored' component={boredContainer}></Route>
+        <Route path='/eventssearch' component={eventssearchContainer}></Route>
+        <Route path='/eventscreate' component={eventscreateContainer}></Route>
+        <Route path='/profileuser' component={profileuserContainer}></Route>
       </Route>
     </Router>
 ), document.getElementById('ugo-app'));
-/*
-ReactDOM.render((
-    <Router history={browserHistory}>
-      <Route path='/' component={Container}>
-        <IndexRoute component={homepage} />
-        <Route path='/upcoming' component={upcoming}></Route>
-        <Route path='/schedule' component={ScheduleContainer}></Route>
-        <Route path='/bored' component={bored}></Route>
-        <Route path='/eventssearch' component={eventssearch}></Route>
-        <Route path='/eventscreate' component={eventscreate}></Route>
-        <Route path='/profileuser' component={profileuser}></Route>
-      </Route>
-    </Router>
-), document.getElementById('ugo-app'));
-*/

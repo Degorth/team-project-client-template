@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class bored extends React.Component{
+export default class Bored extends React.Component{
 
   render(){
     return(
