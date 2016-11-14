@@ -67,12 +67,10 @@
 
         <div class="col-md-7">
           <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body" id="user-info">
               <a class="btn btn-secondary pull-right" href="#" role="button">
                 <span class="glyphicon glyphicon-edit"></span> Edit</a>
-                <h4> My Name </h4>
-                <h5> Contact Info : </h5><p> email@umass.edu </p>
-                <h5> Interests : </h5><p> Karate, Cats </p>
+                <!--User Info-->
               </div>
           </div>
           <div class="panel panel-default">
@@ -83,7 +81,7 @@
                 <a class="btn btn-primary" href="groupscreate.html" role="button">
                 <span class="glyphicon glyphicon-plus"></span> Create A New Event Group</a>
               </div>
-              <div id = 'my-groups'>
+              <div id = "my-groups">
                 <script type="text/babel">
                   ReactDOM.render(<h1>Hello World</h1>, document.getElementById('my-groups'));
                 </script>
@@ -102,7 +100,7 @@
             </div>
             <div class="modal-body">
               <input type="file" id="files" name="files[]" multiple />
-              <img src="img/identicon.png" id="profile-img-thumbnail" width="150px" alt="Profile Image"></img>
+              <img src="img/identicon.png" id="profile-img-thumbnail" width="150px" alt="Profile Image" />
             </div>
             <div class="modal-footer">
               <button type="button" id="pin-profile-photo" class="btn btn-primary">
@@ -113,5 +111,6 @@
         </div>
       </div>
 
+      <script src="./app/app.js"></script>
     </body>
 </html>
