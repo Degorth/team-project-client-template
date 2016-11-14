@@ -52,7 +52,7 @@ function emulateServerReturn(data, cb) {
   export function getScheduledEvents(user_id, cb) {
     var userData = readDocument('Users',user_id);
     var events = userData.events.map((event_id)=>readDocument('Events',event_id));
-    events = events.foreach((event) => event.owner.map((owner_id)=>readDocument('Groups',owner_id)));
+    //events = events.forEach((event) => event.owner = readDocument('Groups',event.owner));
     emulateServerReturn(events,cb);
   }
 

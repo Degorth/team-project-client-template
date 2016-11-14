@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Schedule from './components/schedule.js';
+
+ReactDOM.render(<Schedule user={1}/>, document.getElementById('ugo-app'));
+/*
 import {IndexRoute, Link, Router, Route, browserHistory} from 'react-router';
 
 import bored from './components/bored.js';
-import schedule from './components/schedule.js';
+import Schedule from './components/schedule.js';
 import upcoming from './components/upcoming.js';
 import homepage from './components/homepage.js';
 import eventssearch from './components/eventssearch.js';
@@ -40,3 +44,4 @@ const Container = (props) => <div>
   <navbar />
   {props.children}
 </div>
+*/

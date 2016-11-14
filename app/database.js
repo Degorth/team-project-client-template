@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var events_data ={
+var startData ={
   "Events": {
     "1": {
       "_id": 1,
@@ -104,9 +104,9 @@ var events_data ={
   }
 }
 
-var data = JSON.parse(localStorage.getItem(events_data));
+var data = JSON.parse(localStorage.getItem('events_data'));
 if (data === null) {
-  data = JSONClone(data);
+  data = JSONClone(startData);
 }
 
 /**
@@ -136,7 +136,7 @@ export function writeDocument(collection, changedDocument) {
   // Store a copy of the object into the database. Models a database's behavior.
   data[collection][id] = JSONClone(changedDocument);
   // Update our 'database'.
-  localStorage.setItem(events_data, JSON.stringify(data));
+  localStorage.setItem('events_data', JSON.stringify(data));
 }
 
 /**
@@ -157,7 +157,7 @@ export function addDocument(collectionName, newDoc) {
  * Reset our browser-local database.
  */
 export function resetDatabase() {
-  localStorage.setItem(events_data, JSON.stringify(data));
+  localStorage.setItem('events_data', JSON.stringify(data));
   data = JSONClone(data);
 }
 

@@ -1,24 +1,25 @@
 import React from 'react';
+import {unixTimeToString} from './../util.js';
 
-export default class eventSqDisp extends React.Component {
+export default class EventSqDisp extends React.Component {
     render() {
         return (
             <div className="tile col-md-2">
-                <h4 style="text-decoration: underline;">
-                    {this.props.start}
+                <h4 style={{textDecoration: "underline"}}>
+                    {unixTimeToString(this.props.event.start)}
                 </h4>
-                <h4 style="text-decoration: underline;">
-                    {this.props.loc}
+                <h4 style={{textDecoration: "underline"}}>
+                    {this.props.event.loc}
                 </h4>
-                <img className="tile-img-top profile-img" src={this.props.filepath} alt="Karate Club img"/>
+                <img className="tile-img-top profile-img" src="#" alt="img"/>
                 <div className="tile-block">
-                    <h4 className="tile-title">{this.props.name}</h4>
+                    <h4 className="tile-title">{this.props.event.name}</h4>
                     <h6 className="tile-subtitle text-muted">
                         <a href="#">
-                            {this.props.owner_name}
+                            {this.props.event.owner.name}
                         </a>
                     </h6>
-                    <p className="tile-text">{this.props.desc}</p>
+                    <p className="tile-text">{this.props.event.desc}</p>
                 </div>
             </div>
         );
