@@ -10,10 +10,11 @@ export default class EventsSearch extends React.Component {
           "searchinput": undefined,
           "days": [],
           "after": undefined,
-          "before": undefined
+          "before": undefined,
+          "results": undefined
       }
   }
-  
+
 
   handleChange(checkbox, day){
     if (checkbox.checked)
@@ -37,7 +38,7 @@ export default class EventsSearch extends React.Component {
   }
 
   handleSubmit(){
-    searchEvents(this.state.searchinput,this.state.days,this.state.after,this.state.before);
+    searchEvents(this.state.searchinput,this.state.days,this.state.after,this.state.before, (res)=>this.setState({"results":res}));
   }
 
   render(){
