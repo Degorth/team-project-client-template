@@ -5,6 +5,7 @@ var startData ={
   "Events": {
     "1": {
       "_id": 1,
+      "days": ["Mon","Wed","Fri"],
       "name": "Umass Shotokan Karate Club",
       "desc": "The Umass Shotokan Karate Club is a long standing branch of the Internation Shotokan Karate Federation. We are the 6th club founded though the organization in the United States and have been at this university for over 40 years!",
       "owner": 1, // the group that owns this event
@@ -15,6 +16,7 @@ var startData ={
     },
     "2": {
       "_id": 2,
+      "days":["Tue","Thurs"],
       "name": "Pentesting Lab Training",
       "desc": "The PenTraining for cybersecurity competition.",
       "owner": 2,
@@ -25,6 +27,7 @@ var startData ={
     },
     "3": {
       "_id": 3,
+      "days":["Fri"],
       "name": "Game Hobbyists' League",
       "desc": "The GHL is an RSO that brings anyone and everyone at UMass to have a great time. The GHL holds weekly game nights - featuring board, card, and video games",
       "owner": 3,
@@ -35,6 +38,7 @@ var startData ={
     },
     "4": {
       "_id": 4,
+      "days":["Thurs"],
       "name": "Pentesting Club Meetings",
       "desc": "Administrative meeting for cybersecurity competition team.",
       "owner": 2,

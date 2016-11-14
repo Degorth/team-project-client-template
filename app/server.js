@@ -69,12 +69,15 @@ function emulateServerReturn(data, cb) {
     emulateServerReturn(result, cb);
   }
 
-  export function searchEvents(searchInput, cb) {
+  export function searchEvents(searchInput,days,after,before, cb) {
     var number = 3;
     var i = 1;
     var result = {};
     var eventData;
     var searchString = searchInput.trim().toLowerCase();
+    var beforeString = before.trime().toLowerCase();
+    var afterString = after.trime().toLowerCase();
+    var daysString = days.toString();
     while (i < number) {
       eventData = readDocument('Events', i);
       if (searchString.match(eventData.name)) {
