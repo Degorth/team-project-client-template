@@ -39,7 +39,7 @@ class homepageContainer extends React.Component {
 
 class eventssearchContainer extends React.Component {
     render() {
-        return (<EventsSearch/>);
+        return (<EventsSearch user={curUser}/>);
     }
 }
 
