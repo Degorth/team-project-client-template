@@ -16,7 +16,7 @@ var startData ={
     },
     "2": {
       "_id": 2,
-      "days":["Tue","Thurs"],
+      "days":["Sat"],
       "name": "Pentesting Lab Training",
       "desc": "The PenTraining for cybersecurity competition.",
       "owner": 2,
@@ -26,7 +26,7 @@ var startData ={
     },
     "3": {
       "_id": 3,
-      "days":["Fri"],
+      "days":["Thurs"],
       "name": "Game Hobbyists' League",
       "desc": "The GHL is an RSO that brings anyone and everyone at UMass to have a great time. The GHL holds weekly game nights - featuring board, card, and video games",
       "owner": 3,
