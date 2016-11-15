@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Window.React = require('react');
 import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
@@ -79,4 +80,4 @@ return(
             <Upcoming />, document.getElementById('upcoming')
         </div>
     </div>
-);
+)

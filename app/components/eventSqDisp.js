@@ -1,6 +1,7 @@
 import React from 'react';
 import {unixTimeToString} from './../util.js';
 
+//ADD IMAGE PATH
 export default class EventSqDisp extends React.Component {
     render() {
         return (

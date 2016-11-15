@@ -4,7 +4,7 @@ import {IndexRoute, Link, Router, Route, browserHistory} from 'react-router';
 
 import Bored from './components/bored.js';
 import Schedule from './components/schedule.js';
-//import Upcoming from './components/upcoming.js';
+import Upcoming from './components/upcoming.js';
 import Homepage from './components/homepage.js';
 import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
@@ -27,7 +27,7 @@ class ScheduleContainer extends React.Component {
 
 class upcomingContainer extends React.Component {
     render() {
-        return (<ReactComponentException type="0"/>);
+        return (<Upcoming user={curUser} />);
     }
 }
 
@@ -39,7 +39,7 @@ class homepageContainer extends React.Component {
 
 class eventssearchContainer extends React.Component {
     render() {
-        return (<EventsSearch/>);
+        return (<EventsSearch user={curUser}/>);
     }
 }
 

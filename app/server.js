@@ -1,4 +1,4 @@
-import {readDocument, writeDocument, addDocument} from './database.js';
+import {readDocument, writeDocument, addDocument, readCollection} from './database.js';
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
@@ -91,7 +91,6 @@ export function getUpcomingEvents(cb) {
 
 export function searchEvents(user_id,searchInput, days, after, before, cb) {
   var unfiltered_results = [];
-  var filtered_result = [];
   var searchField = searchInput.toLowerCase();
   var userData = readDocument('Users', user_id);
   var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
@@ -107,8 +106,8 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
       unfiltered_results.push(all_events[i]);
     }
   }
-  filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
-    emulateServerReturn(null, cb)
+  var filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
+  emulateServerReturn(filtered_result, cb)
     /*
     var number = 3;
     var i = 1;
@@ -132,6 +131,5 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
 export function getUserData(user_id, cb) {
     var data = {}
     var user = readDocument('Users', user_id)
-    result.push(user);
     emulateServerReturn(data, cb);
 }
