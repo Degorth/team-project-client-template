@@ -44,7 +44,14 @@ export function postNewEvent(eventToPost, cb) {
             contactInfo: ""
         }
     };
-    emulateServerReturn(blankEvent, cb);
+    var newEvent = addDocument('Events', eventToPost);
+    // Fetch the associated group
+    var groupData = readDocument('Groups', organizer);
+    // add the new event to the group Data
+    groupData.events.unshift(eventToPost._id);
+    // Write back to the document the new group data
+    writeDocument('Groups',groupData);
+    emulateServerReturn(newEvent, cb);
 }
 /*
   export function postNewEvent(name,desc,owner_id,loc,start,length,offset,cb) {
