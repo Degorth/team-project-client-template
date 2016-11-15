@@ -99,8 +99,8 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
   for (var i=0 ; i < all_events.length ; i++)
   {
     if (all_events[i].name.toLowerCase().match("/"+searchField+".*/") &&
-    all_events[i].days.includes(days) &&
-    all_events[i].after >= after &&
+    all_events[i].days.includes(days) ||
+    all_events[i].after >= after ||
     (all_events[i].after + all_events[i].length) <= before
       )
     {
