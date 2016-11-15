@@ -89,7 +89,25 @@ export function getUpcomingEvents(cb) {
     emulateServerReturn(result, cb);
 }
 
-export function searchEvents(searchInput, days, after, before, cb) {
+export function searchEvents(user_id,searchInput, days, after, before, cb) {
+  var unfiltered_results = [];
+  var filtered_result = [];
+  var searchField = searchInput.toLowerCase();
+  var userData = readDocument('Users', user_id);
+  var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
+  var all_events = readCollection('Events')
+  for (var i=0 ; i < all_events.length ; i++)
+  {
+    if (all_events[i].name.toLowerCase().match("/"+searchField+".*/") &&
+    all_events[i].days.includes(days) &&
+    all_events[i].after >= after &&
+    (all_events[i].after + all_events[i].length) <= before
+      )
+    {
+      unfiltered_results.push(all_events[i]);
+    }
+  }
+  filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
     emulateServerReturn(null, cb)
     /*
     var number = 3;

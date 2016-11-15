@@ -109,7 +109,7 @@ var startData ={
   }
 }
 
-var data = JSON.parse(localStorage.getItem('events_data'));
+var data = JSON.parse(localStorage.getItem('startData'));
 if (data === null) {
   data = JSONClone(startData);
 }
@@ -131,6 +131,10 @@ export function readDocument(collection, id) {
   // Clone the data. We do this to model a database, where you receive a
   // *copy* of an object and not the object itself.
   return JSONClone(data[collection][id]);
+}
+
+export function readCollection(collection) {
+  return JSONClone(data[collection]);
 }
 
 /**
