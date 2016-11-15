@@ -8,7 +8,7 @@ export default class EventsCreate extends React.Component {
         this.state = {
             data: {
                 eventName: "",
-                organizer: "",
+                organizer: "1",
                 loc: "",
                 onetime: "",
                 datetime: "",
@@ -50,11 +50,11 @@ export default class EventsCreate extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="eventOrganizer">Organizer</label>
                                     <select className="form-control" id="OrganizerSelect" onChange={(e)=>this.handleChange(e,"organizer")}>
-                                        <option>My Group 1</option>
-                                        <option>My Group 2</option>
-                                        <option>My Group 3</option>
-                                        <option>My Group 4</option>
-                                        <option>My Group 5</option>
+                                        <option value="1">My Group 1</option>
+                                        <option value="2">My Group 2</option>
+                                        <option value="3">My Group 3</option>
+                                        <option value="4">My Group 4</option>
+                                        <option value="5">My Group 5</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
