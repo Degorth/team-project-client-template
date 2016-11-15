@@ -130,7 +130,7 @@ export function readDocument(collection, id) {
 }
 
 export function readCollection(collection) {
-  return JSONClone(data[collection]);
+  return JSON.parse(JSONClone(data[collection]));
 }
 
 /**
