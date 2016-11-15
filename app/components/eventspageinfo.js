@@ -3,33 +3,44 @@ import {Link} from 'react-router';
 
 export default class eventspageinfo extends React.Component {
 
+  constructor(props) {
+      super(props);
+      this.state = {
+        "_id": props.id,
+        "name": props.name,
+        "desc": props.desc,
+        "owner": props.owner, // the group that owns this event
+        "loc": props.loc,
+        "start": props.start,
+        "length": props.length,
+        "offset": props.offset //Weekly recurrence
+      }
+  }
+  
+
   render() {
     return(
       <div>
-        
         <div className="container">
           <div className="row">
               <div className="col-md-4">
-                  <img src="img/iskf.jpg" width="250px" />
+                  <img src="this.state.photo" width="250px" />
               </div>
               <div className="col-md-8">
                   <div className="row">
-                      <h1>Umass Shotokan Karate Club</h1>
+                      <h1>this.state.name</h1>
                   </div>
                   <div className="row">
                       <p>
-                          <h3>The Umass Shotokan Karate Club is a long standing branch of the
-            Internation Shotokan Karate Federation. We are the 6th club founded
-            though the organization in the United States and have been at this
-            university for over 40 years!</h3></p>
+                          <h3>this.state.desc</h3></p>
                   </div>
               </div>
           </div>
           <hr />
           <div className="row centering">
-              <h4>Name:</h4> Weekly Shotokan Karate Training <br />
-              <h4>Organizer:</h4> Umass Shotokan Karate Club <br />
-              <h4>Location:</h4> Boyden Gym Basement Squash Courts <br />
+              <h4>Name:</h4> this.state.name <br />
+              <h4>Organizer:</h4> this.state.owner <br />
+              <h4>Location:</h4> this.state.loc <br />
               <h4>Contact Info:</h4> <a href="#">fakeemail@umass.edu</a> <br />
           </div>
           <hr />
