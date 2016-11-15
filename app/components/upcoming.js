@@ -4,7 +4,7 @@ import DataTable from 'react-data-table';
 import {getUpcomingEvents} from './../server.js';
 
 
-export default class Feed extends React.Component {
+export default class Upcoming extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
