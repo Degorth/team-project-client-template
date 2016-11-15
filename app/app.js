@@ -8,7 +8,7 @@ import Schedule from './components/schedule.js';
 import Homepage from './components/homepage.js';
 import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
-//import profileuser from './components/profileuser.js';
+//import ProfileUser from './components/profileuser.js';
 import UnimplementedReactComponent from './components/UnimplementedReactComponent.js';
 
 class boredContainer extends React.Component {
@@ -49,7 +49,7 @@ class eventscreateContainer extends React.Component {
 
 class profileuserContainer extends React.Component {
     render() {
-        return (<UnimplementedReactComponent/>);
+        return (<ProfileUser/>);
     }
 }
 class Navbar extends React.Component {

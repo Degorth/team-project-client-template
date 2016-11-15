@@ -12,8 +12,7 @@ var startData ={
       "owner": 1, // the group that owns this event
       "loc": "Boyden Gym Basement Squash Courts",
       "start": 1478803334000,
-      "length": 7200000,
-      "offset": 604800000 //Weekly recurrence
+      "length": 7200000
     },
     "2": {
       "_id": 2,
@@ -23,8 +22,7 @@ var startData ={
       "owner": 2,
       "loc": "LGRT 212",
       "start": 1478962800000, //Sat, Nov. 12 2016
-      "length": 18000000, //5 hours long
-      "offset": 604800000 //Weekly recurrence
+      "length": 18000000 //5 hours long
     },
     "3": {
       "_id": 3,
@@ -34,8 +32,7 @@ var startData ={
       "owner": 3,
       "loc": "Campus Center",
       "start": 1478736000000,
-      "length": 18000000, //5 hrs
-      "offset": 604800000
+      "length": 18000000 //5 hrs
     },
     "4": {
       "_id": 4,
@@ -45,8 +42,7 @@ var startData ={
       "owner": 2,
       "loc": "LGRT 212",
       "start": 1478930400000, //Thur, Nov. 10 2016
-      "length": 5400000, //1.5 hours long
-      "offset": 604800000 //Weekly recurrence
+      "length": 5400000 //1.5 hours long
     }
   },
   "Users": {
@@ -56,7 +52,7 @@ var startData ={
       "email": "bjean@umass.edu",
       "groups": [1, 3], //groups to which user has membership by id
       "interests": [], //array of strings for now later hopefully tags for classifying groups
-      "photo": "<filepath>",
+      "photo": "../img/identicon.png",
       "events": [1, 3] //subscribed events by id
     },
     "2": {
@@ -85,7 +81,7 @@ var startData ={
       "name": "Umass Shotokan Karate Club",
       "email": "karate@umass.edu", //main email for group
       "desc": "The Umass Shotokan Karate Club is a long standing branch of the Internation Shotokan Karate Federation. We are the 6th club founded though the organization in the United States and have been at this university for over 40 years!",
-      "photo": "../build/img/iskf.jpeg",
+      "photo": "../img/iskf.jpeg",
       "events": [1] //events owned by id
     },
     "2": {
@@ -103,7 +99,7 @@ var startData ={
       "name": "Umass Game Hobbyists League",
       "email": "gaming@umass.edu",
       "desc": "The GHL is an RSO that brings anyone and everyone at UMass to have a great time. The GHL holds weekly game nights - featuring board, card, and video games",
-      "photo": "<filepath>",
+      "photo": "../img/GHL.jpg",
       "events": [3]
     }
   }
