@@ -3,26 +3,29 @@ import EventSqDisp from './eventSqDisp.js';
 import {getScheduledEvents} from './../server.js';
 import {getDayOfWeek, getMonthOfYear} from './../util.js';
 
+const oneDay = 86400000;
+const oneWeek = 604800000;
+
 var today = function(ev) {
     let eventEndTime = new Date(ev.start + ev.length);
     let now = new Date();
-    return (now.getDay() === eventEndTime.getDay() && now.getMonth() === eventEndTime.getMonth() && now.getYear() === eventEndTime.getYear());
+    return (now.getDate() == eventEndTime.getDate() && now.getMonth() == eventEndTime.getMonth() && now.getYear() == eventEndTime.getYear());
 }
 var thisWeek = function(ev) {
     let eventEndTime = new Date(ev.start + ev.length).getTime()
-    let tomorrow = (new Date().getTime() + 86400000);
-    let weekFromTomorrow = (tomorrow + 604800000);
+    let tomorrow = (new Date().getTime() + oneDay);
+    let weekFromTomorrow = (tomorrow + oneWeek);
     return (tomorrow <= eventEndTime && eventEndTime <= weekFromTomorrow);
 };
 var nextWeek = function(ev) {
     let eventEndTime = new Date(ev.start + ev.length).getTime()
-    let weekFromTomorrow = (new Date().getTime() + 86400000 + 604800000);
-    let twoWeekFromTomorrow = (weekFromTomorrow + 604800000);
+    let weekFromTomorrow = (new Date().getTime() + oneDay + oneWeek);
+    let twoWeekFromTomorrow = (weekFromTomorrow + oneWeek);
     return (weekFromTomorrow <= eventEndTime && eventEndTime <= twoWeekFromTomorrow);
 };
 var future = function(ev) {
     let eventEndTime = new Date(ev.start + ev.length).getTime()
-    let twoWeekFromTomorrow = (new Date().getTime() + 86400000 + 604800000 + 604800000);
+    let twoWeekFromTomorrow = (new Date().getTime() + oneDay + (2*oneWeek));
     return (twoWeekFromTomorrow <= eventEndTime);
 };
 export default class Schedule extends React.Component {
