@@ -79,42 +79,31 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
   var searchField = searchInput.toLowerCase();
   var userData = readDocument('Users', user_id);
   var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
-  var all_events = readCollection('Events')
-  for (var i=0 ; i < all_events.length ; i++)
+  var all_events = readCollection('Events');
+  var length = Object.keys(all_events).length;
+  console.log(length);
+  console.log(searchField);
+
+  for (var i=1 ; i < length; i++)
   {
-    if (all_events[i].name.toLowerCase().match("/"+searchField+".*/") &&
+    console.log(all_events[i].name.toLowerCase());
+    console.log(all_events[i].name.toLowerCase().includes(searchField));
+  if (all_events[i].name.toLowerCase().includes(searchField) ||
     all_events[i].days.includes(days) ||
     all_events[i].after >= after ||
-    (all_events[i].after + all_events[i].length) <= before
+    (all_events[i].after + all_events[i].length) < before
       )
     {
       unfiltered_results.push(all_events[i]);
     }
+
   }
-  var filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
-  emulateServerReturn(filtered_result, cb)
-    /*
-    var number = 3;
-    var i = 1;
-    var result = {};
-    var eventData;
-    var searchString = searchInput.trim().toLowerCase();
-    var beforeString = before.trime().toLowerCase();
-    var afterString = after.trime().toLowerCase();
-    var daysString = days.toString();
-    while (i < number) {
-      eventData = readDocument('Events', i);
-      if (searchString.match(eventData.name)) {
-        result.push(eventData);
-      }
-      i = i+1;
-    }
-    emulateServerReturn(result,cb)
-    */
+  //var filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
+  console.log(unfiltered_results);
+  emulateServerReturn(unfiltered_results, cb);
 }
 
 export function getUserData(user_id, cb) {
-    var data = {}
-    var user = readDocument('Users', user_id)
-    emulateServerReturn(data, cb);
+    console.log(readDocument('Users', user_id));
+    emulateServerReturn(user, cb);
 }

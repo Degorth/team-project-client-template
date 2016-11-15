@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 var startData ={
   "Events": {
     "1": {
@@ -130,7 +129,7 @@ export function readDocument(collection, id) {
 }
 
 export function readCollection(collection) {
-  return JSON.parse(JSONClone(data[collection]));
+  return JSONClone(data[collection]);
 }
 
 /**
