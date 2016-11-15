@@ -4,28 +4,30 @@ import {IndexRoute, Link, Router, Route, browserHistory} from 'react-router';
 
 import Bored from './components/bored.js';
 import Schedule from './components/schedule.js';
-//import upcoming from './components/upcoming.js';
+//import Upcoming from './components/upcoming.js';
 import Homepage from './components/homepage.js';
 import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
 //import ProfileUser from './components/profileuser.js';
-import UnimplementedReactComponent from './components/UnimplementedReactComponent.js';
+import ReactComponentException from './components/ReactComponentException.js';
+
+var curUser = 1;
 
 class boredContainer extends React.Component {
     render() {
-        return (<Bored/>);
+        return (<Bored user={curUser}/>);
     }
 }
 
 class ScheduleContainer extends React.Component {
     render() {
-        return (<Schedule user={1}/>);
+        return (<Schedule user={curUser}/>);
     }
 }
 
 class upcomingContainer extends React.Component {
     render() {
-        return (<UnimplementedReactComponent/>);
+        return (<ReactComponentException type="0"/>);
     }
 }
 
@@ -49,9 +51,11 @@ class eventscreateContainer extends React.Component {
 
 class profileuserContainer extends React.Component {
     render() {
-        return (<ProfileUser/>);
+        //return (<ProfileUser/>);
+        return(<ReactComponentException type="1"/>);
     }
 }
+
 class Navbar extends React.Component {
     render() {
         return (
@@ -90,11 +94,7 @@ class Navbar extends React.Component {
         );
     }
 }
-//<Link to='/'>Home</Link>&nbsp;
-/*
-const Navbar = () => (
-)
-*/
+
 class Container extends React.Component {
     render() {
         return (

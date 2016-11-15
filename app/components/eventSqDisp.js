@@ -6,7 +6,7 @@ export default class EventSqDisp extends React.Component {
         return (
             <div className="tile col-md-2">
                 <h4 style={{textDecoration: "underline"}}>
-                    {unixTimeToString(this.props.event.start)}
+                    {unixTimeToString(this.props.event.start)+ "-" + unixTimeToString(this.props.event.start+this.props.event.length)}
                 </h4>
                 <h4 style={{textDecoration: "underline"}}>
                     {this.props.event.loc}
