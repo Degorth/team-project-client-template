@@ -44,37 +44,15 @@ export function postNewEvent(eventToPost, cb) {
             contactInfo: ""
         }
     };
-    var newEvent = addDocument('Events', eventToPost);
+    addDocument('Events', eventToPost);
     // Fetch the associated group
-    var groupData = readDocument('Groups', organizer);
+    var groupData = readDocument('Groups', eventToPost.organizer);
     // add the new event to the group Data
     groupData.events.unshift(eventToPost._id);
     // Write back to the document the new group data
     writeDocument('Groups',groupData);
-    emulateServerReturn(newEvent, cb);
+    emulateServerReturn(blankEvent, cb);
 }
-/*
-  export function postNewEvent(name,desc,owner_id,loc,start,length,offset,cb) {
-    var newEvent = {
-      "name" : name,
-      "desc": desc,
-      "owner":owner_id,
-      "loc" : loc,
-      "start" : start,
-      "length": length,
-      "offset":offset
-    };
-    // Write the new event to the document
-    newEvent = addDocument('Events', newEvent);
-    // Fetch the associated group
-    var groupData = readDocument('Groups', owner_id);
-    // add the new event to the group Data
-    groupData.events.unshift(newEvent._id);
-    // Write back to the document the new group data
-    writeDocument('Groups',groupData);
-    emulateServerReturn(newEvent, cb);
-  }
-  */
 
 export function getScheduledEvents(user_id, cb) {
     var userData = readDocument('Users', user_id);
