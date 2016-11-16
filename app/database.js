@@ -105,10 +105,8 @@ var startData ={
 }
 
 var data = JSON.parse(localStorage.getItem('startData'));
-console.log(data);
-if (data === null) {
-  console.log(data);
 
+if (data === null) {
   data = JSONClone(startData);
 }
 

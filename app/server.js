@@ -11,9 +11,9 @@ function emulateServerReturn(data, cb) {
 
 export function addEventToUser(user_id,event_id,cb){
   var userData = readDocument('Users',user_id);
-  userData.events.push(event_id);
+  if(userData.events.indexOf(event_id)<=0) userData.events.push(event_id);
   writeDocument('Users',userData);
-  emulateServerReturn(null,cb);
+  emulateServerReturn(userData,cb);
 }
 
 export function postNewGroup(id, owner_id, name, email, description, filepath, event_ids, cb) {
@@ -68,8 +68,8 @@ export function getScheduledEvents(user_id, cb) {
     emulateServerReturn(events, cb);
 }
 
-export function getUpcomingEvents(cb) {
-    var number = 3;
+export function getUpcomingEvents(user_id,cb) {
+    var number = 5;
     var i = 1;
     var result = [];
     var eventData;
@@ -78,6 +78,11 @@ export function getUpcomingEvents(cb) {
         result.push(eventData);
         i = i + 1;
     }
+    var userData = readDocument('Users', user_id);
+    for(i=0;i<4;i++){
+      alert(result[i]._id+" " + userData.events.indexOf(result[i]._id));
+    }
+    result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
     emulateServerReturn(result, cb);
 }
 

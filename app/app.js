@@ -8,7 +8,7 @@ import Schedule from './components/schedule.js';
 import Homepage from './components/homepage.js';
 import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
-import UserProfile from './components/profileuser.js';
+//import UserProfile from './components/profileuser.js';
 import ReactComponentException from './components/ReactComponentException.js';
 
 var curUser = 1;
@@ -27,7 +27,6 @@ class ScheduleContainer extends React.Component {
 
 class upcomingContainer extends React.Component {
     render() {
-        //return (<Upcoming user={curUser} />);
         return(<ReactComponentException type="1"/>);
     }
 }
@@ -52,8 +51,9 @@ class eventscreateContainer extends React.Component {
 
 class profileuserContainer extends React.Component {
     render() {
+        return(<ReactComponentException type="1"/>);
         //return (<ProfileUser/>);
-        return(<UserProfile user={curUser}/>);
+        //return(<UserProfile user={curUser}/>);
     }
 }
 
