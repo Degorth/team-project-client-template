@@ -36,26 +36,8 @@ export default class UserProfile extends React.Component {
 
   render() {
     return(
+
       <div>
-        <div className="row">
-        <div className="col-md-1">
-        </div>
-        <div className="col-md-3">
-          <div className="panel panel-default">
-              <div className="panel-body">
-                <div className="card">
-                  <img className="card-img-top" src="img/identicon.png" id="profile-image" width="250px" alt="Personal Photo"></img>
-                  <div className="card-block">
-                    <p className="card-text"></p>
-                      <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#photoModal">
-                        <span className="glyphicon glyphicon-camera"></span> Edit Photo
-                      </button>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
           <div className="col-md-7">
             <div className="panel panel-default">
               <div className="panel-body" id="user-info">
@@ -82,22 +64,49 @@ export default class UserProfile extends React.Component {
               </div>
             </div>
           </div>
-        <div className="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <h4 className="modal-title" id="photoModalLabel">Choose a Photo . . .</h4>
-                </button>
-              </div>
-              <div className="modal-body">
-                <input type="file" id="files" name="files[]" multiple />
-                <img src="img/identicon.png" id="profile-img-thumbnail" width="150px" alt="Profile Image" />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
 }
+
+/*
+
+<div className="row">
+<div className="col-md-1">
+</div>
+<div className="col-md-3">
+  <div className="panel panel-default">
+      <div className="panel-body">
+        <div className="card">
+          <img className="card-img-top" src="img/identicon.png" id="profile-image" width="250px" alt="Personal Photo"></img>
+          <div className="card-block">
+            <p className="card-text"></p>
+              <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#photoModal">
+                <span className="glyphicon glyphicon-camera"></span> Edit Photo
+              </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+<div className="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel">
+  <div className="modal-dialog" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <h4 className="modal-title" id="photoModalLabel">Choose a Photo . . .</h4>
+        </button>
+      </div>
+      <div className="modal-body">
+        <input type="file" id="files" name="files[]" multiple />
+        <img src="img/identicon.png" id="profile-img-thumbnail" width="150px" alt="Profile Image" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+*/

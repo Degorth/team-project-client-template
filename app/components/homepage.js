@@ -6,7 +6,8 @@ export default class Homepage extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        user_name: undefined
+        user_name: undefined,
+        past_events: []
       }
   }
 
@@ -14,10 +15,19 @@ export default class Homepage extends React.Component {
     getUserData(this.props.user, (user) => this.setState({user_name:user.name}));
   }
 
+  displayPastEvents() {
+
+  }
+
   render()
   {
     return (
-      <center><h4>Welcome, {this.state.user_name}!</h4></center>
+      <div>
+        <center><h4>Welcome, {this.state.user_name}!</h4></center>
+          <div className="row">
+              {this.displayPastEvents()}
+          </div>
+     </div>
     );
   }
 }
