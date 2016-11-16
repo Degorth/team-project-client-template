@@ -1,6 +1,12 @@
 import React from 'react';
+import {getUpcomingEvents} from './server.js';
 
 export default class Bored extends React.Component{
+
+  constructor(props){
+    super(props);
+    getUpcomingEvents((eventsList) => this.setState({events: eventsList}));
+  }
 
   render(){
     return(
