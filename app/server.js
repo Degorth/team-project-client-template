@@ -64,7 +64,7 @@ export function getScheduledEvents(user_id, cb) {
 export function getUpcomingEvents(cb) {
     var number = 3;
     var i = 1;
-    var result = {};
+    var result = [];
     var eventData;
     while (i < number) {
         eventData = readDocument('Events', i);
@@ -81,13 +81,9 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
   var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
   var all_events = readCollection('Events');
   var length = Object.keys(all_events).length;
-  console.log(length);
-  console.log(searchField);
 
   for (var i=1 ; i < length; i++)
   {
-    console.log(all_events[i].name.toLowerCase());
-    console.log(all_events[i].name.toLowerCase().includes(searchField));
   if (all_events[i].name.toLowerCase().includes(searchField) ||
     all_events[i].days.includes(days) ||
     all_events[i].after >= after ||
@@ -99,7 +95,6 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
 
   }
   //var filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
-  console.log(unfiltered_results);
   emulateServerReturn(unfiltered_results, cb);
 }
 
