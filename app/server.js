@@ -79,9 +79,6 @@ export function getUpcomingEvents(user_id,cb) {
         i = i + 1;
     }
     var userData = readDocument('Users', user_id);
-    for(i=0;i<4;i++){
-      alert(result[i]._id+" " + userData.events.indexOf(result[i]._id));
-    }
     result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
     emulateServerReturn(result, cb);
 }

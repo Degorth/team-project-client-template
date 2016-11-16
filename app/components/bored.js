@@ -7,16 +7,22 @@ export default class Bored extends React.Component {
         super(props);
         this.state = {
             "events": [],
-            "currEventId": 0
+            "currEventId": -1
         }
     }
 
     refresh() {
-        getUpcomingEvents(this.props.user,(eventsList) => this.setState({events: eventsList, currEventId: 0}));
+        getUpcomingEvents(this.props.user,(eventsList) => this.setState({events: eventsList, currEventId: -1}));
     }
 
     componentDidMount() {
         this.refresh();
+    }
+
+    handleEventIdUpdate(id){
+      if(this.state.currEventId===-1){
+        this.setState({"currEventId":id});
+      }
     }
 
     rerollHandler(e) {
@@ -28,9 +34,6 @@ export default class Bored extends React.Component {
       e.preventDefault();
       addEventToUser(this.props.user, this.state.currEventId,(res)=>this.refresh(res));
     }
-    updateEventId(id){
-      this.setState({"currEventId":id});
-    }
 
     getEvent() {
         if(this.state.events.length>0){
@@ -38,7 +41,7 @@ export default class Bored extends React.Component {
             var max = Math.floor(this.state.events.length - 1); //Upper bound of event id's to choose from
             var randId = Math.floor(Math.random() * (max - min + 1)) + min; //Random event id in given range
           var ev = this.state.events[randId];
-          this.updateEventId(ev._id);
+          this.handleEventIdUpdate(ev._id);
           var date = new Date(ev.start * 1000);
           // Hours part from the timestamp
           var hours = date.getHours();
