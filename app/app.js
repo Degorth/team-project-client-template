@@ -70,7 +70,7 @@ class Navbar extends React.Component {
                             <Link to='/'>Home</Link>
                         </li>
                         <li>
-                            <Link to='/schedule'>My Scheule</Link>
+                            <Link to='/schedule'>My Schedule</Link>
                         </li>
 
                         <li>

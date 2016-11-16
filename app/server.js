@@ -81,13 +81,9 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
   var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
   var all_events = readCollection('Events');
   var length = Object.keys(all_events).length;
-  console.log(length);
   console.log(searchField);
-
   for (var i=1 ; i < length; i++)
   {
-    console.log(all_events[i].name.toLowerCase());
-    console.log(all_events[i].name.toLowerCase().includes(searchField));
   if (all_events[i].name.toLowerCase().includes(searchField) ||
     all_events[i].days.includes(days) ||
     all_events[i].after >= after ||
@@ -104,6 +100,6 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
 }
 
 export function getUserData(user_id, cb) {
-    console.log(readDocument('Users', user_id));
+    var user = readDocument('Users', user_id);
     emulateServerReturn(user, cb);
 }

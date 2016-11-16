@@ -12,19 +12,21 @@ export default class Homepage extends React.Component {
 
   refresh() {
       console.log(this.state.user_name);
-      getUserData(this.props.user, (user_name) => this.setState({name: user_name}));
+      getUserData(this.props.user, (user_name) => this.setState({user_name:name}));
       console.log(this.state.user_name);
 
   }
 
-  componentDidMount() {
-      this.refresh();
+  componentWillMount() {
+    console.log(this.state.user_name);
+    getUserData("1", (user) => this.setState({user_name:user.name}));
+    console.log(this.state.user_name);
   }
 
   render()
   {
     return (
-      <rowcenter><h4>Welcome, user {this.state.user_name}!</h4></rowcenter>
+      <center><h4>Welcome, {this.state.user_name}!</h4></center>
     );
   }
 }

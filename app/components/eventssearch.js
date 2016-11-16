@@ -51,7 +51,7 @@ export default class EventsSearch extends React.Component {
                     {this.state.results.map((ev) => {
                         return (
                             <div key={ev._id}>
-                                <img src="#" width="150px"/> {ev.name}
+                                <img src="#" width="150px"/> <h4>{ev.name}</h4>
                                 <div>{ev.desc}</div>
                                 <a className="btn btn-secondary" href="#" role="button">
                                     <span className="glyphicon glyphicon-hand-up"></span>
@@ -61,8 +61,10 @@ export default class EventsSearch extends React.Component {
                     })}
                 </div>
             );
-        } else { < div > No Events Found < /div>
-      }
+        }
+        else {
+          return (<h5> No Events Found </h5>);
+        }
     }
 
     render() {
