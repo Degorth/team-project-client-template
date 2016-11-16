@@ -1,32 +1,34 @@
 import React from 'react';
-import {getUpcomingEvents} from './../server.js';
+import {getUpcomingEvents, addEventToUser} from './../server.js';
 
 export default class Bored extends React.Component{
 
   constructor(props){
     super(props);
     this.state={
-      "events":[]
+      "events":[],
+      "currEventId":0
     }
   }
 
   refresh(){
-    getUpcomingEvents((eventsList) => this.setState({events: eventsList}));
+    var min = Math.ceil(0);//Lower bound of event id's to choose from
+    var max = Math.floor(this.state.events.length - 1);//Upper bound of event id's to choose from
+    var randId = Math.floor(Math.random() * (max - min + 1)) + min;//Random event id in given range
+    getUpcomingEvents((eventsList) => this.setState({events: eventsList, currEventId: randId}));
   }
 
   componentDidMount(){
     this.refresh();
   }
 
-  /*
-  addToScheduleHandler(){
-    //need to add an add to schedule function to server
+  rerollHandler(){
+    this.getEvent();
   }
 
-  rerollHandler(){
-    //need to add code to handle a reroll
+  addToScheduleHandler(id){
+    addEventToUser(this.props.user, id, this.rerollHandler());
   }
-  */
 
   render(){
     function getEvent(){
@@ -35,10 +37,7 @@ export default class Bored extends React.Component{
       var ev = this.state.events[0]; //get the first
       */
       //then replace the text below with the values from the 'ev' example 'UMass ShotoKan Karate Club' ==> ev.name
-      var min = Math.ceil(0);//Lower bound of event id's to choose from
-      var max = Math.floor(this.state.events.length - 1);//Upper bound of event id's to choose from
-      var randId = Math.floor(Math.random() * (max - min + 1)) + min;//Random event id in given range
-      var ev = this.state.events[randId];
+      var ev = this.state.events[this.state.currEventId];
       var date = new Date(ev.start*1000);
       // Hours part from the timestamp
       var hours = date.getHours();
@@ -84,14 +83,14 @@ export default class Bored extends React.Component{
               <hr />
               <div className="row text-center">
                   <div className="col-md-6">
-                    <a href="#" className="btn btn-secondary">
+                    <button className="btn btn-secondary" onClick={this.addToScheduleHandler(this.state.currEventId)}>
                         <span className="glyphicon glyphicon-edit"></span> Add to Schedule
-                    </a>
+                    </button>
                   </div>
                   <div className="col-md-6">
-                    <a href="#" className="btn btn-secondary">
+                    <button className="btn btn-secondary" onClick={this.rerollHandler()}>
                         <span className="glyphicon glyphicon-repeat"></span> Reroll For Another Event
-                    </a>
+                    </button>
                   </div>
               </div>
           </div>
