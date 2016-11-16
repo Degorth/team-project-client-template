@@ -28,7 +28,6 @@ class ScheduleContainer extends React.Component {
 
 class upcomingContainer extends React.Component {
     render() {
-        //return (<Upcoming user={curUser} />);
         return(<ReactComponentException type="1"/>);
     }
 }
@@ -123,7 +122,7 @@ ReactDOM.render((
             <Route path='/eventssearch' component={eventssearchContainer}></Route>
             <Route path='/eventscreate' component={eventscreateContainer}></Route>
             <Route path='/profileuser' component={profileuserContainer}></Route>
-            //<Route path='/profileedit' component={profileeditContainer}></Route>
+            <Route path='/profileedit' component={profileeditContainer}></Route>
         </Route>
     </Router>
 ), document.getElementById('ugo-app'));
