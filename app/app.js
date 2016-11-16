@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import {IndexRoute, Link, Router, Route, browserHistory} from 'react-router';
 
 import Bored from './components/bored.js';
-import Schedule from './components/schedule.js';
+import Schedule from './components/Schedule.js';
 //import Upcoming from './components/upcoming.js';
 import Homepage from './components/homepage.js';
 import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
 import UserProfile from './components/profileuser.js';
+import ProfileEdit from './components/profileedit.js';
 import ReactComponentException from './components/ReactComponentException.js';
 
 var curUser = 1;
@@ -55,6 +56,12 @@ class profileuserContainer extends React.Component {
         //return (<ProfileUser/>);
         return(<UserProfile user={curUser}/>);
     }
+}
+
+class profileeditContainer extends React.Component {
+  render() {
+    return(<ProfileEdit user={curUser}/>);
+  }
 }
 
 class Navbar extends React.Component {
@@ -116,6 +123,7 @@ ReactDOM.render((
             <Route path='/eventssearch' component={eventssearchContainer}></Route>
             <Route path='/eventscreate' component={eventscreateContainer}></Route>
             <Route path='/profileuser' component={profileuserContainer}></Route>
+            //<Route path='/profileedit' component={profileeditContainer}></Route>
         </Route>
     </Router>
 ), document.getElementById('ugo-app'));

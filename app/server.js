@@ -115,6 +115,12 @@ export function getUserGroups(user_id, cb) {
   emulateServerReturn(groups, cb);
 }
 
-export function getUserEvents(user_id, cb) {
+export function setUserData(newData, cb) {
+  var user = readDocument('Users', newData._id);
 
 }
+
+/*export function getUserEvents(user_id, cb) {
+
+}
+*/
