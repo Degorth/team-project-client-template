@@ -18,6 +18,16 @@ export default class Bored extends React.Component{
     this.refresh();
   }
 
+  /*
+  addToScheduleHandler(){
+    //need to add an add to schedule function to server
+  }
+
+  rerollHandler(){
+    //need to add code to handle a reroll
+  }
+  */
+
   render(){
     function getEvent(){
       //events is an array you can get a value from it in a number of ways
