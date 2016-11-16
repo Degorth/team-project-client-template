@@ -1,47 +1,96 @@
 import React from 'react';
+import {getUpcomingEvents, addEventToUser} from './../server.js';
 
 export default class Bored extends React.Component{
 
+  constructor(props){
+    super(props);
+    this.state={
+      "events":[],
+      "currEventId":0
+    }
+  }
+
+  refresh(){
+    var min = Math.ceil(0);//Lower bound of event id's to choose from
+    var max = Math.floor(this.state.events.length - 1);//Upper bound of event id's to choose from
+    var randId = Math.floor(Math.random() * (max - min + 1)) + min;//Random event id in given range
+    getUpcomingEvents((eventsList) => this.setState({events: eventsList, currEventId: randId}));
+  }
+
+  componentDidMount(){
+    this.refresh();
+  }
+
+  rerollHandler(){
+    this.getEvent();
+  }
+
+  addToScheduleHandler(id){
+    addEventToUser(this.props.user, id, this.rerollHandler());
+  }
+
   render(){
+    function getEvent(){
+      //events is an array you can get a value from it in a number of ways
+      /*
+      var ev = this.state.events[0]; //get the first
+      */
+      //then replace the text below with the values from the 'ev' example 'UMass ShotoKan Karate Club' ==> ev.name
+      var ev = this.state.events[this.state.currEventId];
+      var date = new Date(ev.start*1000);
+      // Hours part from the timestamp
+      var hours = date.getHours();
+      // Minutes part from the timestamp
+      var minutes = "0" + date.getMinutes();
+      // Will display time in 10:30:23 format
+      var startTime = hours + ':' + minutes.substr(-2);
+      date = new Date((ev.start+ev.length)*1000);
+      hours = date.getHours();
+      minutes = "0" + date.getMinutes();
+      var endTime = hours + ':' + minutes.substr(-2);
+
+      return (
+        <div>
+        <div className="row">
+          <div className="col-md-4">
+              <img src="#" width="250px" />
+          </div>
+          <div className="col-md-8">
+              <div className="row">
+                  <h1>{ev.name}</h1>
+              </div>
+              <div className="row">
+                      <h3>{ev.desc}</h3>
+              </div>
+          </div>
+      </div>
+      <hr />
+      <div className="row text-center">
+          <h4>Name:</h4> {ev.name} <br />
+          <h4>Organizer:</h4> Umass Shotokan Karate Club <br />
+          <h4>Location:</h4> {ev.loc} <br />
+          <h4>Time:</h4> {startTime} - {endTime} <br />
+          <h4>Contact Info:</h4> <a href="#">fakeemail@umass.edu</a> <br />
+      </div>
+    </div>
+  );
+    }
     return(
       <div className="row">
           <div className="cols-med-8">
-              <div className="row">
-                  <div className="col-md-4">
-                      <img src="img/iskf.jpg" width="250px" />
-                  </div>
-                  <div className="col-md-8">
-                      <div className="row">
-                          <h1>Umass Shotokan Karate Club</h1>
-                      </div>
-                      <div className="row">
-                          <p>
-                              <h3>The Umass Shotokan Karate Club is a long standing branch of the
-                  Internation Shotokan Karate Federation. We are the 6th club founded
-                  though the organization in the United States and have been at this
-                  university for over 40 years!</h3></p>
-                      </div>
-                  </div>
-              </div>
-              <hr />
-              <div className="row text-center">
-                  <h4>Name:</h4> Weekly Shotokan Karate Training <br />
-                  <h4>Organizer:</h4> Umass Shotokan Karate Club <br />
-                  <h4>Location:</h4> Boyden Gym Basement Squash Courts <br />
-                  <h4>Time:</h4> 4:30 - 5:30PM <br />
-                  <h4>Contact Info:</h4> <a href="#">fakeemail@umass.edu</a> <br />
-              </div>
+              {getEvent()}
               <hr />
               <div className="row text-center">
                   <div className="col-md-6">
-                    <a href="#" className="btn btn-secondary">
+                    <button className="btn btn-secondary" onClick={this.addToScheduleHandler(this.state.currEventId)}>
                         <span className="glyphicon glyphicon-edit"></span> Add to Schedule
-                    </a>
+                    </button>
                   </div>
                   <div className="col-md-6">
-                    <a href="#" className="btn btn-secondary">
+                    <button className="btn btn-secondary" onClick={this.rerollHandler()}>
                         <span className="glyphicon glyphicon-repeat"></span> Reroll For Another Event
-                    </a>
+                    </button>
                   </div>
               </div>
           </div>

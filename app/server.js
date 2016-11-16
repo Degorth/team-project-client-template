@@ -9,6 +9,13 @@ function emulateServerReturn(data, cb) {
     }, 4);
 }
 
+export function addEventToUser(user_id,event_id,cb){
+  var userData = readDocument('Users',user_id);
+  userData.events.push(event_id);
+  writeDocument('Users',userData);
+  emulateServerReturn(null,cb);
+}
+
 export function postNewGroup(id, owner_id, name, email, description, filepath, event_ids, cb) {
     var newGroup = {
         "_id": id,
@@ -64,7 +71,7 @@ export function getScheduledEvents(user_id, cb) {
 export function getUpcomingEvents(cb) {
     var number = 3;
     var i = 1;
-    var result = {};
+    var result = [];
     var eventData;
     while (i < number) {
         eventData = readDocument('Events', i);
@@ -81,7 +88,6 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
   var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
   var all_events = readCollection('Events');
   var length = Object.keys(all_events).length;
-  console.log(searchField);
   for (var i=1 ; i < length; i++)
   {
   if (all_events[i].name.toLowerCase().includes(searchField) ||
@@ -95,7 +101,6 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
 
   }
   //var filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
-  console.log(unfiltered_results);
   emulateServerReturn(unfiltered_results, cb);
 }
 
@@ -111,5 +116,5 @@ export function getUserGroups(user_id, cb) {
 }
 
 export function getUserEvents(user_id, cb) {
-  
+
 }
