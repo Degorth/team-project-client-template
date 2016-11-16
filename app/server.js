@@ -9,6 +9,13 @@ function emulateServerReturn(data, cb) {
     }, 4);
 }
 
+export function addEventToUser(user_id,event_id,cb){
+  var userData = readDocument('Users',user_id);
+  userData.events.push(event_id);
+  writeDocument('Users',userData);
+  emulateServerReturn(null,cb);
+}
+
 export function postNewGroup(id, owner_id, name, email, description, filepath, event_ids, cb) {
     var newGroup = {
         "_id": id,
