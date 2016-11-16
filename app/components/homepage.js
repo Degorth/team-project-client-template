@@ -6,21 +6,12 @@ export default class Homepage extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        user_name: "somebody"
+        user_name: undefined
       }
   }
 
-  refresh() {
-      console.log(this.state.user_name);
-      getUserData(this.props.user, (user_name) => this.setState({user_name:name}));
-      console.log(this.state.user_name);
-
-  }
-
   componentWillMount() {
-    console.log(this.state.user_name);
-    getUserData("1", (user) => this.setState({user_name:user.name}));
-    console.log(this.state.user_name);
+    getUserData(this.props.user, (user) => this.setState({user_name:user.name}));
   }
 
   render()

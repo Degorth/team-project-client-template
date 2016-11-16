@@ -50,7 +50,7 @@ var startData ={
       "name": "Billie Jean",
       "email": "bjean@umass.edu",
       "groups": [1, 3], //groups to which user has membership by id
-      "interests": [], //array of strings for now later hopefully tags for classifying groups
+      "interests": ["cats","karate"], //array of strings for now later hopefully tags for classifying groups
       "photo": "../img/identicon.png",
       "events": [1, 3] //subscribed events by id
     },

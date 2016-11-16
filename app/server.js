@@ -103,3 +103,9 @@ export function getUserData(user_id, cb) {
     var user = readDocument('Users', user_id);
     emulateServerReturn(user, cb);
 }
+
+export function getUserGroups(user_id, cb) {
+  var userData = readDocument('Users', user_id);
+  var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
+  emulateServerReturn(groups, cb);
+}
