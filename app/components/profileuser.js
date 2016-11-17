@@ -20,7 +20,7 @@ export default class UserProfile extends React.Component {
   }
 
   displayGroups() {
-    getUserGroups("1", (group) => this.setState({groups: group}));
+    getUserGroups(this.props.user, (group) => this.setState({groups: group}));
     return (
         <div className="groupList">
             {this.state.groups.map((gr) => {

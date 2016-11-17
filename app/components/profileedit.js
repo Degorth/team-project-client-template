@@ -5,44 +5,42 @@ export default class ProfileEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_value: "",
+      _id: props.user,
+      name_value: "",
       email_value: "",
-      interests_value: "",
-      data: {
-        _id: "",
-        name: "",
-        email: "",
-        groups: [],
-        interests: "",
-        photo: "",
-        events: []
-      }
+      interests_value: []
     }
+    //window.alert(JSON.stringify(this.state, null, 4));
   }
 
   componentWillMount() {
-    getUserData(this.props.user, (user) => this.setState(
-    user));
-    this.setState({name_value: this.user_name, email_value: this.user_email, interests_value: this.user_interests});
+    getUserData(this.props.user, (user) => this.setState({
+      name: user.name, email: user.email, interests: user.interests
+    }));
+    //this.setState({name_value: data.name, email_value: data.email, interests_value: data.interests});
+
   }
 
-  handleChange(e, field) {
+  handleNameChange(e) {
       e.preventDefault();
-      this.setState({field: e.target.value});
+      this.setState({"user_name": e.target.value});
+  }
+
+  handleEmailChange(e) {
+    e.preventDefault();
+    this.setState({"user_email": e.target.value});
+  }
+
+  handleInterestsChange(e) {
+    e.preventDefault();
+    this.setState({"user_interests": e.target.value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.data.setState({
-      "_id": this.state._id,
-      "name": this.name_value,
-      "email": this.email_value,
-      "groups": this.state.groups,
-      "interests": this.interests_value,
-      "photo": this.state.photo,
-      "events": this.state.events
-    })
-    setUserData(this.data._id, (this.data));
+    //window.alert("Adding: " + this.state._id + " " + this.state.user_name + " " + this.state.user_email + " " + this.state.user_interests);
+    setUserData(this.state._id, this.state.user_name, this.state.user_email,
+      this.state.user_interests, (userData) => {this.setState(userData)});
   }
 
   render() {
@@ -59,8 +57,7 @@ export default class ProfileEdit extends React.Component {
                                 className="form-control"
                                 id="userName"
                                 placeholder={this.state.name}
-                                value={this.state.name_value}
-                                onChange={(e)=>this.handleChange(e,"name_value")}/>
+                                onChange={(e)=>this.handleNameChange(e,"name_value")}/>
                           </div>
                           <div className="form-group">
                               <label>Email Address</label>
@@ -68,8 +65,7 @@ export default class ProfileEdit extends React.Component {
                                 className="form-control"
                                 id="email"
                                 placeholder={this.state.email}
-                                value={this.state.email_value}
-                                onChange={(e) => this.handleChange(e, "email_value")}/>
+                                onChange={(e) => this.handleEmailChange(e, "email_value")}/>
                           </div>
                           <div className="form-group">
                             <label>Interests (Please separate by commas)</label>
@@ -77,8 +73,7 @@ export default class ProfileEdit extends React.Component {
                               className="form-control"
                               id="interests"
                               placeholder={this.state.interests}
-                              value={this.state.interests_value}
-                              onChange={(e) => this.handleChange(e, "interests_value")}/>
+                              onChange={(e) => this.handleInterestsChange(e, "interests_value")}/>
                           </div>
                       </form>
                   </div>

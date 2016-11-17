@@ -117,9 +117,14 @@ export function getUserGroups(user_id, cb) {
   emulateServerReturn(groups, cb);
 }
 
-export function setUserData(newData, cb) {
-  var user = readDocument('Users', newData._id);
-
+export function setUserData(user_id, user_name, user_email, user_interests, cb) {
+  var user = readDocument('Users', user_id);
+  user.name = user_name;
+  user.email = user_email;
+  user.interests = user_interests;
+  window.alert(JSON.stringify(user, null, 4));
+  writeDocument('Users', user);
+  emulateServerReturn(user, cb);
 }
 
 /*export function getUserEvents(user_id, cb) {
