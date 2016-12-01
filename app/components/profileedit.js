@@ -6,9 +6,9 @@ export default class ProfileEdit extends React.Component {
     super(props);
     this.state = {
       _id: props.user,
-      name_value: "",
-      email_value: "",
-      interests_value: []
+      name: props.user.name,
+      email: props.user.email,
+      interests: props.user.interests
     }
     //window.alert(JSON.stringify(this.state, null, 4));
   }
@@ -33,14 +33,13 @@ export default class ProfileEdit extends React.Component {
 
   handleInterestsChange(e) {
     e.preventDefault();
-    this.setState({"user_interests": e.target.value});
+    var interestsArray = e.target.value.split(",");
+    this.setState({"user_interests": interestsArray});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    //window.alert("Adding: " + this.state._id + " " + this.state.user_name + " " + this.state.user_email + " " + this.state.user_interests);
-    setUserData(this.state._id, this.state.user_name, this.state.user_email,
-      this.state.user_interests, (userData) => {this.setState(userData)});
+    setUserData(this.state, (userData) => {this.setState(userData)});
   }
 
   render() {
@@ -57,7 +56,7 @@ export default class ProfileEdit extends React.Component {
                                 className="form-control"
                                 id="userName"
                                 placeholder={this.state.name}
-                                onChange={(e)=>this.handleNameChange(e,"name_value")}/>
+                                onChange={(e)=>this.handleNameChange(e)}/>
                           </div>
                           <div className="form-group">
                               <label>Email Address</label>
@@ -65,7 +64,7 @@ export default class ProfileEdit extends React.Component {
                                 className="form-control"
                                 id="email"
                                 placeholder={this.state.email}
-                                onChange={(e) => this.handleEmailChange(e, "email_value")}/>
+                                onChange={(e) => this.handleEmailChange(e)}/>
                           </div>
                           <div className="form-group">
                             <label>Interests (Please separate by commas)</label>
@@ -73,7 +72,7 @@ export default class ProfileEdit extends React.Component {
                               className="form-control"
                               id="interests"
                               placeholder={this.state.interests}
-                              onChange={(e) => this.handleInterestsChange(e, "interests_value")}/>
+                              onChange={(e) => this.handleInterestsChange(e)}/>
                           </div>
                       </form>
                   </div>

@@ -49,8 +49,9 @@ export default class UserProfile extends React.Component {
             <div className="panel panel-default">
               <div className="panel-body">
                 <div className="btn-group pull-right" role="group">
-                  <a className="btn btn-secondary" href="#" role="button">
-                  <span className="glyphicon glyphicon-hand-up"></span> Manage My Groups</a>
+                  <Link to="/profilegroupedit" className="btn btn-secondary">
+                    <span className="glyphicon glyphicon-hand-up"></span>Manage My Groups
+                  </Link>
                   <a className="btn btn-primary" href="#" role="button">
                   <span className="glyphicon glyphicon-plus"></span> Create A New Event Group</a>
                 </div>

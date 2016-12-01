@@ -10,6 +10,7 @@ import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
 import UserProfile from './components/profileuser.js';
 import ProfileEdit from './components/profileedit.js';
+import ProfileGroupEdit from './components/profilegroupedit.js';
 import ReactComponentException from './components/ReactComponentException.js';
 
 var curUser = 1;
@@ -60,6 +61,12 @@ class profileuserContainer extends React.Component {
 class profileeditContainer extends React.Component {
   render() {
     return(<ProfileEdit user={curUser}/>);
+  }
+}
+
+class profilegroupeditContainer extends React.Component {
+  render() {
+    return(<ProfileGroupEdit user={curUser}/>);
   }
 }
 
@@ -123,6 +130,7 @@ ReactDOM.render((
             <Route path='/eventscreate' component={eventscreateContainer}></Route>
             <Route path='/profileuser' component={profileuserContainer}></Route>
             <Route path='/profileedit' component={profileeditContainer}></Route>
+            <Route path='/profilegroupedit' component ={profilegroupeditContainer}></Route>
         </Route>
     </Router>
 ), document.getElementById('ugo-app'));

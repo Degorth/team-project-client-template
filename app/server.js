@@ -117,14 +117,29 @@ export function getUserGroups(user_id, cb) {
   emulateServerReturn(groups, cb);
 }
 
-export function setUserData(user_id, user_name, user_email, user_interests, cb) {
-  var user = readDocument('Users', user_id);
-  user.name = user_name;
-  user.email = user_email;
-  user.interests = user_interests;
-  window.alert(JSON.stringify(user, null, 4));
+export function setUserData(newData, cb) {
+  var user = readDocument('Users', newData._id);
+  user.name = newData.user_name;
+  user.email = newData.user_email;
+  user.interests = newData.user_interests;
   writeDocument('Users', user);
   emulateServerReturn(user, cb);
+}
+
+export function setUserGroups(newData, cb) {
+  var user = readDocument('Users', newData._id);
+  user.groups = newData.groups;
+  writeDocument('Users', user);
+  emulateServerReturn(user, cb);
+}
+
+export function getGroups(cb) {
+  var groups = readCollection("Groups");
+  var res = [];
+  for (var i = 0; i < groups.length; i++) {
+    res[i] = groups[i]._id
+  }
+  emulateServerReturn(res, cb);
 }
 
 /*export function getUserEvents(user_id, cb) {
