@@ -54,9 +54,9 @@ export default class EventsSearch extends React.Component {
                             <div key={ev._id}>
                                 <img src="#" width="150px"/> <h4>{ev.name}</h4>
                                 <div>{ev.desc}</div>
-                                <a className="btn btn-secondary" href="#" role="button">
+                                <Link to={'event/'+ev._id} className="btn btn-secondary" role="button">
                                     <span className="glyphicon glyphicon-hand-up"></span>
-                                    View Group Page</a>
+                                    View Group Page</Link>
                             </div>
                         )
                     })}
