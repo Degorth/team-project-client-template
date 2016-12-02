@@ -7,7 +7,7 @@ var initialData = {
       "desc": "The Umass Shotokan Karate Club is a long standing branch of the Internation Shotokan Karate Federation. We are the 6th club founded though the organization in the United States and have been at this university for over 40 years!",
       "owner": 1, // the group that owns this event
       "loc": "Boyden Gym Basement Squash Courts",
-      "start": 1478803334000,
+      "start": new Date().getTime() + 7200000,
       "length": 7200000
     },
     "2": {
