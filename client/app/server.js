@@ -54,6 +54,12 @@ function sendXHR(verb, resource, body, cb) {
     }
 }
 
+export function getScheduledEvents(user_id, cb) {
+  sendXHR('GET', '/user/1/schedule', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
@@ -114,12 +120,6 @@ export function postNewEvent(eventToPost, cb) {
     // Write back to the document the new group data
     writeDocument('Groups',groupData);
     emulateServerReturn(blankEvent, cb);
-}
-
-export function getScheduledEvents(user_id, cb) {
-  sendXHR('GET', '/user/1/schedule', undefined, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
 }
 
 export function getUpcomingEvents(user_id,cb) {

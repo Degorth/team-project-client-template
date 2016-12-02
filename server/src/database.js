@@ -7,7 +7,7 @@ var initialData = {
       "desc": "The Umass Shotokan Karate Club is a long standing branch of the Internation Shotokan Karate Federation. We are the 6th club founded though the organization in the United States and have been at this university for over 40 years!",
       "owner": 1, // the group that owns this event
       "loc": "Boyden Gym Basement Squash Courts",
-      "start": new Date().getTime() + 7200000,
+      "start": new Date().getTime() + 7200000, //1478803334000
       "length": 7200000
     },
     "2": {
@@ -17,7 +17,7 @@ var initialData = {
       "desc": "The PenTraining for cybersecurity competition.",
       "owner": 2,
       "loc": "LGRT 212",
-      "start": 1478962800000, //Sat, Nov. 12 2016
+      "start": new Date().getTime() + (604800000*2),//1478962800000, //Sat, Nov. 12 2016
       "length": 18000000 //5 hours long
     },
     "3": {
@@ -27,7 +27,7 @@ var initialData = {
       "desc": "The GHL is an RSO that brings anyone and everyone at UMass to have a great time. The GHL holds weekly game nights - featuring board, card, and video games",
       "owner": 3,
       "loc": "Campus Center",
-      "start": 1478736000000,
+      "start": new Date().getTime() + 604800000, //1478736000000,
       "length": 18000000 //5 hrs
     },
     "4": {
@@ -37,7 +37,7 @@ var initialData = {
       "desc": "Administrative meeting for cybersecurity competition team.",
       "owner": 2,
       "loc": "LGRT 212",
-      "start": 1478930400000, //Thur, Nov. 10 2016
+      "start": new Date().getTime() + (604800000*3),// 1478930400000, //Thur, Nov. 10 2016
       "length": 5400000 //1.5 hours long
     }
   },

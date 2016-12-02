@@ -25,7 +25,7 @@ var nextWeek = function(ev) {
 };
 var future = function(ev) {
     let eventEndTime = new Date(ev.start + ev.length).getTime()
-    let twoWeekFromTomorrow = (new Date().getTime() + oneDay + (2*oneWeek));
+    let twoWeekFromTomorrow = (new Date().getTime() + oneDay + (2 * oneWeek));
     return (twoWeekFromTomorrow <= eventEndTime);
 };
 export default class Schedule extends React.Component {
@@ -66,14 +66,14 @@ export default class Schedule extends React.Component {
         var thisWeekList = this.filter(thisWeek);
         var nextWeekList = this.filter(nextWeek);
         var futureList = this.filter(future);
-        function eventsToDisp(list) {
+        function eventsToDisp(list, user) {
             if (list !== null) {
                 if (list.length > 0) {
                     return (
                         <div className="row">
-                            {list.map((ev) => {
-                                return (<EventSqDisp key={ev._id} event={ev}/>)
-                            })}
+                            {list.map(function(ev){
+                                return (<EventSqDisp key={ev._id} user={user} event={ev}/>);
+                            },this)}
                         </div>
                     );
 
@@ -108,16 +108,16 @@ export default class Schedule extends React.Component {
                             </h3>
 
                             <h4 className="schedule-header">Today: {this.parseDateFormat(curDay, 0)}</h4>
-                            {eventsToDisp(todayList)}
+                            {eventsToDisp(todayList,this.props.user)}
 
                             <h4 className="schedule-header">This Week: {this.parseDateFormat(curDay, 1) + " - " + this.parseDateFormat(curDay, 8)}</h4>
-                            {eventsToDisp(thisWeekList)}
+                            {eventsToDisp(thisWeekList,this.props.user)}
 
                             <h4 className="schedule-header">Next Week: {this.parseDateFormat(curDay, 8) + " - " + this.parseDateFormat(curDay, 15)}</h4>
-                            {eventsToDisp(nextWeekList)}
+                            {eventsToDisp(nextWeekList,this.props.user)}
 
                             <h4 className="schedule-header">Future Events</h4>
-                            {eventsToDisp(futureList)}
+                            {eventsToDisp(futureList,this.props.user)}
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import UserProfile from './components/profileuser.js';
 import ProfileEdit from './components/profileedit.js';
 import ProfileGroupEdit from './components/profilegroupedit.js';
 import ReactComponentException from './components/ReactComponentException.js';
+import ResetDatabase from './components/resetdatabase.js';
 
 var curUser = 1;
 
@@ -134,3 +135,8 @@ ReactDOM.render((
         </Route>
     </Router>
 ), document.getElementById('ugo-app'));
+
+ReactDOM.render(
+  <ResetDatabase />,
+  document.getElementById('ugo-db-reset')
+);

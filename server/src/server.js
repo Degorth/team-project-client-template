@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 const path = require('path')
+var database = require('./database.js');
 var bodyParser = require('body-parser');
 var database = require('./database.js');
 var readDocument = database.readDocument;
@@ -49,6 +50,15 @@ app.get('/user/:userid/schedule', function(req, res) {
     } else {
         res.status(401).end();
     }
+});
+
+// Reset database.
+app.post('/resetdb', function(req, res) {
+    console.log("Resetting database...");
+    // This is a debug route, so don't do any validation.
+    database.resetDatabase();
+    // res.send() sends an empty response with status code 200
+    res.send();
 });
 
 

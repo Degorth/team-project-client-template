@@ -15,7 +15,7 @@ export default class EventSqDisp extends React.Component {
                 </h4>
                 <img className="tile-img-top profile-img" src="#" alt="img"/>
                 <div className="tile-block">
-                    <Link to={"/event/"+this.props.event._id}><h4 className="tile-title">{this.props.event.name}</h4></Link>
+                    <Link to={"/event/"+this.props.event._id+"/user/"+this.props.user}><h4 className="tile-title">{this.props.event.name}</h4></Link>
                     <h6 className="tile-subtitle text-muted">
                         <a href="#">
                             {this.props.event.owner.name}
