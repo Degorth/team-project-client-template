@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var startData ={
+var startData = {
   "Events": {
     "1": {
       "_id": 1,

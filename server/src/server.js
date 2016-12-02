@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 //import static stuff
-app.use(express.static('../build'));
+app.use(express.static('../client/build'));
 
 // Starts the server on port 3000!
 app.listen(3000, function () {
