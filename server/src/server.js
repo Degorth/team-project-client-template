@@ -17,7 +17,6 @@ app.use(express.static('../client/build'));
 app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 app.use(bodyParser.json());
-app.use(bodyParser.text());
 
 // Starts the server on port 3000!
 app.listen(3000, function() {
