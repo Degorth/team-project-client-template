@@ -155,6 +155,17 @@ app.get('/event/:eventid/user/:userid', function(req, res) {
     }
 });
 
+app.get('user/:userid',function(req,res){
+      var userid = req.params.userid;
+      var fromUser = getUserIdFromToken(req.get('Authorization'));
+      var useridNum = parseInt(userid, 10);
+      if (fromUser === useridNum) {
+          res.send(readDocument('Users', userid));
+      } else {
+          res.status(401).end();
+      }
+});
+
 // Reset database.
 app.post('/resetdb', function(req, res) {
     console.log("Resetting database...");

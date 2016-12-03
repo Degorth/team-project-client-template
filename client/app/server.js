@@ -83,6 +83,12 @@ export function searchEvents(user_id,searchInput, days, after, before, cb) {
   });
 }
 
+export function getUserData(user_id, cb) {
+    sendXHR('GET', '/user/'+user_id, undefined, (xhr) => {
+      cb(JSON.parse(xhr.responseText));
+    });
+}
+
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
@@ -142,11 +148,6 @@ export function getUpcomingEvents(user_id,cb) {
     var userData = readDocument('Users', user_id);
     result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
     emulateServerReturn(result, cb);
-}
-
-export function getUserData(user_id, cb) {
-    var user = readDocument('Users', user_id);
-    emulateServerReturn(user, cb);
 }
 
 export function getUserGroups(user_id, cb) {
