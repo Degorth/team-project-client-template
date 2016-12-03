@@ -14,6 +14,7 @@ import ProfileEdit from './components/profileedit.js';
 import ProfileGroupEdit from './components/profilegroupedit.js';
 import ReactComponentException from './components/ReactComponentException.js';
 import ResetDatabase from './components/resetdatabase.js';
+import ErrorBanner from './components/errorbanner.js';
 
 var curUser = 1;
 var curEvent = 1;
@@ -123,6 +124,7 @@ class Container extends React.Component {
     render() {
         return (
             <div>
+                <ErrorBanner/>
                 <Navbar/> {this.props.children}
             </div>
         )

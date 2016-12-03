@@ -1,5 +1,3 @@
-import {readDocument, writeDocument, addDocument, readCollection} from './database.js';
-
 var token = 'eyJpZCI6MX0=';
 
 function sendXHR(verb, resource, body, cb) {

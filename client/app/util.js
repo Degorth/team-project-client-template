@@ -1,3 +1,11 @@
+export function hideElement(shouldHide) {
+  if (shouldHide) {
+    return 'hidden';
+  } else {
+    return '';
+  }
+}
+
 export function unixTimeToString(time) {
     return new Date(time).toLocaleString().substring(0,17);
 }
