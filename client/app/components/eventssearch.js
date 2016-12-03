@@ -7,10 +7,10 @@ export default class EventsSearch extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "searchinput": undefined,
+            "searchinput": "",
             "days": [],
-            "after": undefined,
-            "before": undefined,
+            "after": "",
+            "before": "",
             "results": undefined
         }
     }

@@ -1,3 +1,5 @@
+import {readDocument, writeDocument, addDocument, readCollection} from './database.js';
+
 var token = 'eyJpZCI6MX0=';
 
 function sendXHR(verb, resource, body, cb) {
@@ -64,9 +66,36 @@ export function getEvent(event_id,user_id, cb) {
   });
 }
 
+export function postEvent(event_id,eventToPost, cb){
+  sendXHR('POST', '/event/'+event_id, eventToPost, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
+export function searchEvents(user_id,searchInput, days, after, before, cb) {
+  sendXHR('POST', '/search', {
+    "searchInput": searchInput,
+    "days": days,
+    "after": after,
+    "before": before
+  }, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
+ */
+ /* These functions are not implemented on the new server.
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
 function emulateServerReturn(data, cb) {
     setTimeout(() => {
@@ -98,12 +127,6 @@ export function postNewGroup(id, owner_id, name, email, description, filepath, e
     // add the new group to the user Data
     userData.groups.unshift(newGroup._id);
     emulateServerReturn(newGroup, cb);
-}
-
-export function postEvent(event_id,eventToPost, cb){
-  sendXHR('POST', '/event/'+event_id, eventToPost, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
 }
 
 export function postNewEvent(eventToPost, cb) {
@@ -147,18 +170,6 @@ export function getUpcomingEvents(user_id,cb) {
     emulateServerReturn(result, cb);
 }
 
-export function searchEvents(user_id,searchInput, days, after, before, cb) {
-  var searchParams= {
-    searchInput: searchInput,
-    days: days,
-    after: after,
-    before: before
-  }
-  sendXHR('GET', '/event/'+searchParams, searchParams, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
-}
-
 export function getUserData(user_id, cb) {
     var user = readDocument('Users', user_id);
     emulateServerReturn(user, cb);
@@ -194,8 +205,3 @@ export function getGroups(cb) {
   }
   emulateServerReturn(res, cb);
 }
-
-/*export function getUserEvents(user_id, cb) {
-
-}
-*/

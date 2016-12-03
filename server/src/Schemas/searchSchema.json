@@ -6,7 +6,10 @@
       "type": "string"
     },
     "days": {
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "after": {
       "type": "string"
