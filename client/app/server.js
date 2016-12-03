@@ -66,7 +66,7 @@ export function getEvent(event_id,user_id, cb) {
   });
 }
 
-export function postEvent(event_id,eventToPost, cb){
+export function postNewEvent(event_id,eventToPost, cb){
   sendXHR('POST', '/event/'+event_id, eventToPost, (xhr) => {
     cb(JSON.parse(xhr.responseText));
   });
@@ -127,32 +127,6 @@ export function postNewGroup(id, owner_id, name, email, description, filepath, e
     // add the new group to the user Data
     userData.groups.unshift(newGroup._id);
     emulateServerReturn(newGroup, cb);
-}
-
-export function postNewEvent(eventToPost, cb) {
-    //This Function takes an event JSON and writes it to the server. See Eventscreat.js
-    var blankEvent = {
-        data: {
-            eventName: "",
-            organizer: "",
-            loc: "",
-            onetime: "",
-            datetime: "",
-            reoccuring: "",
-            weekday: "",
-            time: "",
-            desc: "",
-            contactInfo: ""
-        }
-    };
-    addDocument('Events', eventToPost);
-    // Fetch the associated group
-    var groupData = readDocument('Groups', eventToPost.organizer);
-    // add the new event to the group Data
-    groupData.events.unshift(eventToPost._id);
-    // Write back to the document the new group data
-    writeDocument('Groups',groupData);
-    emulateServerReturn(blankEvent, cb);
 }
 
 export function getUpcomingEvents(user_id,cb) {
