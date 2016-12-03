@@ -155,7 +155,7 @@ app.get('/event/:eventid/user/:userid', function(req, res) {
     }
 });
 
-app.get('user/:userid',function(req,res){
+app.get('/user/:userid',function(req,res){
       var userid = req.params.userid;
       var fromUser = getUserIdFromToken(req.get('Authorization'));
       var useridNum = parseInt(userid, 10);
