@@ -91,7 +91,7 @@ app.post('/event/:eventid', validate({body: EventSchema}), function(req, res) {
 
 });
 
-app.post('/search', validate({body: SearchSchema}), function(req, res) {
+app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
     //var user_id = req.params.userid;
     //var event_id = req.params.eventid;
       var unfiltered_results = [];

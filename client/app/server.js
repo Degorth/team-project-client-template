@@ -73,7 +73,7 @@ export function postNewEvent(event_id,eventToPost, cb){
 }
 
 export function searchEvents(user_id,searchInput, days, after, before, cb) {
-  sendXHR('POST', '/search', {
+  sendXHR('POST', '/search?searchInput='+searchInput+'&days='+days+'&after='+after+'&before='+before, {
     "searchInput": searchInput,
     "days": days,
     "after": after,
