@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "eventName": {
+          "type": "string"
+        },
+        "organizer": {
+          "type": "string"
+        },
+        "loc": {
+          "type": "string"
+        },
+        "onetime": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "reoccuring": {
+          "type": "string"
+        },
+        "weekday": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "contactInfo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventName",
+        "organizer",
+        "loc",
+        "onetime",
+        "datetime",
+        "reoccuring",
+        "weekday",
+        "time",
+        "desc",
+        "contactInfo"
+      ]
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

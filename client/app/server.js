@@ -100,6 +100,12 @@ export function postNewGroup(id, owner_id, name, email, description, filepath, e
     emulateServerReturn(newGroup, cb);
 }
 
+export function postEvent(event_id,eventToPost, cb){
+  sendXHR('POST', '/event/'+event_id, eventToPost, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
 export function postNewEvent(eventToPost, cb) {
     //This Function takes an event JSON and writes it to the server. See Eventscreat.js
     var blankEvent = {
@@ -142,26 +148,15 @@ export function getUpcomingEvents(user_id,cb) {
 }
 
 export function searchEvents(user_id,searchInput, days, after, before, cb) {
-  var unfiltered_results = [];
-  var searchField = searchInput.toLowerCase();
-  var userData = readDocument('Users', user_id);
-  var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
-  var all_events = readCollection('Events');
-  var length = Object.keys(all_events).length;
-  for (var i=1 ; i < length; i++)
-  {
-  if (all_events[i].name.toLowerCase().includes(searchField) ||
-    all_events[i].days.includes(days) ||
-    all_events[i].after >= after ||
-    (all_events[i].after + all_events[i].length) < before
-      )
-    {
-      unfiltered_results.push(all_events[i]);
-    }
-
+  var searchParams= {
+    searchInput: searchInput,
+    days: days,
+    after: after,
+    before: before
   }
-  //var filtered_result = all_events.map((event_id) => !user_events.includes(event_id))
-  emulateServerReturn(unfiltered_results, cb);
+  sendXHR('GET', '/event/'+searchParams, searchParams, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
 }
 
 export function getUserData(user_id, cb) {

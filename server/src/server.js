@@ -38,6 +38,57 @@ function getUserIdFromToken(authorizationLine) {
     }
 }
 
+app.post('/event/:eventid',validate({ body: eventSchema }), function(req,res)){
+    var newEvent = req.params.body;
+    //This Function takes an event JSON and writes it to the server. See Eventscreat.js
+    var blankEvent = {
+        data: {
+            eventName: "",
+            organizer: "",
+            loc: "",
+            onetime: "",
+            datetime: "",
+            reoccuring: "",
+            weekday: "",
+            time: "",
+            desc: "",
+            contactInfo: ""
+        }
+    };
+    addDocument('Events', newEvent);
+    // Fetch the associated group
+    var groupData = readDocument('Groups', newEvent.organizer);
+    // add the new event to the group Data
+    groupData.events.unshift(newEvent._id);
+    // Write back to the document the new group data
+    writeDocument('Groups',groupData);
+    res.send(blankEvent);
+});
+
+app.get('/search/:params',validate({ body: searchSchema }), function(req,res)){
+  var user_id = req.params.userid;
+  var event_id = req.params.eventid;
+  var unfiltered_results = [];
+  var searchField = req.params.body.searchInput.toLowerCase();
+  var userData = readDocument('Users', user_id);
+  var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
+  var all_events = readCollection('Events');
+  var length = Object.keys(all_events).length;
+  for (var i=1 ; i < length; i++)
+  {
+  if (all_events[i].name.toLowerCase().includes(searchField) ||
+    all_events[i].days.includes(days) ||
+    all_events[i].after >= after ||
+    (all_events[i].after + all_events[i].length) < before
+      )
+    {
+      unfiltered_results.push(all_events[i]);
+    }
+
+  }
+  res.send();
+});
+
 app.get('/user/:userid/schedule', function(req, res) {
     var userid = req.params.userid;
     var fromUser = getUserIdFromToken(req.get('Authorization'));
