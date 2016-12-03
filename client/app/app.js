@@ -8,6 +8,7 @@ import Schedule from './components/Schedule.js';
 import Homepage from './components/homepage.js';
 import EventsSearch from './components/eventssearch.js';
 import EventsCreate from './components/eventscreate.js';
+import EventPageInfo from './components/eventspageinfo.js';
 import UserProfile from './components/profileuser.js';
 import ProfileEdit from './components/profileedit.js';
 import ProfileGroupEdit from './components/profilegroupedit.js';
@@ -15,6 +16,8 @@ import ReactComponentException from './components/ReactComponentException.js';
 import ResetDatabase from './components/resetdatabase.js';
 
 var curUser = 1;
+var curEvent = 1;
+
 
 class boredContainer extends React.Component {
     render() {
@@ -50,6 +53,12 @@ class eventscreateContainer extends React.Component {
     render() {
         return (<EventsCreate/>);
     }
+}
+
+class eventspageinfoContainer extends React.Component {
+  render(){
+    return(<EventPageInfo eventId={curEvent} user={curUser}/>);
+  }
 }
 
 class profileuserContainer extends React.Component {
@@ -129,6 +138,7 @@ ReactDOM.render((
             <Route path='/bored' component={boredContainer}></Route>
             <Route path='/eventssearch' component={eventssearchContainer}></Route>
             <Route path='/eventscreate' component={eventscreateContainer}></Route>
+            <Route path='/eventInfo' component={eventspageinfoContainer}></Route>
             <Route path='/profileuser' component={profileuserContainer}></Route>
             <Route path='/profileedit' component={profileeditContainer}></Route>
             <Route path='/profilegroupedit' component ={profilegroupeditContainer}></Route>

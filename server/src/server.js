@@ -3,7 +3,6 @@ var app = express();
 const path = require('path')
 var database = require('./database.js');
 var bodyParser = require('body-parser');
-var database = require('./database.js');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
@@ -47,6 +46,27 @@ app.get('/user/:userid/schedule', function(req, res) {
         var userData = readDocument('Users', useridNum);
         var events = userData.events.map((event_id) => readDocument('Events', event_id));
         res.send(events);
+    } else {
+        res.status(401).end();
+    }
+});
+
+app.get('/event/:eventid/user/:userid', function(req, res) {
+    var userid = req.params.userid;
+    var eventid = req.params.eventid;
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    var eventidNum = parseInt(eventid,10);
+    if (fromUser === useridNum) {
+        var ev = readDocument('Events', eventidNum);
+        var eventOwner = readDocument('Users',ev.owner);
+        ev.owner = {
+          "name":"",
+          "email":""
+        }
+        ev.owner.name = eventOwner.name;
+        ev.owner.email = eventOwner.email;
+        res.send(ev);
     } else {
         res.status(401).end();
     }

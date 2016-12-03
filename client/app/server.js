@@ -55,7 +55,13 @@ function sendXHR(verb, resource, body, cb) {
 }
 
 export function getScheduledEvents(user_id, cb) {
-  sendXHR('GET', '/user/1/schedule', undefined, (xhr) => {
+  sendXHR('GET', '/user/'+user_id+'/schedule', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
+export function getEvent(event_id,user_id, cb) {
+  sendXHR('GET', '/event/'+event_id+'/user/'+user_id, undefined, (xhr) => {
     cb(JSON.parse(xhr.responseText));
   });
 }
