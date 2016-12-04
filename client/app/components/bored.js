@@ -75,7 +75,7 @@ export default class Bored extends React.Component {
                       {ev.name}
                       <br/>
                       <h4>Organizer:</h4>
-                      Umass Shotokan Karate Club
+                      {ev.owner.name}
                       <br/>
                       <h4>Location:</h4>
                       {ev.loc}
@@ -85,7 +85,7 @@ export default class Bored extends React.Component {
                       - {endTime}
                       <br/>
                       <h4>Contact Info:</h4>
-                      <a href="#">fakeemail@umass.edu</a>
+                      <a href="#">{ev.owner.email}</a>
                       <br/>
                   </div>
               </div>

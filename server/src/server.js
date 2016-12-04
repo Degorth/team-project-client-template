@@ -198,6 +198,7 @@ app.get('/user/:userid/upcoming', function(req, res){
         i = i + 1;
     }
     result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
+    result.forEach((ev)=>(ev.owner = readDocument('Users', ev.owner)));
     res.send(result);
   } else {
       res.status(401).end();
