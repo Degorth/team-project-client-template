@@ -44,6 +44,16 @@ function getUserIdFromToken(authorizationLine) {
         return -1;
     }
 }
+function getEventOwnerInfoForEvent(event_obj){
+  var eventOwner = readDocument('Users', event_obj.owner);
+  event_obj.owner = {
+      "name": "",
+      "email": ""
+  }
+  event_obj.owner.name = eventOwner.name;
+  event_obj.owner.email = eventOwner.email;
+  return event_obj;
+}
 /**
 User Authentication Protocol
     var userid = req.params.userid;
@@ -142,13 +152,7 @@ app.get('/event/:eventid/user/:userid', function(req, res) {
     var eventidNum = parseInt(eventid, 10);
     if (fromUser === useridNum) {
         var ev = readDocument('Events', eventidNum);
-        var eventOwner = readDocument('Users', ev.owner);
-        ev.owner = {
-            "name": "",
-            "email": ""
-        }
-        ev.owner.name = eventOwner.name;
-        ev.owner.email = eventOwner.email;
+        ev = getEventOwnerInfoForEvent(ev);
         res.send(ev);
     } else {
         res.status(401).end();
@@ -198,7 +202,7 @@ app.get('/user/:userid/upcoming', function(req, res){
         i = i + 1;
     }
     result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
-    result.forEach((ev)=>(ev.owner = readDocument('Users', ev.owner)));
+    result.forEach((ev)=>getEventOwnerInfoForEvent(ev));
     res.send(result);
   } else {
       res.status(401).end();
