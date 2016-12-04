@@ -1,6 +1,7 @@
 import React from 'react';
 import {getUpcomingEvents, addEventToUser} from './../server.js';
 import {Link} from 'react-router';
+import {getMonthOfYear} from './../util.js';
 
 export default class Bored extends React.Component {
 
@@ -43,16 +44,16 @@ export default class Bored extends React.Component {
             var randId = Math.floor(Math.random() * (max - min + 1)) + min; //Random event id in given range
           var ev = this.state.events[randId];
           this.handleEventIdUpdate(ev._id);
-          var date = new Date(ev.start * 1000);
+          var stDate = new Date(ev.start);
           // Hours part from the timestamp
-          var hours = date.getHours();
+          var hours = stDate.getHours();
           // Minutes part from the timestamp
-          var minutes = "0" + date.getMinutes();
+          var minutes = "0" + stDate.getMinutes();
           // Will display time in 10:30:23 format
           var startTime = hours + ':' + minutes.substr(-2);
-          date = new Date((ev.start + ev.length) * 1000);
-          hours = date.getHours();
-          minutes = "0" + date.getMinutes();
+          var endDate = new Date((ev.start + ev.length));
+          hours = endDate.getHours();
+          minutes = "0" + endDate.getMinutes();
           var endTime = hours + ':' + minutes.substr(-2);
 
           return (
@@ -80,6 +81,9 @@ export default class Bored extends React.Component {
                       <br/>
                       <h4>Location:</h4>
                       {ev.loc}
+                      <br/>
+                      <h4>Date:</h4>
+                      {getMonthOfYear(stDate.getMonth())+" "+stDate.getDate()+", "+stDate.getFullYear()}
                       <br/>
                       <h4>Time:</h4>
                       {startTime}
