@@ -44,15 +44,15 @@ function getUserIdFromToken(authorizationLine) {
         return -1;
     }
 }
-function getEventOwnerInfoForEvent(event_obj){
-  var eventOwner = readDocument('Users', event_obj.owner);
-  event_obj.owner = {
-      "name": "",
-      "email": ""
-  }
-  event_obj.owner.name = eventOwner.name;
-  event_obj.owner.email = eventOwner.email;
-  return event_obj;
+function getEventOwnerInfoForEvent(event_obj) {
+    var eventOwner = readDocument('Users', event_obj.owner);
+    event_obj.owner = {
+        "name": "",
+        "email": ""
+    }
+    event_obj.owner.name = eventOwner.name;
+    event_obj.owner.email = eventOwner.email;
+    return event_obj;
 }
 /**
 User Authentication Protocol
@@ -104,18 +104,18 @@ app.post('/event/:eventid', validate({body: EventSchema}), function(req, res) {
 app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
     //var user_id = req.params.userid;
     //var event_id = req.params.eventid;
-      var unfiltered_results = [];
-      var searchField = req.body.searchInput.trim().toLowerCase();
-      //var userData = readDocument('Users', user_id);
-      //var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
-      var all_events = getCollection('Events');
-      var length = Object.keys(all_events).length;
-      for (var i = 1; i < length; i++) {
-          if (all_events[i].name.toLowerCase().includes(searchField)) {
-              unfiltered_results.push(all_events[i]);
-          }
-      }
-      /* Before and after not yet implemented
+    var unfiltered_results = [];
+    var searchField = req.body.searchInput.trim().toLowerCase();
+    //var userData = readDocument('Users', user_id);
+    //var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
+    var all_events = getCollection('Events');
+    var length = Object.keys(all_events).length;
+    for (var i = 1; i < length; i++) {
+        if (all_events[i].name.toLowerCase().includes(searchField)) {
+            unfiltered_results.push(all_events[i]);
+        }
+    }
+    /* Before and after not yet implemented
     for (var i=1 ; i < length; i++)
     {
     if (all_events[i].name.toLowerCase().includes(searchField) ||
@@ -128,7 +128,7 @@ app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
 
     }
     */
-      res.send(unfiltered_results);
+    res.send(unfiltered_results);
 });
 
 app.get('/user/:userid/schedule', function(req, res) {
@@ -159,54 +159,77 @@ app.get('/event/:eventid/user/:userid', function(req, res) {
     }
 });
 
-app.get('/user/:userid',function(req,res){
-      var userid = req.params.userid;
-      var fromUser = getUserIdFromToken(req.get('Authorization'));
-      var useridNum = parseInt(userid, 10);
-      if (fromUser === useridNum) {
-          res.send(readDocument('Users', userid));
-      } else {
-          res.status(401).end();
-      }
-});
-
-app.put('/user/:userid/event/:eventid', function(req, res){
-  var userid = req.params.userid;
-  var eventid = req.params.eventid;
-  var eventidNum = parseInt(eventid, 10);
-  var fromUser = getUserIdFromToken(req.get('Authorization'));
-  var useridNum = parseInt(userid, 10);
-  if (fromUser === useridNum) {
-    var userData = readDocument('Users',useridNum);
-    if(userData.events.indexOf(eventidNum)<=0) userData.events.push(eventidNum);
-    writeDocument('Users',userData);
-    res.send(userData);
-  } else {
-      res.status(401).end();
-  }
-});
-
-app.get('/user/:userid/upcoming', function(req, res){
-  var userid = req.params.userid;
-  var fromUser = getUserIdFromToken(req.get('Authorization'));
-  var useridNum = parseInt(userid, 10);
-  if (fromUser === useridNum) {
-    var number = 5;
-    var i = 1;
-    var result = [];
-    var eventData;
-    var userData = readDocument('Users', userid);
-    while (i < number) {
-        eventData = readDocument('Events', i);
-        result.push(eventData);
-        i = i + 1;
+app.get('/user/:userid', function(req, res) {
+    var userid = req.params.userid;
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    if (fromUser === useridNum) {
+        res.send(readDocument('Users', userid));
+    } else {
+        res.status(401).end();
     }
-    result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
-    result.forEach((ev)=>getEventOwnerInfoForEvent(ev));
-    res.send(result);
-  } else {
-      res.status(401).end();
+});
+
+app.put('/user/:userid/event/:eventid', function(req, res) {
+    var userid = req.params.userid;
+    var eventid = req.params.eventid;
+    var eventidNum = parseInt(eventid, 10);
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    if (fromUser === useridNum) {
+        var userData = readDocument('Users', useridNum);
+        if (userData.events.indexOf(eventidNum) <= 0)
+            userData.events.push(eventidNum);
+        writeDocument('Users', userData);
+        res.send(userData);
+    } else {
+        res.status(401).end();
+    }
+});
+
+app.get('/user/:userid/upcoming', function(req, res) {
+    var userid = req.params.userid;
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    if (fromUser === useridNum) {
+        var number = 5;
+        var i = 1;
+        var result = [];
+        var eventData;
+        var userData = readDocument('Users', userid);
+        while (i < number) {
+            eventData = readDocument('Events', i);
+            result.push(eventData);
+            i = i + 1;
+        }
+        result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
+        result.forEach((ev) => getEventOwnerInfoForEvent(ev));
+        res.send(result);
+    } else {
+        res.status(401).end();
+    }
+});
+
+app.get('/user/:userid/groups', function(req, res) {
+    var userid = req.params.userid;
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    if (fromUser === useridNum) {
+        var userData = readDocument('Users', useridNum);
+        var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
+        res.send(groups);
+    } else {
+        res.status(401).end();
+    }
+});
+
+app.get('/groups',function(req,res){
+  var groups = getCollection("Groups");
+  var groupsAsArray = [];
+  for (var i = 0; i < groups.length; i++) {
+    groupsAsArray[i] = groups[i]._id
   }
+  res.send(groupsAsArray);
 });
 
 // Reset database.

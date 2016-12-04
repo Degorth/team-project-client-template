@@ -24,7 +24,7 @@ export default class UserProfile extends React.Component {
     return (
         <div className="groupList">
             {this.state.groups.map((gr) => {
-                return (<li>{gr.name}</li>)
+                return (<li key={gr._id}>{gr.name}</li>)
             })}
         </div>
     );

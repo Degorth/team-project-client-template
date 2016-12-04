@@ -1,5 +1,3 @@
-import {readDocument, writeDocument, addDocument, readCollection} from './database.js';
-
 var token = 'eyJpZCI6MX0=';
 
 function sendXHR(verb, resource, body, cb) {
@@ -55,56 +53,67 @@ function sendXHR(verb, resource, body, cb) {
 }
 
 export function getScheduledEvents(user_id, cb) {
-  sendXHR('GET', '/user/'+user_id+'/schedule', undefined, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
-}
-
-export function getEvent(event_id,user_id, cb) {
-  sendXHR('GET', '/event/'+event_id+'/user/'+user_id, undefined, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
-}
-
-export function postNewEvent(event_id,eventToPost, cb){
-  sendXHR('POST', '/event/'+event_id, eventToPost, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
-}
-
-export function searchEvents(user_id,searchInput, days, after, before, cb) {
-  sendXHR('POST', '/search?searchInput='+searchInput+'&days='+days+'&after='+after+'&before='+before, {
-    "searchInput": searchInput,
-    "days": days,
-    "after": after,
-    "before": before
-  }, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
-}
-
-export function getUserData(user_id, cb) {
-    sendXHR('GET', '/user/'+user_id, undefined, (xhr) => {
-      cb(JSON.parse(xhr.responseText));
+    sendXHR('GET', '/user/' + user_id + '/schedule', undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
     });
 }
 
-export function addEventToUser(user_id,event_id,cb){
-  sendXHR('PUT', '/user/'+user_id+'/event/'+event_id, undefined, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
+export function getEvent(event_id, user_id, cb) {
+    sendXHR('GET', '/event/' + event_id + '/user/' + user_id, undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
 }
 
-export function getUpcomingEvents(user_id,cb) {
-  sendXHR('GET', '/user/'+user_id+'/upcoming', undefined, (xhr) => {
-    cb(JSON.parse(xhr.responseText));
-  });
+export function postNewEvent(event_id, eventToPost, cb) {
+    sendXHR('POST', '/event/' + event_id, eventToPost, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+export function searchEvents(user_id, searchInput, days, after, before, cb) {
+    sendXHR('POST', '/search?searchInput=' + searchInput + '&days=' + days + '&after=' + after + '&before=' + before, {
+        "searchInput": searchInput,
+        "days": days,
+        "after": after,
+        "before": before
+    }, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+export function getUserData(user_id, cb) {
+    sendXHR('GET', '/user/' + user_id, undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+export function addEventToUser(user_id, event_id, cb) {
+    sendXHR('PUT', '/user/' + user_id + '/event/' + event_id, undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+export function getUpcomingEvents(user_id, cb) {
+    sendXHR('GET', '/user/' + user_id + '/upcoming', undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+export function getUserGroups(user_id, cb) {
+    sendXHR('GET', '/user/' + user_id + '/groups', undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    })
+}
+export function getGroups(cb) {
+    sendXHR('GET', '/groups', undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    })
 }
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
  */
- /* These functions are not implemented on the new server.
+/* These functions are not implemented on the new server.
  *
  *
  *
@@ -113,7 +122,6 @@ export function getUpcomingEvents(user_id,cb) {
  *
  *
  *
- */
 function emulateServerReturn(data, cb) {
     setTimeout(() => {
         cb(data);
@@ -139,12 +147,6 @@ export function postNewGroup(id, owner_id, name, email, description, filepath, e
     emulateServerReturn(newGroup, cb);
 }
 
-export function getUserGroups(user_id, cb) {
-  var userData = readDocument('Users', user_id);
-  var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
-  emulateServerReturn(groups, cb);
-}
-
 export function setUserData(newData, cb) {
   var user = readDocument('Users', newData._id);
   user.name = newData.user_name;
@@ -160,12 +162,4 @@ export function setUserGroups(newData, cb) {
   writeDocument('Users', user);
   emulateServerReturn(user, cb);
 }
-
-export function getGroups(cb) {
-  var groups = readCollection("Groups");
-  var res = [];
-  for (var i = 0; i < groups.length; i++) {
-    res[i] = groups[i]._id
-  }
-  emulateServerReturn(res, cb);
-}
+*/
