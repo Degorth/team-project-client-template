@@ -1,5 +1,6 @@
 import React from 'react';
 import {getUpcomingEvents, addEventToUser} from './../server.js';
+import {Link} from 'react-router';
 
 export default class Bored extends React.Component {
 
@@ -91,13 +92,26 @@ export default class Bored extends React.Component {
               </div>
           );
         }
+        else{
+          return(
+            <div className="row text-center">
+              <div className="col-md-3"></div>
+              <div className="col-md-6">
+                <h1>
+                    You are already signed up for all the upcoming events! You must be very bored to want more!
+                </h1>
+                <Link to='/schedule'>Click here to go to your schedule...</Link>
+              </div>
+            </div>
+          );
+        }
 
     }
 
     render() {
         return (
             <div className="row">
-                <div className="cols-med-8">
+                <div className="col-med-8">
                     {this.getEvent()}
                     <hr/>
                     <div className="row text-center">
