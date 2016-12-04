@@ -44,6 +44,8 @@ function getUserIdFromToken(authorizationLine) {
         return -1;
     }
 }
+
+//gets name and email for event organizer
 function getEventOwnerInfoForEvent(event_obj) {
     var eventOwner = readDocument('Users', event_obj.owner);
     event_obj.owner = {
