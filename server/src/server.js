@@ -166,6 +166,44 @@ app.get('/user/:userid',function(req,res){
       }
 });
 
+app.put('/user/:userid/event/:eventid', function(req, res){
+  var userid = req.params.userid;
+  var eventid = req.params.eventid;
+  var eventidNum = parseInt(eventid, 10);
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  var useridNum = parseInt(userid, 10);
+  if (fromUser === useridNum) {
+    var userData = readDocument('Users',useridNum);
+    if(userData.events.indexOf(eventidNum)<=0) userData.events.push(eventidNum);
+    writeDocument('Users',userData);
+    res.send(userData);
+  } else {
+      res.status(401).end();
+  }
+});
+
+app.get('/user/:userid/upcoming', function(req, res){
+  var userid = req.params.userid;
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  var useridNum = parseInt(userid, 10);
+  if (fromUser === useridNum) {
+    var number = 5;
+    var i = 1;
+    var result = [];
+    var eventData;
+    var userData = readDocument('Users', userid);
+    while (i < number) {
+        eventData = readDocument('Events', i);
+        result.push(eventData);
+        i = i + 1;
+    }
+    result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
+    res.send(result);
+  } else {
+      res.status(401).end();
+  }
+});
+
 // Reset database.
 app.post('/resetdb', function(req, res) {
     console.log("Resetting database...");

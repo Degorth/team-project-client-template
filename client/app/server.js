@@ -89,6 +89,17 @@ export function getUserData(user_id, cb) {
     });
 }
 
+export function addEventToUser(user_id,event_id,cb){
+  sendXHR('PUT', '/user/'+user_id+'/event/'+event_id, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
+export function getUpcomingEvents(user_id,cb) {
+  sendXHR('GET', '/user/'+user_id+'/upcoming', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
  * some time in the future with data.
@@ -109,13 +120,6 @@ function emulateServerReturn(data, cb) {
     }, 4);
 }
 
-export function addEventToUser(user_id,event_id,cb){
-  var userData = readDocument('Users',user_id);
-  if(userData.events.indexOf(event_id)<=0) userData.events.push(event_id);
-  writeDocument('Users',userData);
-  emulateServerReturn(userData,cb);
-}
-
 export function postNewGroup(id, owner_id, name, email, description, filepath, event_ids, cb) {
     var newGroup = {
         "_id": id,
@@ -133,21 +137,6 @@ export function postNewGroup(id, owner_id, name, email, description, filepath, e
     // add the new group to the user Data
     userData.groups.unshift(newGroup._id);
     emulateServerReturn(newGroup, cb);
-}
-
-export function getUpcomingEvents(user_id,cb) {
-    var number = 5;
-    var i = 1;
-    var result = [];
-    var eventData;
-    while (i < number) {
-        eventData = readDocument('Events', i);
-        result.push(eventData);
-        i = i + 1;
-    }
-    var userData = readDocument('Users', user_id);
-    result = result.filter((ev)=>(userData.events.indexOf(ev._id)<0));
-    emulateServerReturn(result, cb);
 }
 
 export function getUserGroups(user_id, cb) {
