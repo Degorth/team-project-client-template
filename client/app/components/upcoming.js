@@ -9,7 +9,7 @@ export default class Upcoming extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        "events": []
+        "eventsList": []
     }
   }
   refresh() {
@@ -21,25 +21,55 @@ export default class Upcoming extends Component {
   }
 
   render(){
-    var rows = [];
-    this.state.events.forEach(function(event) {
-        rows.push(<CustomRow Name={event.name} Organzer={event.owner.name} Location = {event.loc} Contact = {event.owner.email} />);
-    }.bind(this)
+    let rows = this.state.eventsList
+    return (
+        <table>
+        <thead>
+          <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Organizer
+            </td>
+            <td>
+                Location
+            </td>
+            <td>
+                Contact Info
+            </td>
+            <td>
+                Description
+            </td>
+          </tr>
+          </thead>
+          <tbody>
+          {rows.map(event =>
+            <tr>
+              <td>
+                  {event.name}
+              </td>
+              <td>
+                  Organizer
+              </td>
+              <td>
+                  Location
+              </td>
+              <td>
+                  Contact Info
+              </td>
+              <td>
+                  Description
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+
     );
-
-
-  var CustomRow = React.createClass({
-      render: function() {
-          return (
-              <tr>
-                  <td>{this.props.Name}</td>
-                  <td>{this.props.Organizer}</td>
-                  <td>{this.props.Location}</td>
-                  <td>{this.props.Contact}</td>
-              </tr>
-          );
-      }
-  });
-
+    // this.state.eventsList.forEach(function(event) {
+    //     rows.push(<CustomRow Name={event.name} Organzer={event.owner.name} Location = {event.loc} Contact = {event.owner.email} />);
+    //     }.bind(this)
+    // );
   }
 }
