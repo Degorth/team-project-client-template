@@ -10,6 +10,7 @@ var getCollection = database.getCollection;
 var validate = require('express-jsonschema').validate;
 var EventSchema = require('./schemas/eventSchema.json');
 var SearchSchema = require('./schemas/searchSchema.json');
+var UserSchema = require('./schemas/userSchema.json');
 
 //import static stuff
 app.use(express.static('../client/build'));
@@ -170,6 +171,23 @@ app.get('/user/:userid', function(req, res) {
     } else {
         res.status(401).end();
     }
+});
+
+app.put('/user/:userid', validate({ body: UserSchema }), function(req, res) {
+  var userid = req.params.userid;
+  var useridNum = parseInt(userid, 10);
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  if (fromUser === useridNum) {
+    var user = readDocument('Users', userid);
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.interests = req.body.interests;
+    writeDocument('Users', user);
+    res.send();
+  }
+  else {
+    res.status(401).end();
+  }
 });
 
 app.put('/user/:userid/event/:eventid', function(req, res) {

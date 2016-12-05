@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "/",
+    "type": "object",
+    "properties": {
+        "userid": {
+          "id": "userid",
+          "type": "integer"
+        },
+        "name": {
+          "id": "name",
+          "type": "string"
+        },
+        "email": {
+          "id": "email",
+          "type": "string"
+        },
+        "interests": {
+          "id": "interests",
+          "type": "array"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "userid",
+        "name",
+        "email",
+        "interests"
+    ]
+}

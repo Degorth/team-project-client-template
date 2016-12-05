@@ -5,41 +5,38 @@ export default class ProfileEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: props.user,
+      userid: props.user,
       name: props.user.name,
       email: props.user.email,
       interests: props.user.interests
     }
-    //window.alert(JSON.stringify(this.state, null, 4));
   }
 
   componentWillMount() {
     getUserData(this.props.user, (user) => this.setState({
       name: user.name, email: user.email, interests: user.interests
     }));
-    //this.setState({name_value: data.name, email_value: data.email, interests_value: data.interests});
-
   }
 
   handleNameChange(e) {
       e.preventDefault();
-      this.setState({"user_name": e.target.value});
+      this.setState({"name": e.target.value});
   }
 
   handleEmailChange(e) {
     e.preventDefault();
-    this.setState({"user_email": e.target.value});
+    this.setState({"email": e.target.value});
   }
 
   handleInterestsChange(e) {
     e.preventDefault();
     var interestsArray = e.target.value.split(",");
-    this.setState({"user_interests": interestsArray});
+    this.setState({"interests": interestsArray});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    setUserData(this.state, (userData) => {this.setState(userData)});
+    setUserData(this.state.userid, this.state, (userData) => {this.setState(userData)});
   }
 
   render() {
