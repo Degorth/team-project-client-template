@@ -87,6 +87,12 @@ export function getUserData(user_id, cb) {
     });
 }
 
+export function setUserData(user_id, newData, cb) {
+  sendXHR('PUT', '/user/' + user_id, newData, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
 export function addEventToUser(user_id, event_id, cb) {
     sendXHR('PUT', '/user/' + user_id + '/event/' + event_id, undefined, (xhr) => {
         cb(JSON.parse(xhr.responseText));

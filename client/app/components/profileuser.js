@@ -16,7 +16,7 @@ export default class UserProfile extends React.Component {
 
   componentWillMount() {
     getUserData(this.props.user, (user) => this.setState(
-      {user_name:user.name, user_email:user.email, user_interests:user.interests + " "}));
+      {user_name:user.name, user_email:user.email, user_interests:user.interests}));
   }
 
   displayGroups() {
