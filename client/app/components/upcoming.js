@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 import {getUpcomingEvents} from './../server.js'
 import {unixTimeToString} from "./../util";
+import {Link} from 'react-router';
 
 
 export default class Upcoming extends Component {
@@ -28,7 +29,7 @@ export default class Upcoming extends Component {
             {this.state.events.map((ev) => {
                 return (
                     <div key={ev._id}>
-                        <img src="#" width="150px"/> <h4>{ev.name}</h4>
+                        <img src="#" width="150px"/> <Link to={'events/'+ev._id+'/eventInfo'}><h4>{ev.name}</h4></Link>
                         <div>{ev.desc}</div>
 
                     </div>
