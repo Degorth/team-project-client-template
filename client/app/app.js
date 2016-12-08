@@ -12,13 +12,10 @@ import EventPageInfo from './components/eventspageinfo.js';
 import UserProfile from './components/profileuser.js';
 import ProfileEdit from './components/profileedit.js';
 import ProfileGroupEdit from './components/profilegroupedit.js';
-import ReactComponentException from './components/ReactComponentException.js';
 import ResetDatabase from './components/resetdatabase.js';
 import ErrorBanner from './components/errorbanner.js';
 
 var curUser = 1;
-var curEvent = 1;
-
 
 class boredContainer extends React.Component {
     render() {
