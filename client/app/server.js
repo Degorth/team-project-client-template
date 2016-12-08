@@ -93,8 +93,20 @@ export function setUserData(user_id, newData, cb) {
   });
 }
 
+export function userIsAttending(event_id,user_id,cb){
+      sendXHR('GET', '/user/'+user_id+'/event/' + event_id + '/isAttending' , undefined, (xhr) => {
+          cb(JSON.parse(xhr.responseText));
+      });
+}
+
 export function addEventToUser(user_id, event_id, cb) {
     sendXHR('PUT', '/user/' + user_id + '/event/' + event_id, undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+export function removeEventFromUser(user_id, event_id, cb) {
+    sendXHR('DELETE', '/user/' + user_id + '/event/' + event_id, undefined, (xhr) => {
         cb(JSON.parse(xhr.responseText));
     });
 }

@@ -173,6 +173,20 @@ app.get('/user/:userid', function(req, res) {
     }
 });
 
+app.get('/user/:userid/event/:eventid/isAttending', function(req, res) {
+    var userid = req.params.userid;
+    var eventid = req.params.eventid;
+    var eventidNum = parseInt(eventid, 10);
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    if (fromUser === useridNum) {
+        var userData = readDocument('Users', useridNum);
+        res.send(userData.events.indexOf(eventidNum) >= 0);
+    } else {
+        res.status(401).end();
+    }
+});
+
 app.put('/user/:userid', validate({ body: UserSchema }), function(req, res) {
   var userid = req.params.userid;
   var useridNum = parseInt(userid, 10);
@@ -198,8 +212,25 @@ app.put('/user/:userid/event/:eventid', function(req, res) {
     var useridNum = parseInt(userid, 10);
     if (fromUser === useridNum) {
         var userData = readDocument('Users', useridNum);
-        if (userData.events.indexOf(eventidNum) <= 0)
+        if (userData.events.indexOf(eventidNum) < 0)
             userData.events.push(eventidNum);
+        writeDocument('Users', userData);
+        res.send(userData);
+    } else {
+        res.status(401).end();
+    }
+});
+app.delete('/user/:userid/event/:eventid', function(req, res) {
+    var userid = req.params.userid;
+    var eventid = req.params.eventid;
+    var eventidNum = parseInt(eventid, 10);
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var useridNum = parseInt(userid, 10);
+    if (fromUser === useridNum) {
+        var userData = readDocument('Users', useridNum);
+        if (userData.events.indexOf(eventidNum) >= 0){
+          userData.events.splice(userData.events.indexOf(eventidNum),1);
+        }
         writeDocument('Users', userData);
         res.send(userData);
     } else {

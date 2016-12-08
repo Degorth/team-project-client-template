@@ -58,7 +58,7 @@ export default class Schedule extends React.Component {
         }
 
     parseDateFormat(d, modifier) {
-        return getDayOfWeek(d.getDay() + modifier % 7) + " " + getMonthOfYear(d.getMonth()) + " " + (d.getDate() + modifier);
+        return getDayOfWeek((d.getDay() + modifier) % 7) + " " + getMonthOfYear(d.getMonth()) + " " + (d.getDate() + modifier);
     }
 
     render() {
@@ -97,7 +97,6 @@ export default class Schedule extends React.Component {
                 }
             }
         }
-        var curDay = new Date();
         return (
             <div className="row-md-3">
                 <div className="col-md-12">
@@ -107,13 +106,13 @@ export default class Schedule extends React.Component {
                                 <span className="schedule-title">Schedule</span>
                             </h3>
 
-                            <h4 className="schedule-header">Today: {this.parseDateFormat(curDay, 0)}</h4>
+                            <h4 className="schedule-header">Today: {this.parseDateFormat(new Date(), 0)}</h4>
                             {eventsToDisp(todayList,this.props.user)}
 
-                            <h4 className="schedule-header">This Week: {this.parseDateFormat(curDay, 1) + " - " + this.parseDateFormat(curDay, 8)}</h4>
+                            <h4 className="schedule-header">This Week: {this.parseDateFormat(new Date(), 1) + " - " + this.parseDateFormat(new Date(), 8)}</h4>
                             {eventsToDisp(thisWeekList,this.props.user)}
 
-                            <h4 className="schedule-header">Next Week: {this.parseDateFormat(curDay, 8) + " - " + this.parseDateFormat(curDay, 15)}</h4>
+                            <h4 className="schedule-header">Next Week: {this.parseDateFormat(new Date(), 8) + " - " + this.parseDateFormat(new Date(), 15)}</h4>
                             {eventsToDisp(nextWeekList,this.props.user)}
 
                             <h4 className="schedule-header">Future Events</h4>

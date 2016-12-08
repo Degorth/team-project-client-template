@@ -59,7 +59,7 @@ class eventscreateContainer extends React.Component {
 
 class eventspageinfoContainer extends React.Component {
   render(){
-    return(<EventPageInfo eventId={curEvent} user={curUser}/>);
+    return(<EventPageInfo eventId={this.props.routeParams.eventId} user={curUser}/>);
   }
 }
 
@@ -141,7 +141,7 @@ ReactDOM.render((
             <Route path='/bored' component={boredContainer}></Route>
             <Route path='/eventssearch' component={eventssearchContainer}></Route>
             <Route path='/eventscreate' component={eventscreateContainer}></Route>
-            <Route path='/eventInfo' component={eventspageinfoContainer}></Route>
+            <Route path='events/:eventId/eventInfo' component={eventspageinfoContainer}></Route>
             <Route path='/profileuser' component={profileuserContainer}></Route>
             <Route path='/profileedit' component={profileeditContainer}></Route>
             <Route path='/profilegroupedit' component ={profilegroupeditContainer}></Route>

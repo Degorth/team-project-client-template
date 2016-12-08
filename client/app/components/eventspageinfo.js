@@ -1,24 +1,51 @@
 import React from 'react';
-import {getEvent} from './../server.js';
+import {getEvent, addEventToUser, userIsAttending, removeEventFromUser} from './../server.js';
 
 export default class eventspageinfo extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            "event": undefined
+            "event": this.props.eventId,
+            "attending": false
         }
     }
 
     refresh() {
         getEvent(this.props.eventId, this.props.user, (event) => this.setState({event: event}));
+        userIsAttending(this.props.eventId, this.props.user, (att) => this.setState({attending: att}));
     }
     componentDidMount() {
         this.refresh();
     }
+    addToScheduleHandler(e) {
+        e.preventDefault();
+        addEventToUser(this.props.user, this.state.event._id, () => this.refresh());
+    }
+    removeFromScheduleHandler(e) {
+        e.preventDefault();
+        removeEventFromUser(this.props.user, this.state.event._id, () => this.refresh());
+    }
+
+    getAddRemoveButton() {
+        if (this.state.attending) {
+            return (
+                <a className="btn btn-primary" onClick={(e) => this.removeFromScheduleHandler(e)} role="button">
+                    <span className="glyphicon glyphicon-edit"></span>
+                    Remove From Schedule</a>
+            )
+        } else {
+
+            return (
+                <a className="btn btn-primary" onClick={(e) => this.addToScheduleHandler(e)} role="button">
+                    <span className="glyphicon glyphicon-edit"></span>
+                    Add to Schedule</a>
+            )
+        }
+    }
 
     render() {
-        if (this.state.event !== undefined) {
+        if (typeof(this.state.event) !== "string") {
             return (
                 <div>
                     <div className="container">
@@ -31,7 +58,7 @@ export default class eventspageinfo extends React.Component {
                                     <h1>{this.state.event.name}</h1>
                                 </div>
                                 <div className="row">
-                                        <h3>{this.state.event.desc}</h3>
+                                    <h3>{this.state.event.desc}</h3>
                                 </div>
                             </div>
                         </div>
@@ -64,9 +91,7 @@ export default class eventspageinfo extends React.Component {
                                     View Members</button>
                             </div>
                             <div className="col-md-4">
-                                <a className="btn btn-primary" href="#" role="button">
-                                    <span className="glyphicon glyphicon-edit"></span>
-                                    Add to Schedule</a>
+                                {this.getAddRemoveButton()}
                                 <a className="btn btn-primary" href="#" role="button">
                                     <span className="glyphicon glyphicon-pencil"></span>
                                     Write a Review</a>
@@ -92,7 +117,7 @@ export default class eventspageinfo extends React.Component {
                 </div>
             );
         } else {
-          return <div></div>
+            return <div></div>
         }
     }
 

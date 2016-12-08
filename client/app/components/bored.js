@@ -64,7 +64,7 @@ export default class Bored extends React.Component {
                       </div>
                       <div className="col-md-8">
                           <div className="row">
-                              <h1>{ev.name}</h1>
+                              <Link to={'events/'+ev._id+'/eventInfo'}><h1>{ev.name}</h1></Link>
                           </div>
                           <div className="row">
                               <h3>{ev.desc}</h3>
@@ -74,7 +74,7 @@ export default class Bored extends React.Component {
                   <hr/>
                   <div className="row text-center">
                       <h4>Name:</h4>
-                      {ev.name}
+                      <Link to={'events/'+ev._id+'/eventInfo'}>{ev.name}</Link>
                       <br/>
                       <h4>Organizer:</h4>
                       {ev.owner.name}
