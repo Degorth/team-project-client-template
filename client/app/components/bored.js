@@ -9,22 +9,23 @@ export default class Bored extends React.Component {
         super(props);
         this.state = {
             "events": [],
-            "eventObj": undefined
+            "eventObj": undefined,
+            "randId": 0
         }
     }
 
     refresh() {
         if (this.state.events.length === 0) {
-            getUpcomingEvents(this.props.user, (eventsList) => this.setState({"events": eventsList, "eventObj": eventsList[0]}));
+            getUpcomingEvents(this.props.user, (eventsList) => this.setState({"events": eventsList, "eventObj": eventsList[this.state.randId]}));
         } else {
             var newEventsList = [];
             if (this.state.events.length !== 1) {
-                newEventsList = this.state.events.splice(randId, 1);
+                newEventsList = this.state.events.splice(this.state.randId, 1);
             }
             var min = Math.ceil(0); //Lower bound of event id's to choose from
             var max = Math.floor(newEventsList.length - 1); //Upper bound of event id's to choose from
-            var randId = Math.floor(Math.random() * (max - min + 1)) + min; //Random event id in given range
-            this.handleEventUpdate(randId);
+            this.setState({"randId":Math.floor(Math.random() * (max - min + 1)) + min}); //Random event id in given range
+            this.handleEventUpdate(this.state.randId);
             this.setState({"events": newEventsList});
         }
     }
