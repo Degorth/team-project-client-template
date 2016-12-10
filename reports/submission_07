@@ -32,7 +32,10 @@ UGo
           b. setUserGroups()
           c. getGroups()
         2. Profile Editing
-          a. Put '/user/:userid'
+          a. PUT '/user/:userid'
+        3. Server
+          a. POST '/resetdb'
       ii. Contributions
         1. Added initial database data to MongoDB
         2. Added MongoDB to server requirements
+        3. Attached resetDB button to database

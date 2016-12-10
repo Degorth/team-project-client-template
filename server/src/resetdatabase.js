@@ -1,6 +1,6 @@
 var ObjectID = require('mongodb').ObjectID;
 
-var databaseName = "facebook";
+var databaseName = "ugo";
 // Put the initial mock objects here.
 var initialData = {
   "Events": {
@@ -106,13 +106,6 @@ var initialData = {
 };
 
 /**
- * Adds any desired indexes to the database.
- */
-function addIndexes(db, cb) {
-  db.collection('feedItems').createIndex({ "contents.contents": "text" }, null, cb);
-}
-
-/**
  * Resets a collection.
  */
 function resetCollection(db, name, cb) {
@@ -147,8 +140,6 @@ function resetDatabase(db, cb) {
       i++;
       // Use myself as a callback.
       resetCollection(db, collection, processNextCollection);
-    } else {
-      addIndexes(db, cb);
     }
   }
 
