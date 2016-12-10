@@ -1,0 +1,38 @@
+UGo
+  1. HTTP Requests / Routes
+  2. Special Server Setup Procedure
+    a. None
+  3. Individual Contributions
+    a. Henry Ecker
+      i. Responsible for
+        1. Schedule
+          a. Get '/user/:userid/schedule'
+          b. Get '/event/:eventid/user/:userid'
+      ii. Contributions
+        1.
+    b. Tanner Kranich
+      i. Responsible for
+        1. I'm Bored
+          a. Get '/user/:userid/upcoming'
+          b. Put '/user/:userid/event/:eventid'
+      ii. Contributions
+        1.
+    c. Ami Kuehl
+      i. Responsible for
+        1. Search
+          a. Post '/search*/'
+        2. Create Event
+          a. Post '/event/:eventid'
+      ii. Contributions
+        1.
+    d. James Coyne
+      i. Responsible for
+        1. Profile User
+          a. setUserData()
+          b. setUserGroups()
+          c. getGroups()
+        2. Profile Editing
+          a. Put '/user/:userid'
+      ii. Contributions
+        1. Added initial database data to MongoDB
+        2. Added MongoDB to server requirements
