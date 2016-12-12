@@ -260,12 +260,7 @@ MongoClient.connect(url, function(err, db) {
                 if (err) {
                     throw err;
                 } else {
-                    var search = userData.events.find((evId) => (evId.toString() === eventid));
-                    if (search !== undefined) {
-                        res.send(search.toString() === eventid);
-                    } else {
-                        res.send(false);
-                    }
+                  res.send(userData.events.find((evId) => (evId.toString() === eventid)) !== undefined);
                 }
             });
         } else {
@@ -300,15 +295,35 @@ MongoClient.connect(url, function(err, db) {
     app.put('/user/:userid/event/:eventid', function(req, res) {
         var userid = req.params.userid;
         var eventid = req.params.eventid;
-        var eventidNum = parseInt(eventid, 10);
         var fromUser = getUserIdFromToken(req.get('Authorization'));
-        var useridNum = parseInt(userid, 10);
-        if (fromUser === useridNum) {
+        if (fromUser === userid) {
+              var userIDObj = new ObjectID(userid);
+              db.collection('Users').updateOne({
+                  _id: userIDObj
+              }, {
+                  $addToSet: {
+                      events: new ObjectID(eventid)
+                  }
+              }, function(err) {
+                  if (err) {
+                      return sendDatabaseError(res, err);
+                  }
+                  db.collection('Users').findOne({
+                      _id: userIDObj
+                  }, function(err, userData) {
+                      if (err) {
+                          return sendDatabaseError(res, err);
+                      }
+                      res.send(userData);
+                  });
+              });
+              /*
             var userData = readDocument('Users', useridNum);
             if (userData.events.indexOf(eventidNum) < 0)
                 userData.events.push(eventidNum);
             writeDocument('Users', userData);
             res.send(userData);
+            */
         } else {
             res.status(401).end();
         }
@@ -316,16 +331,36 @@ MongoClient.connect(url, function(err, db) {
     app.delete('/user/:userid/event/:eventid', function(req, res) {
         var userid = req.params.userid;
         var eventid = req.params.eventid;
-        var eventidNum = parseInt(eventid, 10);
         var fromUser = getUserIdFromToken(req.get('Authorization'));
-        var useridNum = parseInt(userid, 10);
-        if (fromUser === useridNum) {
+        if (fromUser === userid) {
+                var userIDObj = new ObjectID(userid);
+                db.collection('Users').updateOne({
+                    _id: userIDObj
+                }, {
+                    $pull: {
+                        events: new ObjectID(eventid)
+                    }
+                }, function(err) {
+                    if (err) {
+                        return sendDatabaseError(res, err);
+                    }
+                    db.collection('Users').findOne({
+                        _id: userIDObj
+                    }, function(err, userData) {
+                        if (err) {
+                            return sendDatabaseError(res, err);
+                        }
+                        res.send(userData);
+                    });
+                });
+                /*
             var userData = readDocument('Users', useridNum);
             if (userData.events.indexOf(eventidNum) >= 0) {
                 userData.events.splice(userData.events.indexOf(eventidNum), 1);
             }
             writeDocument('Users', userData);
             res.send(userData);
+            */
         } else {
             res.status(401).end();
         }
