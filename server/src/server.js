@@ -14,7 +14,6 @@ var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var url = 'mongodb://localhost:27017/ugo';
 
-
 //* To Be removed when fully migrated to MongoDB
 var database = require('./database.js');
 var readDocument = database.readDocument;
@@ -208,9 +207,9 @@ MongoClient.connect(url, function(err, db) {
             db.collection('Events').findOne({
                 _id: eventObject
             }, function(err, eventData) {
-                  if (err) {
-                      return sendDatabaseError(res, err);
-                  } else {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                } else {
                     getEventOwnerInfoForEvent(eventData, function(err, modifiedEvent) {
                         if (err) {
                             return sendDatabaseError(res, err);
@@ -232,9 +231,9 @@ MongoClient.connect(url, function(err, db) {
             db.collection('Users').findOne({
                 _id: userObject
             }, function(err, userData) {
-                  if (err) {
-                      return sendDatabaseError(res, err);
-                  } else {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                } else {
                     res.send(userData);
                 }
             });
@@ -277,7 +276,7 @@ MongoClient.connect(url, function(err, db) {
                 }
             }, function(err) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
                     res.send();
                 }
@@ -377,7 +376,7 @@ MongoClient.connect(url, function(err, db) {
                 _id: new ObjectID(userid)
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
                     //console.log("User groups: " + userData.groups.toString());
                     db.collection('Groups').find({
