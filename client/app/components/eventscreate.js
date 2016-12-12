@@ -24,7 +24,11 @@ export default class EventsCreate extends React.Component {
     handleChange(e, updateField) {
         e.preventDefault()
         var update = this.state.data;
-        update[updateField] = e.target.value;
+        if(updateField === "weekday"){
+          update[updateField] = update[updateField].concat(e.target.value);
+        } else {
+          update[updateField] = e.target.value;
+        }
         this.setState({data: update});
     }
 
@@ -72,6 +76,8 @@ export default class EventsCreate extends React.Component {
                                 </div>
                                 <div className="radio">
                                     <label><input type="radio" name="optradio" onChange={(e)=>this.handleChange(e,"reoccuring")}/>Weekly Event</label>
+                                    <option value = "no" checked = "checked"> No </option>
+                                    <option value = "yes"> Yes </option>
                                 </div>
                                 <div className="form-inline">
                                     <div className="form-group row">
