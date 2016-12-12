@@ -43,16 +43,16 @@ MongoClient.connect(url, function(err, db) {
           // Convert the UTF-8 string into a JavaScript object.
           var tokenObj = JSON.parse(regularString);
           var id = tokenObj['id'];
-          // Check that id is a number.
-          if (typeof id === 'number') {
+          // Check that id is a string.
+          if (typeof id === 'string') {
               return id;
           } else {
-              // Not a number. Return -1, an invalid ID.
-              return -1;
+              // Not a string.
+              return "";
           }
       } catch (e) {
           // Return an invalid ID.
-          return -1;
+          return "";
       }
   }
 
@@ -175,9 +175,18 @@ MongoClient.connect(url, function(err, db) {
   app.get('/user/:userid', function(req, res) {
       var userid = req.params.userid;
       var fromUser = getUserIdFromToken(req.get('Authorization'));
-      var useridNum = parseInt(userid, 10);
-      if (fromUser === useridNum) {
-          res.send(readDocument('Users', userid));
+      //var useridNum = parseInt(userid, 10);
+      if (fromUser === userid) {
+        var userObject = new ObjectID(userid);
+        db.collection('Users').findOne({
+          _id: userObject
+        }, function(err, userData) {
+          if (err) {
+            throw err;
+          } else {
+            res.send(userData);
+          }
+        });
       } else {
           res.status(401).end();
       }
@@ -199,15 +208,23 @@ MongoClient.connect(url, function(err, db) {
 
   app.put('/user/:userid', validate({ body: UserSchema }), function(req, res) {
     var userid = req.params.userid;
-    var useridNum = parseInt(userid, 10);
     var fromUser = getUserIdFromToken(req.get('Authorization'));
-    if (fromUser === useridNum) {
-      var user = readDocument('Users', userid);
-      user.name = req.body.name;
-      user.email = req.body.email;
-      user.interests = req.body.interests;
-      writeDocument('Users', user);
-      res.send();
+    if (fromUser === userid) {
+      db.collection('Users').updateOne({
+        _id: new ObjectID(userid)
+      }, {
+        $set: {
+          name: req.body.name,
+          email: req.body.email,
+          interests: req.body.interests
+        }
+      }, function (err) {
+        if (err) {
+          throw err;
+        } else {
+          res.send();
+        }
+      });
     }
     else {
       res.status(401).end();
@@ -274,11 +291,32 @@ MongoClient.connect(url, function(err, db) {
   app.get('/user/:userid/groups', function(req, res) {
       var userid = req.params.userid;
       var fromUser = getUserIdFromToken(req.get('Authorization'));
-      var useridNum = parseInt(userid, 10);
-      if (fromUser === useridNum) {
-          var userData = readDocument('Users', useridNum);
-          var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
-          res.send(groups);
+      if (fromUser === userid) {
+        db.collection('Users').findOne({
+          _id: new ObjectID(userid)
+        }, function(err, userData) {
+          if (err) {
+            throw err;
+          } else {
+            //console.log("User groups: " + userData.groups.toString());
+            db.collection('Groups').find({
+              _id: {
+                $in: userData.groups
+              }, function(err, groups) {
+                if (err) {
+                  throw err;
+                } else {
+                  //console.log("" + groups.toString());
+                  res.send(groups);
+                }
+              }
+            });
+            //userData = readDocument('Users', useridNum);
+            //var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
+            //res.send(groups);
+          }
+        });
+
       } else {
           res.status(401).end();
       }

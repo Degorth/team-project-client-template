@@ -1,4 +1,4 @@
-var token = 'eyJpZCI6MX0=';
+var token = 'eyJpZCI6IjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMSJ9';
 
 function sendXHR(verb, resource, body, cb) {
     var xhr = new XMLHttpRequest();
