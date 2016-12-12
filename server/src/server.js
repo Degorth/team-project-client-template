@@ -1,13 +1,8 @@
 var express = require('express');
 var app = express();
 const path = require('path')
-var database = require('./database.js');
 var reset = require('./resetdatabase.js');
 var bodyParser = require('body-parser');
-var readDocument = database.readDocument;
-var writeDocument = database.writeDocument;
-var addDocument = database.addDocument;
-var getCollection = database.getCollection;
 var validate = require('express-jsonschema').validate;
 var EventSchema = require('./schemas/eventSchema.json');
 var SearchSchema = require('./schemas/searchSchema.json');
@@ -18,6 +13,15 @@ var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var url = 'mongodb://localhost:27017/ugo';
+
+
+//* To Be removed when fully migrated to MongoDB
+var database = require('./database.js');
+var readDocument = database.readDocument;
+var writeDocument = database.writeDocument;
+var addDocument = database.addDocument;
+var getCollection = database.getCollection;
+//*/
 
 MongoClient.connect(url, function(err, db) {
     //import static stuff
@@ -180,7 +184,7 @@ MongoClient.connect(url, function(err, db) {
                 _id: userObject
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
                     resolveEventObjects(userData.events, function(err, eventMap) {
                         if (err) {
@@ -193,18 +197,6 @@ MongoClient.connect(url, function(err, db) {
         } else {
             res.status(401).end();
         }
-        /*
-      var userid = req.params.userid;
-      var fromUser = getUserIdFromToken(req.get('Authorization'));
-      var useridNum = parseInt(userid, 10);
-      if (fromUser === userid) {
-          var userData = readDocument('Users', useridNum);
-          var events = userData.events.map((event_id) => readDocument('Events', event_id));
-          res.send(events);
-      } else {
-          res.status(401).end();
-      }
-      */
     });
 
     app.get('/event/:eventid/user/:userid', function(req, res) {
@@ -216,12 +208,15 @@ MongoClient.connect(url, function(err, db) {
             db.collection('Events').findOne({
                 _id: eventObject
             }, function(err, eventData) {
-                if (err) {
-                    throw err;
-                } else {
-                  getEventOwnerInfoForEvent(eventData, function(err, modifiedEvent) {
-                    res.send(modifiedEvent);
-                  })
+                  if (err) {
+                      return sendDatabaseError(res, err);
+                  } else {
+                    getEventOwnerInfoForEvent(eventData, function(err, modifiedEvent) {
+                        if (err) {
+                            return sendDatabaseError(res, err);
+                        }
+                        res.send(modifiedEvent);
+                    })
                 }
             });
         } else {
@@ -237,9 +232,9 @@ MongoClient.connect(url, function(err, db) {
             db.collection('Users').findOne({
                 _id: userObject
             }, function(err, userData) {
-                if (err) {
-                    throw err;
-                } else {
+                  if (err) {
+                      return sendDatabaseError(res, err);
+                  } else {
                     res.send(userData);
                 }
             });
@@ -258,9 +253,9 @@ MongoClient.connect(url, function(err, db) {
                 _id: userObject
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
-                  res.send(userData.events.find((evId) => (evId.toString() === eventid)) !== undefined);
+                    res.send(userData.events.find((evId) => (evId.toString() === eventid)) !== undefined);
                 }
             });
         } else {
@@ -297,33 +292,26 @@ MongoClient.connect(url, function(err, db) {
         var eventid = req.params.eventid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
-              var userIDObj = new ObjectID(userid);
-              db.collection('Users').updateOne({
-                  _id: userIDObj
-              }, {
-                  $addToSet: {
-                      events: new ObjectID(eventid)
-                  }
-              }, function(err) {
-                  if (err) {
-                      return sendDatabaseError(res, err);
-                  }
-                  db.collection('Users').findOne({
-                      _id: userIDObj
-                  }, function(err, userData) {
-                      if (err) {
-                          return sendDatabaseError(res, err);
-                      }
-                      res.send(userData);
-                  });
-              });
-              /*
-            var userData = readDocument('Users', useridNum);
-            if (userData.events.indexOf(eventidNum) < 0)
-                userData.events.push(eventidNum);
-            writeDocument('Users', userData);
-            res.send(userData);
-            */
+            var userIDObj = new ObjectID(userid);
+            db.collection('Users').updateOne({
+                _id: userIDObj
+            }, {
+                $addToSet: {
+                    events: new ObjectID(eventid)
+                }
+            }, function(err) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                }
+                db.collection('Users').findOne({
+                    _id: userIDObj
+                }, function(err, userData) {
+                    if (err) {
+                        return sendDatabaseError(res, err);
+                    }
+                    res.send(userData);
+                });
+            });
         } else {
             res.status(401).end();
         }
@@ -333,34 +321,26 @@ MongoClient.connect(url, function(err, db) {
         var eventid = req.params.eventid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
-                var userIDObj = new ObjectID(userid);
-                db.collection('Users').updateOne({
+            var userIDObj = new ObjectID(userid);
+            db.collection('Users').updateOne({
+                _id: userIDObj
+            }, {
+                $pull: {
+                    events: new ObjectID(eventid)
+                }
+            }, function(err) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                }
+                db.collection('Users').findOne({
                     _id: userIDObj
-                }, {
-                    $pull: {
-                        events: new ObjectID(eventid)
-                    }
-                }, function(err) {
+                }, function(err, userData) {
                     if (err) {
                         return sendDatabaseError(res, err);
                     }
-                    db.collection('Users').findOne({
-                        _id: userIDObj
-                    }, function(err, userData) {
-                        if (err) {
-                            return sendDatabaseError(res, err);
-                        }
-                        res.send(userData);
-                    });
+                    res.send(userData);
                 });
-                /*
-            var userData = readDocument('Users', useridNum);
-            if (userData.events.indexOf(eventidNum) >= 0) {
-                userData.events.splice(userData.events.indexOf(eventidNum), 1);
-            }
-            writeDocument('Users', userData);
-            res.send(userData);
-            */
+            });
         } else {
             res.status(401).end();
         }
