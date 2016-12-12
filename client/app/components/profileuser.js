@@ -42,7 +42,7 @@ export default class UserProfile extends React.Component {
                 </Link>
                 <h4>{this.state.user_name} </h4>
                 <h5>Contact Info: {this.state.user_email}</h5>
-                <h5>Interests: {this.state.user_interests}</h5>
+                <h5>Interests: {this.state.user_interests.toString()}</h5>
                 </div>
             </div>
 

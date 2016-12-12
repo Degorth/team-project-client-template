@@ -15,7 +15,7 @@ import ProfileGroupEdit from './components/profilegroupedit.js';
 import ResetDatabase from './components/resetdatabase.js';
 import ErrorBanner from './components/errorbanner.js';
 
-var curUser = 1;
+var curUser = "000000000000000000000001";
 
 class boredContainer extends React.Component {
     render() {
@@ -62,7 +62,6 @@ class eventspageinfoContainer extends React.Component {
 
 class profileuserContainer extends React.Component {
     render() {
-        //return (<ProfileUser/>);
         return(<UserProfile user={curUser}/>);
     }
 }
