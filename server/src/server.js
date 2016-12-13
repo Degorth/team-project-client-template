@@ -1,13 +1,8 @@
 var express = require('express');
 var app = express();
 const path = require('path')
-var database = require('./database.js');
 var reset = require('./resetdatabase.js');
 var bodyParser = require('body-parser');
-var readDocument = database.readDocument;
-var writeDocument = database.writeDocument;
-var addDocument = database.addDocument;
-var getCollection = database.getCollection;
 var validate = require('express-jsonschema').validate;
 var EventSchema = require('./schemas/eventSchema.json');
 var SearchSchema = require('./schemas/searchSchema.json');
@@ -18,6 +13,14 @@ var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var url = 'mongodb://localhost:27017/ugo';
+
+//* To Be removed when fully migrated to MongoDB
+var database = require('./database.js');
+var readDocument = database.readDocument;
+var writeDocument = database.writeDocument;
+var addDocument = database.addDocument;
+var getCollection = database.getCollection;
+//*/
 
 MongoClient.connect(url, function(err, db) {
     //import static stuff
@@ -84,6 +87,7 @@ MongoClient.connect(url, function(err, db) {
         }
     }
 
+<<<<<<< HEAD
     function postNewEvent(newEvent, callback){
 
       var blankEvent = {
@@ -113,6 +117,11 @@ MongoClient.connect(url, function(err, db) {
     }
 
     app.post('/event/:eventid', validate({body: EventSchema}), function(req, res) {
+=======
+    app.post('/event/:eventid', validate({
+        body: EventSchema
+    }), function(req, res) {
+>>>>>>> 93038f8c5e4d3e06470a814513c09f73e4392068
         //This Function takes an event JSON and writes it to the server. See Eventscreat.js
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
@@ -127,12 +136,30 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
+<<<<<<< HEAD
     function doSearch(searchInput,, callback){
 
       var matchedEvents = [];
       var allEvents = db.collection.('Events').find({}).toArray(function(err, eventList)){
         if(err){
           return callback(err);
+=======
+    app.post('/search*/', validate({
+        body: SearchSchema
+    }), function(req, res) {
+        //var user_id = req.params.userid;
+        //var event_id = req.params.eventid;
+        var unfiltered_results = [];
+        var searchField = req.body.searchInput.trim().toLowerCase();
+        //var userData = readDocument('Users', user_id);
+        //var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
+        var all_events = getCollection('Events');
+        var length = Object.keys(all_events).length;
+        for (var i = 1; i < length; i++) {
+            if (all_events[i].name.toLowerCase().includes(searchField)) {
+                unfiltered_results.push(all_events[i]);
+            }
+>>>>>>> 93038f8c5e4d3e06470a814513c09f73e4392068
         }
         for(int i = 0; i < allEvents.length; i++){
           if(allEvents[i].name.toLowerCase().includes(searchInput)){
@@ -159,7 +186,9 @@ MongoClient.connect(url, function(err, db) {
         } else {
             var query = {
                 $or: eventList.map((id) => {
-                    return {_id: id}
+                    return {
+                        _id: id
+                    }
                 })
             };
             db.collection('Events').find(query).toArray(function(err, events) {
@@ -184,7 +213,7 @@ MongoClient.connect(url, function(err, db) {
                 _id: userObject
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
                     resolveEventObjects(userData.events, function(err, eventMap) {
                         if (err) {
@@ -197,18 +226,6 @@ MongoClient.connect(url, function(err, db) {
         } else {
             res.status(401).end();
         }
-        /*
-      var userid = req.params.userid;
-      var fromUser = getUserIdFromToken(req.get('Authorization'));
-      var useridNum = parseInt(userid, 10);
-      if (fromUser === userid) {
-          var userData = readDocument('Users', useridNum);
-          var events = userData.events.map((event_id) => readDocument('Events', event_id));
-          res.send(events);
-      } else {
-          res.status(401).end();
-      }
-      */
     });
 
     app.get('/event/:eventid/user/:userid', function(req, res) {
@@ -221,11 +238,14 @@ MongoClient.connect(url, function(err, db) {
                 _id: eventObject
             }, function(err, eventData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
-                  getEventOwnerInfoForEvent(eventData, function(err, modifiedEvent) {
-                    res.send(modifiedEvent);
-                  })
+                    getEventOwnerInfoForEvent(eventData, function(err, modifiedEvent) {
+                        if (err) {
+                            return sendDatabaseError(res, err);
+                        }
+                        res.send(modifiedEvent);
+                    })
                 }
             });
         } else {
@@ -242,7 +262,7 @@ MongoClient.connect(url, function(err, db) {
                 _id: userObject
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
                     res.send(userData);
                 }
@@ -262,14 +282,9 @@ MongoClient.connect(url, function(err, db) {
                 _id: userObject
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
-                    var search = userData.events.find((evId) => (evId.toString() === eventid));
-                    if (search !== undefined) {
-                        res.send(search.toString() === eventid);
-                    } else {
-                        res.send(false);
-                    }
+                    res.send(userData.events.find((evId) => (evId.toString() === eventid)) !== undefined);
                 }
             });
         } else {
@@ -277,7 +292,9 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
-    app.put('/user/:userid', validate({body: UserSchema}), function(req, res) {
+    app.put('/user/:userid', validate({
+        body: UserSchema
+    }), function(req, res) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
@@ -291,7 +308,7 @@ MongoClient.connect(url, function(err, db) {
                 }
             }, function(err) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
                     res.send();
                 }
@@ -304,15 +321,28 @@ MongoClient.connect(url, function(err, db) {
     app.put('/user/:userid/event/:eventid', function(req, res) {
         var userid = req.params.userid;
         var eventid = req.params.eventid;
-        var eventidNum = parseInt(eventid, 10);
         var fromUser = getUserIdFromToken(req.get('Authorization'));
-        var useridNum = parseInt(userid, 10);
-        if (fromUser === useridNum) {
-            var userData = readDocument('Users', useridNum);
-            if (userData.events.indexOf(eventidNum) < 0)
-                userData.events.push(eventidNum);
-            writeDocument('Users', userData);
-            res.send(userData);
+        if (fromUser === userid) {
+            var userIDObj = new ObjectID(userid);
+            db.collection('Users').updateOne({
+                _id: userIDObj
+            }, {
+                $addToSet: {
+                    events: new ObjectID(eventid)
+                }
+            }, function(err) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                }
+                db.collection('Users').findOne({
+                    _id: userIDObj
+                }, function(err, userData) {
+                    if (err) {
+                        return sendDatabaseError(res, err);
+                    }
+                    res.send(userData);
+                });
+            });
         } else {
             res.status(401).end();
         }
@@ -320,16 +350,28 @@ MongoClient.connect(url, function(err, db) {
     app.delete('/user/:userid/event/:eventid', function(req, res) {
         var userid = req.params.userid;
         var eventid = req.params.eventid;
-        var eventidNum = parseInt(eventid, 10);
         var fromUser = getUserIdFromToken(req.get('Authorization'));
-        var useridNum = parseInt(userid, 10);
-        if (fromUser === useridNum) {
-            var userData = readDocument('Users', useridNum);
-            if (userData.events.indexOf(eventidNum) >= 0) {
-                userData.events.splice(userData.events.indexOf(eventidNum), 1);
-            }
-            writeDocument('Users', userData);
-            res.send(userData);
+        if (fromUser === userid) {
+            var userIDObj = new ObjectID(userid);
+            db.collection('Users').updateOne({
+                _id: userIDObj
+            }, {
+                $pull: {
+                    events: new ObjectID(eventid)
+                }
+            }, function(err) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                }
+                db.collection('Users').findOne({
+                    _id: userIDObj
+                }, function(err, userData) {
+                    if (err) {
+                        return sendDatabaseError(res, err);
+                    }
+                    res.send(userData);
+                });
+            });
         } else {
             res.status(401).end();
         }
@@ -366,25 +408,20 @@ MongoClient.connect(url, function(err, db) {
                 _id: new ObjectID(userid)
             }, function(err, userData) {
                 if (err) {
-                    throw err;
+                    return sendDatabaseError(res, err);
                 } else {
-                    //console.log("User groups: " + userData.groups.toString());
                     db.collection('Groups').find({
                         _id: {
                             $in: userData.groups
-                        },
-                        function(err, groups) {
-                            if (err) {
-                                throw err;
-                            } else {
-                                //console.log("" + groups.toString());
-                                res.send(groups);
-                            }
+                        }
+                    }).toArray(function(err, groups) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            //console.log("" + groups.toString());
+                            res.send(groups);
                         }
                     });
-                    //userData = readDocument('Users', useridNum);
-                    //var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
-                    //res.send(groups);
                 }
             });
 
@@ -394,12 +431,14 @@ MongoClient.connect(url, function(err, db) {
     });
 
     app.get('/groups', function(req, res) {
-        var groups = getCollection("Groups");
-        var groupsAsArray = [];
-        for (var i = 0; i < groups.length; i++) {
-            groupsAsArray[i] = groups[i]._id
-        }
-        res.send(groupsAsArray);
+        db.collection('Groups').find({}).toArray(function(err, groups) {
+            if (err) {
+                throw err;
+            } else {
+                //console.log("" + groups.toString());
+                res.send(groups);
+            }
+        });
     });
 
     // Reset database.
