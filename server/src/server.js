@@ -378,23 +378,18 @@ MongoClient.connect(url, function(err, db) {
                 if (err) {
                     return sendDatabaseError(res, err);
                 } else {
-                    //console.log("User groups: " + userData.groups.toString());
                     db.collection('Groups').find({
-                        _id: {
-                            $in: userData.groups
-                        },
-                        function(err, groups) {
+                      _id: {
+                        $in: userData.groups
+                      }
+                    }).toArray(function(err, groups) {
                             if (err) {
                                 throw err;
                             } else {
                                 //console.log("" + groups.toString());
                                 res.send(groups);
                             }
-                        }
-                    });
-                    //userData = readDocument('Users', useridNum);
-                    //var groups = userData.groups.map((group_id) => readDocument('Groups', group_id));
-                    //res.send(groups);
+                        });
                 }
             });
 
