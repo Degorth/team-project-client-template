@@ -2,6 +2,8 @@ var ObjectID = require('mongodb').ObjectID;
 
 var databaseName = "ugo";
 // Put the initial mock objects here.
+
+var eventImgPath = "../client/build/img/"
 var initialData = {
   "Events": {
     "1": {
@@ -12,7 +14,8 @@ var initialData = {
       "owner": new ObjectID("000000000000000000000001"), // the group that owns this event
       "loc": "Boyden Gym Basement Squash Courts",
       "start": new Date().getTime() + 7200000, //1478803334000
-      "length": 7200000
+      "length": 7200000,
+      "photo": eventImgPath + "iskf.jpg"
     },
     "2": {
       "_id": new ObjectID("000000000000000000000002"),
@@ -22,7 +25,8 @@ var initialData = {
       "owner": new ObjectID("000000000000000000000002"),
       "loc": "LGRT 212",
       "start": new Date().getTime() + (604800000*2),//1478962800000, //Sat, Nov. 12 2016
-      "length": 18000000 //5 hours long
+      "length": 18000000, //5 hours long
+      "photo": eventImgPath + "cybersecurity.jpeg"
     },
     "3": {
       "_id": new ObjectID("000000000000000000000003"),
@@ -32,7 +36,8 @@ var initialData = {
       "owner": new ObjectID("000000000000000000000003"),
       "loc": "Campus Center",
       "start": new Date().getTime() + 604800000, //1478736000000,
-      "length": 18000000 //5 hrs
+      "length": 18000000, //5 hrs
+      "photo": eventImgPath + "GHL.jpg"
     },
     "4": {
       "_id": new ObjectID("000000000000000000000004"),
@@ -42,7 +47,8 @@ var initialData = {
       "owner": new ObjectID("000000000000000000000002"),
       "loc": "LGRT 212",
       "start": new Date().getTime() + (604800000*3),// 1478930400000, //Thur, Nov. 10 2016
-      "length": 5400000 //1.5 hours long
+      "length": 5400000, //1.5 hours long
+      "photo": eventImgPath + "cybersecurity.jpeg"
     }
   },
   "Users": {

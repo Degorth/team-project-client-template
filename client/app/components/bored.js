@@ -68,8 +68,8 @@ export default class Bored extends React.Component {
                 <div>
                     <div>
                         <div className="row">
-                            <div className="col-md-4">
-                                <img src="#" width="250px"/>
+                            <div className="col-md-2">
+                                <img src={'/event/' + ev._id + '/user/' + this.props.user + '/photo'} width="250px"/>
                             </div>
                             <div className="col-md-8">
                                 <div className="row">

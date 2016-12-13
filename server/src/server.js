@@ -12,15 +12,8 @@ var mongo_express_config = require('mongo-express/config.default.js');
 var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
+var fs = require('fs');
 var url = 'mongodb://localhost:27017/ugo';
-
-/* To Be removed when fully migrated to MongoDB
-var database = require('./database.js');
-var readDocument = database.readDocument;
-var writeDocument = database.writeDocument;
-var addDocument = database.addDocument;
-var getCollection = database.getCollection;
-//*/
 
 MongoClient.connect(url, function(err, db) {
     //import static stuff
@@ -130,12 +123,11 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
-
     app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
         db.collection('Events').find({
-            $text:{
-              $search: req.body.searchInput.trim(),
-              $caseSensitive: false
+            $text: {
+                $search: req.body.searchInput.trim(),
+                $caseSensitive: false
             }
         }).toArray(function(err, eventList) {
             if (err) {
@@ -160,15 +152,15 @@ MongoClient.connect(url, function(err, db) {
             db.collection('Events').find(query).toArray(function(err, events) {
                 var modifiedCount = 0;
                 var modifiedResults = [];
-                events.forEach((event)=>getEventOwnerInfoForEvent(event,function(err,modifiedEvent){
-                  if(err){
-                    return callback(err,null);
-                  }
-                  modifiedCount++
-                  modifiedResults.push(modifiedEvent);
-                  if(modifiedCount===events.length){
-                    return callback(null,modifiedResults);
-                  }
+                events.forEach((event) => getEventOwnerInfoForEvent(event, function(err, modifiedEvent) {
+                    if (err) {
+                        return callback(err, null);
+                    }
+                    modifiedCount++;
+                    modifiedResults.push(modifiedEvent);
+                    if (modifiedCount === events.length) {
+                        return callback(null, modifiedResults);
+                    }
                 }));
             });
         }
@@ -241,6 +233,21 @@ MongoClient.connect(url, function(err, db) {
         } else {
             res.status(401).end();
         }
+    });
+
+    app.get('/event/:eventid/user/:userid/photo', function(req, res) {
+        var eventid = req.params.eventid;
+        var eventObject = new ObjectID(eventid);
+        db.collection('Events').findOne({
+            _id: eventObject
+        }, function(err, eventData) {
+            if (err) {
+                return sendDatabaseError(res, err);
+            }
+            var fileToLoad = fs.readFileSync("./" + eventData.photo);
+            res.writeHead(200, {'Content-Type': 'image/jpg'});
+            res.end(fileToLoad, 'binary');
+        });
     });
 
     app.get('/user/:userid', function(req, res) {
@@ -357,26 +364,28 @@ MongoClient.connect(url, function(err, db) {
                 if (err) {
                     return sendDatabaseError(res, err);
                 } else {
-                  db.collection('Events').find({
-                      _id: {$nin: userData.events}
-                  }).toArray(function(err, eventList) {
-                      if (err) {
-                          return sendDatabaseError(res, err);
-                      }
-                      var result = eventList.filter((ev) => (userData.events.indexOf(ev._id) < 0));
-                      var modifiedCount = 0;
-                      var modifiedResults = [];
-                      result.forEach((event)=>getEventOwnerInfoForEvent(event,function(err,modifiedEvent){
-                        if(err){
-                          return sendDatabaseError(res,err);
+                    db.collection('Events').find({
+                        _id: {
+                            $nin: userData.events
                         }
-                        modifiedCount++
-                        modifiedResults.push(modifiedEvent);
-                        if(modifiedCount===result.length){
-                          res.send(modifiedResults);
+                    }).toArray(function(err, eventList) {
+                        if (err) {
+                            return sendDatabaseError(res, err);
                         }
-                      }));
-                  });
+                        var result = eventList.filter((ev) => (userData.events.indexOf(ev._id) < 0));
+                        var modifiedCount = 0;
+                        var modifiedResults = [];
+                        result.forEach((event) => getEventOwnerInfoForEvent(event, function(err, modifiedEvent) {
+                            if (err) {
+                                return sendDatabaseError(res, err);
+                            }
+                            modifiedCount++;
+                            modifiedResults.push(modifiedEvent);
+                            if (modifiedCount === result.length) {
+                                res.send(modifiedResults);
+                            }
+                        }));
+                    });
                 }
             });
         } else {

@@ -6,9 +6,22 @@ export function hideElement(shouldHide) {
   }
 }
 
+export function parseTime(start,end){
+  var startDate = new Date(start);
+  var endDate = new Date(end);
+  return (startDate.getMonth()+1)+"/"+(startDate.getDate())+"/"+startDate.getFullYear() +"\n"+
+  startDate.getUTCHours()+":"+startDate.getUTCMinutes() + " - " + endDate.getUTCHours()+":"+endDate.getUTCMinutes();
+}
+
 export function unixTimeToString(time) {
     return new Date(time).toLocaleString().substring(0,17);
 }
+
+export function unixTimeToStringTimeOnly(time) {
+    return new Date(time).toLocaleString().substring(12,17);
+}
+
+
 
 export function getDayOfWeek(num){
   switch(num){

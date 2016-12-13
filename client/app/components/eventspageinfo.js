@@ -51,7 +51,7 @@ export default class eventspageinfo extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-4">
-                                <img src={this.state.event.photo} width="250px"/>
+                                <img src={'/event/'+this.props.eventId+'/user/'+this.props.user+'/photo'} width="250px"/>
                             </div>
                             <div className="col-md-8">
                                 <div className="row">
