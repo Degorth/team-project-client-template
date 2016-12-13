@@ -87,73 +87,73 @@ MongoClient.connect(url, function(err, db) {
         }
     }
 
-    app.post('/event/:eventid', validate({
-        body: EventSchema
-    }), function(req, res) {
+    function postNewEvent(newEvent, callback){
+
+      var blankEvent = {
+          data: {
+              eventName: "",
+              organizer: "",
+              loc: "",
+              onetime: "",
+              datetime: "",
+              reoccuring: "",
+              weekday: "",
+              time: "",
+              desc: "",
+              contactInfo: ""
+          }
+      };
+
+      db.collection('Events').insertOne(blankEvent, function(err, result) {
+          if (err) {
+            return callback(err);
+          }
+
+          blankEvent._id = result.insertedId;
+
+          callback(null, blankEvent);
+        });
+    }
+
+    app.post('/event/:eventid', validate({body: EventSchema}), function(req, res) {
         //This Function takes an event JSON and writes it to the server. See Eventscreat.js
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
-        var useridNum = parseInt(userid, 10);
-        if (fromUser === useridNum) {
-            var newEvent = req.params.body;
-            var blankEvent = {
-                data: {
-                    eventName: "",
-                    organizer: "",
-                    loc: "",
-                    onetime: "",
-                    datetime: "",
-                    reoccuring: "",
-                    weekday: "",
-                    time: "",
-                    desc: "",
-                    contactInfo: ""
-                }
-            };
-            addDocument('Events', newEvent);
-            // Fetch the associated group
-            var groupData = readDocument('Groups', newEvent.organizer);
-            // add the new event to the group Data
-            groupData.events.unshift(newEvent._id);
-            // Write back to the document the new group data
-            writeDocument('Groups', groupData);
+        if (fromUser === userid) {
+            postNewEvent(req.params.body, function(err, blankEvent));
+            if (err) {
+                return sendDatabaseError(res, err);
+            }
             res.send(blankEvent);
         } else {
             res.status(401).end();
         }
-
     });
 
-    app.post('/search*/', validate({
-        body: SearchSchema
-    }), function(req, res) {
-        //var user_id = req.params.userid;
-        //var event_id = req.params.eventid;
-        var unfiltered_results = [];
-        var searchField = req.body.searchInput.trim().toLowerCase();
-        //var userData = readDocument('Users', user_id);
-        //var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
-        var all_events = getCollection('Events');
-        var length = Object.keys(all_events).length;
-        for (var i = 1; i < length; i++) {
-            if (all_events[i].name.toLowerCase().includes(searchField)) {
-                unfiltered_results.push(all_events[i]);
-            }
-        }
-        /* Before and after not yet implemented
-      for (var i=1 ; i < length; i++)
-      {
-      if (all_events[i].name.toLowerCase().includes(searchField) ||
-        all_events[i].days.includes(days) ||
-        all_events[i].after >= after ||
-        (all_events[i].after + all_events[i].length) < before)
-        {
-          unfiltered_results.push(all_events[i]);
-        }
+    function doSearch(searchInput, callback){
 
-      }
-      */
-        res.send(unfiltered_results);
+      var matchedEvents = [];
+      var allEvents = db.collection.('Events').find({}).toArray(function(err, eventList)){
+        if(err){
+          return callback(err);
+        }
+        for(int i = 0; i < allEvents.length; i++){
+          if(allEvents[i].name.toLowerCase().includes(searchInput)){
+            matchedEvents.push(allEvents[i]);
+          }
+        }
+        callback(null, matchedEvents);
+      });
+    }
+
+    app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
+
+        doSearch(req.body.searchInput.trim().toLowerCase(), function(err, matchedEvents)){
+          if(err){
+            return sendDatabaseError(res, err);
+          }
+          res.send(matchEvents);
+        }
     });
 
     function resolveEventObjects(eventList, callback) {
