@@ -343,8 +343,6 @@ MongoClient.connect(url, function(err, db) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
-            var number = 5;
-            var i = 1;
             var result = [];
             var userObject = new ObjectID(userid);
             db.collection('Users').findOne({
@@ -353,21 +351,18 @@ MongoClient.connect(url, function(err, db) {
                 if (err) {
                     return sendDatabaseError(res, err);
                 } else {
-                    while (i < number) {
-                        db.collection('Events').findOne({
-                            _id: i
-                        }, function(err, eventData) {
-                            if (err) {
-                                return sendDatabaseError(res, err);
-                            } else {
-                                result.push(eventData);
-                                i = i + 1;
-                            }
-                        });
-                    }
-                    result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
-                    result.forEach((ev) => getEventOwnerInfoForEvent(ev));
-                    res.send(result);
+                  db.collection('Events').find({
+                      _id: {$nin: userData.events}
+                  }, function(err, eventData) {
+                      if (err) {
+                          return sendDatabaseError(res, err);
+                      } else {
+                          result.push(eventData);
+                      }
+                  });
+                  result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
+                  result.forEach((ev) => getEventOwnerInfoForEvent(ev));
+                  res.send(result);
                 }
             });
         } else {
