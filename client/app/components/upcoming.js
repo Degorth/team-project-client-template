@@ -1,8 +1,8 @@
 Window.React = require('react');
-import { render } from 'react-dom';
+//import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react';
 import {getUpcomingEvents} from './../server.js'
-import {unixTimeToString} from "./../util";
+//import {unixTimeToString} from "./../util";
 import {Link} from 'react-router';
 
 
@@ -22,14 +22,13 @@ export default class Upcoming extends Component {
   }
 
   render(){
-    let events = this.state.events
-    console.log(events.length);
+    //let events = this.state.events
     return (
         <div className="upcomingEvents">
             {this.state.events.map((ev) => {
                 return (
                     <div key={ev._id}>
-                        <img src="#" width="150px"/> <Link to={'events/'+ev._id+'/eventInfo'}><h4>{ev.name}</h4></Link>
+                        <img src={'/event/' + ev._id + '/user/' + this.props.user + '/photo'} width="150px"/> <Link to={'events/'+ev._id+'/eventInfo'}><h4>{ev.name}</h4></Link>
                         <div>{ev.desc}</div>
 
                     </div>
