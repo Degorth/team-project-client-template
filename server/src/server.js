@@ -158,11 +158,18 @@ MongoClient.connect(url, function(err, db) {
                 })
             };
             db.collection('Events').find(query).toArray(function(err, events) {
-                var eventArray = [];
-                events.forEach((event) => {
-                    eventArray.push(event);
-                });
-                callback(null, eventArray);
+                var modifiedCount = 0;
+                var modifiedResults = [];
+                events.forEach((event)=>getEventOwnerInfoForEvent(event,function(err,modifiedEvent){
+                  if(err){
+                    return callback(err,null);
+                  }
+                  modifiedCount++
+                  modifiedResults.push(modifiedEvent);
+                  if(modifiedCount===events.length){
+                    return callback(null,modifiedResults);
+                  }
+                }));
             });
         }
     }
@@ -343,7 +350,6 @@ MongoClient.connect(url, function(err, db) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
-            var result = [];
             var userObject = new ObjectID(userid);
             db.collection('Users').findOne({
                 _id: userObject
@@ -353,16 +359,24 @@ MongoClient.connect(url, function(err, db) {
                 } else {
                   db.collection('Events').find({
                       _id: {$nin: userData.events}
-                  }, function(err, eventData) {
+                  }).toArray(function(err, eventList) {
                       if (err) {
                           return sendDatabaseError(res, err);
-                      } else {
-                          result.push(eventData);
                       }
+                      var result = eventList.filter((ev) => (userData.events.indexOf(ev._id) < 0));
+                      var modifiedCount = 0;
+                      var modifiedResults = [];
+                      result.forEach((event)=>getEventOwnerInfoForEvent(event,function(err,modifiedEvent){
+                        if(err){
+                          return sendDatabaseError(res,err);
+                        }
+                        modifiedCount++
+                        modifiedResults.push(modifiedEvent);
+                        if(modifiedCount===result.length){
+                          res.send(modifiedResults);
+                        }
+                      }));
                   });
-                  result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
-                  result.forEach((ev) => getEventOwnerInfoForEvent(ev));
-                  res.send(result);
                 }
             });
         } else {

@@ -80,21 +80,11 @@ export default class eventspageinfo extends React.Component {
                         <hr/>
                         <div className="row">
                             <div className="col-md-4">
-                                <h4>See More From This Group...</h4>
                             </div>
                             <div className="col-md-4">
-                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#genericModal">
-                                    <span className="glyphicon glyphicon-calendar"></span>
-                                    View Events</button>
-                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#genericModal">
-                                    <span className="glyphicon glyphicon-user"></span>
-                                    View Members</button>
                             </div>
                             <div className="col-md-4">
                                 {this.getAddRemoveButton()}
-                                <a className="btn btn-primary" href="#" role="button">
-                                    <span className="glyphicon glyphicon-pencil"></span>
-                                    Write a Review</a>
                             </div>
                         </div>
                     </div>
