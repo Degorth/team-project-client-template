@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import {searchEvents} from './../server.js';
 
+var notFoundBanner = <h5> No Events Found </h5>;
+
 export default class EventsSearch extends React.Component {
 
     constructor(props) {
@@ -46,7 +48,7 @@ export default class EventsSearch extends React.Component {
 
     dispResults() {
         if(this.state.results===undefined) return(<div></div>);
-        if (this.state.results !== undefined && this.state.results !== null) {
+        if (this.state.results.length>0 && this.state.results !== null) {
             return (
                 <div className="searchresult">
                     {this.state.results.map((ev) => {
@@ -64,7 +66,7 @@ export default class EventsSearch extends React.Component {
             );
         }
         else {
-          return (<h5> No Events Found </h5>);
+          return (notFoundBanner);
         }
 
     }

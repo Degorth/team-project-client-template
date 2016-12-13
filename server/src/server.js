@@ -14,7 +14,7 @@ var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var url = 'mongodb://localhost:27017/ugo';
 
-//* To Be removed when fully migrated to MongoDB
+/* To Be removed when fully migrated to MongoDB
 var database = require('./database.js');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
@@ -87,31 +87,30 @@ MongoClient.connect(url, function(err, db) {
         }
     }
 
-    function postNewEvent(newEvent, callback){
+    function postNewEvent(newEvent, callback) {
+        var blankEvent = {
+            data: {
+                eventName: "",
+                organizer: "",
+                loc: "",
+                onetime: "",
+                datetime: "",
+                reoccuring: "",
+                weekday: "",
+                time: "",
+                desc: "",
+                contactInfo: ""
+            }
+        };
 
-      var blankEvent = {
-          data: {
-              eventName: "",
-              organizer: "",
-              loc: "",
-              onetime: "",
-              datetime: "",
-              reoccuring: "",
-              weekday: "",
-              time: "",
-              desc: "",
-              contactInfo: ""
-          }
-      };
+        db.collection('Events').insertOne(blankEvent, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
 
-      db.collection('Events').insertOne(blankEvent, function(err, result) {
-          if (err) {
-            return callback(err);
-          }
+            blankEvent._id = result.insertedId;
 
-          blankEvent._id = result.insertedId;
-
-          callback(null, blankEvent);
+            callback(null, blankEvent);
         });
     }
 
@@ -120,40 +119,33 @@ MongoClient.connect(url, function(err, db) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
-            postNewEvent(req.params.body, function(err, blankEvent));
-            if (err) {
-                return sendDatabaseError(res, err);
-            }
-            res.send(blankEvent);
+            postNewEvent(req.params.body, function(err, blankEvent) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                }
+                res.send(blankEvent);
+            });
         } else {
             res.status(401).end();
         }
     });
 
-    function doSearch(searchInput, callback){
-
-      var matchedEvents = [];
-      var allEvents = db.collection.('Events').find({}).toArray(function(err, eventList)){
-        if(err){
-          return callback(err);
-        }
-        for(int i = 0; i < allEvents.length; i++){
-          if(allEvents[i].name.toLowerCase().includes(searchInput)){
-            matchedEvents.push(allEvents[i]);
-          }
-        }
-        callback(null, matchedEvents);
-      });
-    }
 
     app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
-
-        doSearch(req.body.searchInput.trim().toLowerCase(), function(err, matchedEvents)){
-          if(err){
-            return sendDatabaseError(res, err);
-          }
-          res.send(matchEvents);
-        }
+        db.collection('Events').find({
+            $text:{
+              $search: req.body.searchInput.trim(),
+              $caseSensitive: false
+            }
+        }).toArray(function(err, eventList) {
+            if (err) {
+                sendDatabaseError(res, err);
+            }
+            if (eventList === undefined) {
+                res.send([]);
+            }
+            res.send(eventList);
+        });
     });
 
     function resolveEventObjects(eventList, callback) {
@@ -162,15 +154,10 @@ MongoClient.connect(url, function(err, db) {
         } else {
             var query = {
                 $or: eventList.map((id) => {
-                    return {
-                        _id: id
-                    }
+                    return {_id: id}
                 })
             };
             db.collection('Events').find(query).toArray(function(err, events) {
-                if (err) {
-                    return callback(err);
-                }
                 var eventArray = [];
                 events.forEach((event) => {
                     eventArray.push(event);
@@ -197,6 +184,26 @@ MongoClient.connect(url, function(err, db) {
                         }
                         res.send(eventMap);
                     });
+                }
+            });
+        } else {
+            res.status(401).end();
+        }
+    });
+
+    app.get('/user/:userid/event/:eventid/isAttending', function(req, res) {
+        var userid = req.params.userid;
+        var eventid = req.params.eventid;
+        var fromUser = getUserIdFromToken(req.get('Authorization'));
+        if (fromUser === userid) {
+            var userObject = new ObjectID(userid);
+            db.collection('Users').findOne({
+                _id: userObject
+            }, function(err, userData) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                } else {
+                    res.send(userData.events.find((evId) => (evId.toString() === eventid)) !== undefined);
                 }
             });
         } else {
@@ -248,29 +255,7 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
-    app.get('/user/:userid/event/:eventid/isAttending', function(req, res) {
-        var userid = req.params.userid;
-        var eventid = req.params.eventid;
-        var fromUser = getUserIdFromToken(req.get('Authorization'));
-        if (fromUser === userid) {
-            var userObject = new ObjectID(userid);
-            db.collection('Users').findOne({
-                _id: userObject
-            }, function(err, userData) {
-                if (err) {
-                    return sendDatabaseError(res, err);
-                } else {
-                    res.send(userData.events.find((evId) => (evId.toString() === eventid)) !== undefined);
-                }
-            });
-        } else {
-            res.status(401).end();
-        }
-    });
-
-    app.put('/user/:userid', validate({
-        body: UserSchema
-    }), function(req, res) {
+    app.put('/user/:userid', validate({body: UserSchema}), function(req, res) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
@@ -323,6 +308,7 @@ MongoClient.connect(url, function(err, db) {
             res.status(401).end();
         }
     });
+
     app.delete('/user/:userid/event/:eventid', function(req, res) {
         var userid = req.params.userid;
         var eventid = req.params.eventid;
@@ -362,29 +348,27 @@ MongoClient.connect(url, function(err, db) {
             var result = [];
             var userObject = new ObjectID(userid);
             db.collection('Users').findOne({
-              _id: userObject
-            }, function(err, userData){
-              if(err){
-                return sendDatabaseError(res, err);
-              }
-              else{
-                while (i < number) {
-                  db.collection('Events').findOne({
-                    _id: i
-                  }, function(err, eventData){
-                    if(err){
-                      return sendDatabaseError(res, err);
+                _id: userObject
+            }, function(err, userData) {
+                if (err) {
+                    return sendDatabaseError(res, err);
+                } else {
+                    while (i < number) {
+                        db.collection('Events').findOne({
+                            _id: i
+                        }, function(err, eventData) {
+                            if (err) {
+                                return sendDatabaseError(res, err);
+                            } else {
+                                result.push(eventData);
+                                i = i + 1;
+                            }
+                        });
                     }
-                    else{
-                      result.push(eventData);
-                      i = i + 1;
-                    }
-                  });
+                    result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
+                    result.forEach((ev) => getEventOwnerInfoForEvent(ev));
+                    res.send(result);
                 }
-                result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
-                result.forEach((ev) => getEventOwnerInfoForEvent(ev));
-                res.send(result);
-              }
             });
         } else {
             res.status(401).end();
