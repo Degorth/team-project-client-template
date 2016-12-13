@@ -2,6 +2,7 @@ import React from 'react';
 import EventSqDisp from './eventSqDisp.js';
 import {getScheduledEvents} from './../server.js';
 import {getDayOfWeek, getMonthOfYear} from './../util.js';
+import {Link} from 'react-router';
 
 const oneDay = 86400000;
 const oneWeek = 604800000;
@@ -88,7 +89,7 @@ export default class Schedule extends React.Component {
                                 }}>No events scheduled</h4>
                                 <div className="tile-block">
                                     <h6 className="tile-subtitle text-muted">
-                                        <a href="#">Sign up for some events!</a>
+                                        <Link to='/upcoming'>Sign up for some events!</Link>
                                     </h6>
                                 </div>
                             </div>

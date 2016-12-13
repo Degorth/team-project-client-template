@@ -54,7 +54,7 @@ export default class EventsSearch extends React.Component {
                     {this.state.results.map((ev) => {
                         return (
                             <div key={ev._id}>
-                                <img src="#" width="150px"/> <h4>{ev.name}</h4>
+                                <img src={'/event/' + ev._id + '/user/' + this.props.user + '/photo'} width="150px"/> <h4>{ev.name}</h4>
                                 <div>{ev.desc}</div>
                                 <Link to={'events/'+ev._id+'/eventInfo'} className="btn btn-secondary" role="button">
                                     <span className="glyphicon glyphicon-hand-up"></span>
