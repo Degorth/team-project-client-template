@@ -39,3 +39,4 @@ UGo
         1. Added initial database data to MongoDB
         2. Added MongoDB to server requirements
         3. Attached resetDB button to database
+        4. Set ProfileUser and ProfileEdit to use Mongo
