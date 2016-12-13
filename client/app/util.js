@@ -9,8 +9,8 @@ export function hideElement(shouldHide) {
 export function parseTime(start,end){
   var startDate = new Date(start);
   var endDate = new Date(end);
-  return (startDate.getMonth()+1)+"/"+(startDate.getDate())+"/"+startDate.getFullYear() +"\n"+
-  startDate.getUTCHours()+":"+startDate.getUTCMinutes() + " - " + endDate.getUTCHours()+":"+endDate.getUTCMinutes();
+  return (startDate.getMonth()+1)+"/"+(startDate.getDate())+"/"+startDate.getFullYear() +" " +
+  startDate.getHours()+":"+startDate.getMinutes() + " - " +(endDate.getMonth()+1)+"/"+(endDate.getDate())+"/"+endDate.getFullYear() +" " + endDate.getHours()+":"+endDate.getMinutes();
 }
 
 export function unixTimeToString(time) {

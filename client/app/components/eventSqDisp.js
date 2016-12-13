@@ -13,8 +13,10 @@ export default class EventSqDisp extends React.Component {
                 <h4>
                     {parseTime(this.props.event.start, this.props.event.start + this.props.event.length)}
                 </h4>
-                <img className="tile-img-top profile-img" src={'/event/' + this.props.event._id + '/user/' + this.props.user + '/photo'} alt="img"/>
                 <div className="tile-block">
+                  <div className="col-md4">
+                      <img className="tile-img-top profile-img" src={'/event/' + this.props.event._id + '/user/' + this.props.user + '/photo'} alt="img"/>
+                  </div>
                     <Link to={'events/' + this.props.event._id + '/eventInfo'}>
                         <h4 className="tile-title">{this.props.event.name}</h4>
                     </Link>

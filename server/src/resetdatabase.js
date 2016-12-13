@@ -59,7 +59,7 @@ var initialData = {
       "groups": [new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000003")], //groups to which user has membership by id
       "interests": ["cats","karate"], //array of strings for now later hopefully tags for classifying groups
       "photo": eventImgPath + "identicon.png",
-      "events": [new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000003")] //subscribed events by id
+      "events": [new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")] //subscribed events by id
     },
     "2": {
       "_id": new ObjectID("000000000000000000000002"),
