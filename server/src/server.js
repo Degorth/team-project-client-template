@@ -356,21 +356,36 @@ MongoClient.connect(url, function(err, db) {
     app.get('/user/:userid/upcoming', function(req, res) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
-        var useridNum = parseInt(userid, 10);
-        if (fromUser === useridNum) {
+        if (fromUser === userid) {
             var number = 5;
             var i = 1;
             var result = [];
-            var eventData;
-            var userData = readDocument('Users', userid);
-            while (i < number) {
-                eventData = readDocument('Events', i);
-                result.push(eventData);
-                i = i + 1;
-            }
-            result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
-            result.forEach((ev) => getEventOwnerInfoForEvent(ev));
-            res.send(result);
+            var userObject = new ObjectID(userid);
+            db.collection('Users').findOne({
+              _id: userObject
+            }, function(err, userData){
+              if(err){
+                return sendDatabaseError(res, err);
+              }
+              else{
+                while (i < number) {
+                  db.collection('Events').findOne({
+                    _id: i
+                  }, function(err, eventData){
+                    if(err){
+                      return sendDatabaseError(res, err);
+                    }
+                    else{
+                      result.push(eventData);
+                      i = i + 1;
+                    }
+                  });
+                }
+                result = result.filter((ev) => (userData.events.indexOf(ev._id) < 0));
+                result.forEach((ev) => getEventOwnerInfoForEvent(ev));
+                res.send(result);
+              }
+            });
         } else {
             res.status(401).end();
         }
