@@ -87,7 +87,9 @@ MongoClient.connect(url, function(err, db) {
         }
     }
 
-    app.post('/event/:eventid', validate({body: EventSchema}), function(req, res) {
+    app.post('/event/:eventid', validate({
+        body: EventSchema
+    }), function(req, res) {
         //This Function takes an event JSON and writes it to the server. See Eventscreat.js
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
@@ -122,7 +124,9 @@ MongoClient.connect(url, function(err, db) {
 
     });
 
-    app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
+    app.post('/search*/', validate({
+        body: SearchSchema
+    }), function(req, res) {
         //var user_id = req.params.userid;
         //var event_id = req.params.eventid;
         var unfiltered_results = [];
@@ -158,7 +162,9 @@ MongoClient.connect(url, function(err, db) {
         } else {
             var query = {
                 $or: eventList.map((id) => {
-                    return {_id: id}
+                    return {
+                        _id: id
+                    }
                 })
             };
             db.collection('Events').find(query).toArray(function(err, events) {
@@ -262,7 +268,9 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
-    app.put('/user/:userid', validate({body: UserSchema}), function(req, res) {
+    app.put('/user/:userid', validate({
+        body: UserSchema
+    }), function(req, res) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
         if (fromUser === userid) {
@@ -379,17 +387,17 @@ MongoClient.connect(url, function(err, db) {
                     return sendDatabaseError(res, err);
                 } else {
                     db.collection('Groups').find({
-                      _id: {
-                        $in: userData.groups
-                      }
+                        _id: {
+                            $in: userData.groups
+                        }
                     }).toArray(function(err, groups) {
-                            if (err) {
-                                throw err;
-                            } else {
-                                //console.log("" + groups.toString());
-                                res.send(groups);
-                            }
-                        });
+                        if (err) {
+                            throw err;
+                        } else {
+                            //console.log("" + groups.toString());
+                            res.send(groups);
+                        }
+                    });
                 }
             });
 
@@ -399,12 +407,14 @@ MongoClient.connect(url, function(err, db) {
     });
 
     app.get('/groups', function(req, res) {
-        var groups = getCollection("Groups");
-        var groupsAsArray = [];
-        for (var i = 0; i < groups.length; i++) {
-            groupsAsArray[i] = groups[i]._id
-        }
-        res.send(groupsAsArray);
+        db.collection('Groups').find({}).toArray(function(err, groups) {
+            if (err) {
+                throw err;
+            } else {
+                //console.log("" + groups.toString());
+                res.send(groups);
+            }
+        });
     });
 
     // Reset database.

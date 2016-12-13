@@ -6,7 +6,7 @@ export default class ProfileGroupEdit extends React.Component {
     super(props);
     this.state = {
       _id: props.user,
-      groups: props.user.groups
+      groups: []
     }
   }
 
@@ -19,6 +19,18 @@ export default class ProfileGroupEdit extends React.Component {
     setUserGroups(this.state, (userData) => {this.setState(userData)});
   }
 
+  /*displayGroups() {
+    getGroups((group) => this.setState({groups: group}));
+    return (
+        <div className="groupList">
+            {this.state.groups.map((gr) => {
+                return (<input type="radio" name="group" value={gr._id}>{gr.name}</input>
+            )})
+            }
+        </div>
+      );
+  }*/
+
   render() {
     return(
       <div className="row">
@@ -28,6 +40,7 @@ export default class ProfileGroupEdit extends React.Component {
                   <div className="panel-body">
                       <form>
                           <div id="groupradios">
+                            //{this.displayGroups()}
                           </div>
                       </form>
                   </div>
