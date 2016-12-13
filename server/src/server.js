@@ -87,7 +87,6 @@ MongoClient.connect(url, function(err, db) {
         }
     }
 
-<<<<<<< HEAD
     function postNewEvent(newEvent, callback){
 
       var blankEvent = {
@@ -117,11 +116,6 @@ MongoClient.connect(url, function(err, db) {
     }
 
     app.post('/event/:eventid', validate({body: EventSchema}), function(req, res) {
-=======
-    app.post('/event/:eventid', validate({
-        body: EventSchema
-    }), function(req, res) {
->>>>>>> 93038f8c5e4d3e06470a814513c09f73e4392068
         //This Function takes an event JSON and writes it to the server. See Eventscreat.js
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
@@ -136,30 +130,12 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
-<<<<<<< HEAD
-    function doSearch(searchInput,, callback){
+    function doSearch(searchInput, callback){
 
       var matchedEvents = [];
       var allEvents = db.collection.('Events').find({}).toArray(function(err, eventList)){
         if(err){
           return callback(err);
-=======
-    app.post('/search*/', validate({
-        body: SearchSchema
-    }), function(req, res) {
-        //var user_id = req.params.userid;
-        //var event_id = req.params.eventid;
-        var unfiltered_results = [];
-        var searchField = req.body.searchInput.trim().toLowerCase();
-        //var userData = readDocument('Users', user_id);
-        //var user_events = userData.events.map((event_id) => readDocument('Events', event_id));
-        var all_events = getCollection('Events');
-        var length = Object.keys(all_events).length;
-        for (var i = 1; i < length; i++) {
-            if (all_events[i].name.toLowerCase().includes(searchField)) {
-                unfiltered_results.push(all_events[i]);
-            }
->>>>>>> 93038f8c5e4d3e06470a814513c09f73e4392068
         }
         for(int i = 0; i < allEvents.length; i++){
           if(allEvents[i].name.toLowerCase().includes(searchInput)){
