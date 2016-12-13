@@ -16,7 +16,7 @@ export default class UserProfile extends React.Component {
 
   componentWillMount() {
     getUserData(this.props.user, (user) => this.setState(
-      {user_name:user.name, user_email:user.email, user_interests:user.interests}));
+      {user_name:user.name, user_email:user.email, user_interests:user.interests, user_photo: user.photo}));
   }
 
   displayGroups() {
@@ -36,6 +36,7 @@ export default class UserProfile extends React.Component {
           <div className="col-md-7">
             <div className="panel panel-default">
               <div className="panel-body" id="user-info">
+                <p><img src={'/user/' + this.props.user + '/photo'} width="250px" className="pull-left"/></p>
                 <Link to="/profileedit" className="btn btn-secondary pull-right" role="button">
                   <span className="glyphicon glyphicon-edit"></span>
                   Edit

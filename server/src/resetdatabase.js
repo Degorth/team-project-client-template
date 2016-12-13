@@ -58,7 +58,7 @@ var initialData = {
       "email": "bjean@umass.edu",
       "groups": [new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000003")], //groups to which user has membership by id
       "interests": ["cats","karate"], //array of strings for now later hopefully tags for classifying groups
-      "photo": "../img/identicon.png",
+      "photo": eventImgPath + "identicon.png",
       "events": [new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000003")] //subscribed events by id
     },
     "2": {

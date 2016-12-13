@@ -269,6 +269,20 @@ MongoClient.connect(url, function(err, db) {
         }
     });
 
+    app.get('/user/:userid/photo', function(req, res) {
+      var userId = new ObjectID(req.params.userid);
+      db.collection('Users').findOne({
+          _id: userId
+      }, function(err, userData) {
+          if (err) {
+              return sendDatabaseError(res, err);
+          }
+          var fileToLoad = fs.readFileSync("./" + userData.photo);
+          res.writeHead(200, {'Content-Type': 'image/jpg'});
+          res.end(fileToLoad, 'binary');
+      });
+    });
+
     app.put('/user/:userid', validate({body: UserSchema}), function(req, res) {
         var userid = req.params.userid;
         var fromUser = getUserIdFromToken(req.get('Authorization'));
