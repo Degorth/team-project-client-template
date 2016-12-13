@@ -124,6 +124,7 @@ MongoClient.connect(url, function(err, db) {
     });
 
     app.post('/search*/', validate({body: SearchSchema}), function(req, res) {
+        db.collection('Events').createIndex({ "$**": "text" });
         db.collection('Events').find({
             $text: {
                 $search: req.body.searchInput.trim(),
