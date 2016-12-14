@@ -11,7 +11,7 @@ import EventsCreate from './components/eventscreate.js';
 import EventPageInfo from './components/eventspageinfo.js';
 import UserProfile from './components/profileuser.js';
 import ProfileEdit from './components/profileedit.js';
-import ProfileGroupEdit from './components/profilegroupedit.js';
+import ProfileGroupSelect from './components/profilegroupselect.js';
 import ResetDatabase from './components/resetdatabase.js';
 import ErrorBanner from './components/errorbanner.js';
 
@@ -72,9 +72,9 @@ class profileeditContainer extends React.Component {
   }
 }
 
-class profilegroupeditContainer extends React.Component {
+class profilegroupselectContainer extends React.Component {
   render() {
-    return(<ProfileGroupEdit user={curUser}/>);
+    return(<ProfileGroupSelect user={curUser}/>);
   }
 }
 
@@ -140,7 +140,7 @@ ReactDOM.render((
             <Route path='events/:eventId/eventInfo' component={eventspageinfoContainer}></Route>
             <Route path='/profileuser' component={profileuserContainer}></Route>
             <Route path='/profileedit' component={profileeditContainer}></Route>
-            <Route path='/profilegroupedit' component ={profilegroupeditContainer}></Route>
+            <Route path='/profilegroupselect' component={profilegroupselectContainer}></Route>
         </Route>
     </Router>
 ), document.getElementById('ugo-app'));

@@ -122,6 +122,13 @@ export function getUserGroups(user_id, cb) {
         cb(JSON.parse(xhr.responseText));
     })
 }
+
+export function setUserGroups(user_id, newGroups, cb) {
+    sendXHR('PUT', '/user/' + user_id + '/groups', newGroups, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    })
+}
+
 export function getGroups(cb) {
     sendXHR('GET', '/groups', undefined, (xhr) => {
         cb(JSON.parse(xhr.responseText));

@@ -76,9 +76,10 @@ export default class ProfileEdit extends React.Component {
                   <div className="panel-footer">
                       <div className="form-group row">
                           <div className="offset-sm-2 col-sm-10">
+                          <Link to="/profileuser">
                               <button className="btn btn-primary" onClick={(e)=>this.handleSubmit(e)}>
                                   <span className="glyphicon glyphicon-pin"></span>
-                                  Save</button>
+                                  Save</button></Link>
                           </div>
                       </div>
                   </div>

@@ -50,7 +50,7 @@ export default class UserProfile extends React.Component {
             <div className="panel panel-default">
               <div className="panel-body">
                 <div className="btn-group pull-right" role="group">
-                  <Link to="/profilegroupedit" className="btn btn-secondary">
+                  <Link to="/profilegroupselect" className="btn btn-secondary">
                     <span className="glyphicon glyphicon-hand-up"></span>Manage My Groups
                   </Link>
                   <a className="btn btn-primary" href="#" role="button">

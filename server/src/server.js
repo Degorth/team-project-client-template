@@ -449,6 +449,27 @@ MongoClient.connect(url, function(err, db) {
         });
     });
 
+    app.put('/user/:userid/groups', function(req, res) {
+      var userId = req.params.userid;
+      var newGroups = req.body;
+      for (var i = 0; i < newGroups.length; i++) {
+        newGroups[i] = new ObjectID(newGroups[i]);
+      }
+      db.collection('Users').updateOne({
+        _id: new ObjectID(userId)
+      }, {
+        $set: {
+          "groups": newGroups
+        }
+      }, function(err) {
+        if(err) {
+          throw err;
+        } else {
+          res.send();
+        }
+      });
+    });
+
     // Reset database.
     app.post('/resetdb', function(req, res) {
         console.log("Resetting database...");
