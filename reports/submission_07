@@ -9,7 +9,17 @@ UGo
           a. Get '/user/:userid/schedule'
           b. Get '/event/:eventid/user/:userid'
       ii. Contributions
-        1.
+        1. Updated the get schedule function. Added event Owner id protection.
+        2. Created the event page info page routing.
+        3. Created a function that returns true if the user is attending the event and false if they are not. Used in the event info page.
+        4. Created a function to remove an event from user's schedule.
+        5. Updated links to function properly on schedule, bored, and search.
+        6. Made a function to render event profile photos.
+        7. Updated react components to display the event profile photos in schedule, upcoming, search, and bored pages.
+        8. Fixed search function to return correct information.
+        9. Fixed the upcoming events function to behave correctly (not blow the node call stack).
+        10.Fixed the I'm Bored page so that it no longer has a React state transition error.
+        11. Changed the I'm Bored page's logic so that it behaves more in line with the expectation.
     b. Tanner Kranich
       i. Responsible for
         1. I'm Bored
@@ -45,10 +55,15 @@ UGo
         3. Attached resetDB button to database
         4. Set ProfileUser and ProfileEdit to use Mongo
      e. Zarina Norton
-        i. Responsible for 
+        i. Responsible for
           1. Home Page
+          2. Implementing a user review system.
+          3. Implementing a way to use the review system to tailer suggested events to user's previous likes and dislikes
+        ii. Contributions
 
 
 --Dropped/unimplemented Features--
 1. Searching for parameters other than name (UI exists, not functional)
 2. All functionality of the Home page
+3. User ability to review events.
+4. I'm bored page generates events based on reviews.
