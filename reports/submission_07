@@ -20,6 +20,7 @@ UGo
         9. Fixed the upcoming events function to behave correctly (not blow the node call stack).
         10.Fixed the I'm Bored page so that it no longer has a React state transition error.
         11. Changed the I'm Bored page's logic so that it behaves more in line with the expectation.
+        12. Updated the date formate of Schedule.
     b. Tanner Kranich
       i. Responsible for
         1. I'm Bored
