@@ -33,7 +33,9 @@ UGo
           a. Get '/user/:userid/upcoming'
           b. Put '/user/:userid/event/:eventid'
       ii. Contributions
-        1.
+        1. Updated get upcoming events framework and most workings of new version
+        2. Added a missing date element to bored.js to show day-date along with the pre-existing time shown
+        3. Fixed time/date interpretation of stored values so correct values are shown to user
     c. Ami Kuehl
       i. Responsible for
         1. Search
