@@ -23,7 +23,7 @@ UGo
     b. Tanner Kranich
       i. Responsible for
         1. I'm Bored
-          a. Get '/user/:userid/upcoming'
+          a. Get '/user/:userid/bored'
           b. Put '/user/:userid/event/:eventid'
       ii. Contributions
         1.
@@ -54,7 +54,18 @@ UGo
         2. Added MongoDB to server requirements
         3. Attached resetDB button to database
         4. Set ProfileUser and ProfileEdit to use Mongo
-     e. Zarina Norton
+     e. Elitza Neytcheva
+      i. Responsible for
+        1. Upcoming
+          a. Get '/user/:userid/upcoming'
+          b. Add dates to Upcoming
+      ii. Contributions
+        1. Upcoming
+          a. Get '/user/:userid/upcoming'
+          b. Added dates to Upcoming
+          c. fixed alignment (now true neutral)
+          d. updated bored to use '/user/:userid/bored' rather than upcoming
+     f. Zarina Norton
         i. Responsible for
           1. Home Page
           2. Implementing a user review system.
