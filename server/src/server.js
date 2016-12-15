@@ -7,7 +7,7 @@ var validate = require('express-jsonschema').validate;
 var EventSchema = require('./schemas/eventSchema.json');
 var SearchSchema = require('./schemas/searchSchema.json');
 var UserSchema = require('./schemas/userSchema.json');
-var GroupSchema = require('./schemas/groupSchema.json');
+//var GroupSchema = require('./schemas/groupSchema.json');
 var mongo_express = require('mongo-express/lib/middleware');
 var mongo_express_config = require('mongo-express/config.default.js');
 var MongoDB = require('mongodb');
@@ -489,7 +489,7 @@ MongoClient.connect(url, function(err, db) {
         });
     });
 
-    app.post('/groups/:userid', validate({body: GroupSchema}), function(req, res) {
+    app.post('/groups/:userid'/*, validate({body: GroupSchema})*/, function(req, res) {
       var userId = req.params.userid;
       var fromUser = getUserIdFromToken(req.get('Authorization'));
       if (fromUser === userId) {
