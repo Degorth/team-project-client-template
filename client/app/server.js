@@ -127,17 +127,23 @@ export function getUpcomingEvents(user_id, cb) {
 export function getUserGroups(user_id, cb) {
     sendXHR('GET', '/user/' + user_id + '/groups', undefined, (xhr) => {
         cb(JSON.parse(xhr.responseText));
-    })
+    });
 }
 
 export function setUserGroups(user_id, newGroups, cb) {
     sendXHR('PUT', '/user/' + user_id + '/groups', newGroups, (xhr) => {
         cb(JSON.parse(xhr.responseText));
-    })
+    });
 }
 
 export function getGroups(cb) {
     sendXHR('GET', '/groups', undefined, (xhr) => {
         cb(JSON.parse(xhr.responseText));
-    })
+    });
+}
+
+export function makeGroup(user_id, groupData, cb) {
+    sendXHR('POST', '/groups/' + user_id, groupData, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
 }

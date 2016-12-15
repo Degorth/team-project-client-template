@@ -12,6 +12,7 @@ import EventPageInfo from './components/eventspageinfo.js';
 import UserProfile from './components/profileuser.js';
 import ProfileEdit from './components/profileedit.js';
 import ProfileGroupSelect from './components/profilegroupselect.js';
+import GroupCreate from './components/groupcreate.js';
 import ResetDatabase from './components/resetdatabase.js';
 import ErrorBanner from './components/errorbanner.js';
 
@@ -78,6 +79,12 @@ class profilegroupselectContainer extends React.Component {
   }
 }
 
+class groupcreateContainer extends React.Component {
+  render() {
+    return(<GroupCreate user={curUser}/>);
+  }
+}
+
 class Navbar extends React.Component {
     render() {
         return (
@@ -141,6 +148,7 @@ ReactDOM.render((
             <Route path='/profileuser' component={profileuserContainer}></Route>
             <Route path='/profileedit' component={profileeditContainer}></Route>
             <Route path='/profilegroupselect' component={profilegroupselectContainer}></Route>
+            <Route path='/groupcreate' component={groupcreateContainer}></Route>
         </Route>
     </Router>
 ), document.getElementById('ugo-app'));

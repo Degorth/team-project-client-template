@@ -8,6 +8,12 @@ UGo
         1. Schedule
           a. Get '/user/:userid/schedule'
           b. Get '/event/:eventid/user/:userid'
+          c. Get '/event/:eventid/user/:userid/photo'
+          d. Get '/user/:userid/event/:eventid/isAttending'
+          e. Function resolveEventObjects()
+          f. Function getEventOwnerInfoForEvent()
+          g. Put '/user/:userid/event/:eventid'
+          h. Delete '/user/:userid/event/:eventid'
       ii. Contributions
         1. Updated the get schedule function. Added event Owner id protection.
         2. Created the event page info page routing.
@@ -20,13 +26,16 @@ UGo
         9. Fixed the upcoming events function to behave correctly (not blow the node call stack).
         10.Fixed the I'm Bored page so that it no longer has a React state transition error.
         11. Changed the I'm Bored page's logic so that it behaves more in line with the expectation.
+        12. Updated the date formate of Schedule and some styling of Schedule.
     b. Tanner Kranich
       i. Responsible for
         1. I'm Bored
           a. Get '/user/:userid/bored'
           b. Put '/user/:userid/event/:eventid'
       ii. Contributions
-        1.
+        1. Updated get upcoming events framework and most workings of new version
+        2. Added a missing date element to bored.js to show day-date along with the pre-existing time shown
+        3. Fixed time/date interpretation of stored values so correct values are shown to user
     c. Ami Kuehl
       i. Responsible for
         1. Search
@@ -42,11 +51,14 @@ UGo
     d. James Coyne
       i. Responsible for
         1. Profile User
-          a. setUserData()
-          b. setUserGroups()
-          c. getGroups()
+          a. GET '/user/:userid'
+          b. GET '/user/:userid/groups'
+          c. GET '/user/:userid/photo'
         2. Profile Editing
           a. PUT '/user/:userid'
+          b. PUT '/user/:userid/groups'
+        2. Group Create
+          a. POST '/groups/:userid'
         3. Server
           a. POST '/resetdb'
       ii. Contributions
@@ -54,7 +66,12 @@ UGo
         2. Added MongoDB to server requirements
         3. Attached resetDB button to database
         4. Set ProfileUser and ProfileEdit to use Mongo
-     e. Elitza Neytcheva
+        5. Created groupSchema for adding new groups
+        6. Added user ability to create groups
+        7. Added user ability to select own group membership
+        8. Pages that edit the profile will now return to the profile page when saved
+        9. Added basic user photo support
+    e. Elitza Neytcheva
       i. Responsible for
         1. Upcoming
           a. Get '/user/:userid/upcoming'
@@ -69,7 +86,7 @@ UGo
         i. Responsible for
           1. Home Page
           2. Implementing a user review system.
-          3. Implementing a way to use the review system to tailer suggested events to user's previous likes and dislikes
+          3. Implementing a way to use the review system to tailor suggested events to user's previous likes and dislikes
         ii. Contributions
 
 
