@@ -42,11 +42,14 @@ UGo
     d. James Coyne
       i. Responsible for
         1. Profile User
-          a. setUserData()
-          b. setUserGroups()
-          c. getGroups()
+          a. GET '/user/:userid'
+          b. GET '/user/:userid/groups'
+          c. GET '/user/:userid/photo'
         2. Profile Editing
           a. PUT '/user/:userid'
+          b. PUT '/user/:userid/groups'
+        2. Group Create
+          a. POST '/groups/:userid'
         3. Server
           a. POST '/resetdb'
       ii. Contributions
@@ -54,11 +57,16 @@ UGo
         2. Added MongoDB to server requirements
         3. Attached resetDB button to database
         4. Set ProfileUser and ProfileEdit to use Mongo
+        5. Created groupSchema for adding new groups
+        6. Added user ability to create groups
+        7. Added user ability to select own group membership
+        8. Pages that edit the profile will now return to the profile page when saved
+        9. Added basic user photo support
      e. Zarina Norton
         i. Responsible for
           1. Home Page
           2. Implementing a user review system.
-          3. Implementing a way to use the review system to tailer suggested events to user's previous likes and dislikes
+          3. Implementing a way to use the review system to tailor suggested events to user's previous likes and dislikes
         ii. Contributions
 
 

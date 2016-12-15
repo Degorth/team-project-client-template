@@ -53,8 +53,9 @@ export default class UserProfile extends React.Component {
                   <Link to="/profilegroupselect" className="btn btn-secondary">
                     <span className="glyphicon glyphicon-hand-up"></span>Manage My Groups
                   </Link>
-                  <a className="btn btn-primary" href="#" role="button">
-                  <span className="glyphicon glyphicon-plus"></span> Create A New Event Group</a>
+                  <Link to="/groupcreate" className="btn btn-primary">
+                    <span className="glyphicon glyphicon-plus"></span> Create A New Event Group
+                  </Link>
                 </div>
                 <div id = "my-groups">
                   <h4>My Groups</h4>

@@ -7,6 +7,7 @@ var validate = require('express-jsonschema').validate;
 var EventSchema = require('./schemas/eventSchema.json');
 var SearchSchema = require('./schemas/searchSchema.json');
 var UserSchema = require('./schemas/userSchema.json');
+var GroupSchema = require('./schemas/groupSchema.json');
 var mongo_express = require('mongo-express/lib/middleware');
 var mongo_express_config = require('mongo-express/config.default.js');
 var MongoDB = require('mongodb');
@@ -464,9 +465,8 @@ MongoClient.connect(url, function(err, db) {
                         }
                     }).toArray(function(err, groups) {
                         if (err) {
-                            throw err;
+                            return sendDatabaseError(res, err);
                         } else {
-                            //console.log("" + groups.toString());
                             res.send(groups);
                         }
                     });
@@ -481,12 +481,48 @@ MongoClient.connect(url, function(err, db) {
     app.get('/groups', function(req, res) {
         db.collection('Groups').find({}).toArray(function(err, groups) {
             if (err) {
-                throw err;
+                return sendDatabaseError(res, err);
             } else {
                 //console.log("" + groups.toString());
                 res.send(groups);
             }
         });
+    });
+
+    app.post('/groups/:userid', validate({body: GroupSchema}), function(req, res) {
+      var userId = req.params.userid;
+      var fromUser = getUserIdFromToken(req.get('Authorization'));
+      if (fromUser === userId) {
+        db.collection('Groups').insertOne({
+          owner: new ObjectID(req.body.owner),
+          name: req.body.name,
+          email: req.body.email,
+          desc: req.body.desc,
+          photo: "<filepath>",
+          events: []
+        }, function (err, ret) {
+          if (err) {
+            return sendDatabaseError(res, err);
+          } else {
+            db.collection('Users').updateOne({
+              _id: new ObjectID(userId)
+            }, {
+              $addToSet: {
+                "groups": ret.insertedId
+              }
+            }, function(err) {
+              if(err) {
+                return sendDatabaseError(res, err);
+              } else {
+                res.status(201);
+                res.send();
+              }
+            });
+          }
+        });
+      } else {
+        res.status(401).end();
+      }
     });
 
     app.put('/user/:userid/groups', function(req, res) {
@@ -503,7 +539,7 @@ MongoClient.connect(url, function(err, db) {
         }
       }, function(err) {
         if(err) {
-          throw err;
+          return sendDatabaseError(res, err);
         } else {
           res.send();
         }
@@ -516,7 +552,7 @@ MongoClient.connect(url, function(err, db) {
         // This is a debug route, so don't do any validation.
         reset(db, function(err) {
             if (err) {
-                throw err;
+                return sendDatabaseError(res, err);
             } else {
                 res.status(200);
             }
