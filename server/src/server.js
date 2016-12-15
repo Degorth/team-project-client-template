@@ -421,7 +421,7 @@ MongoClient.connect(url, function(err, db) {
                 } else {
                     db.collection('Events').find({
                         _id: {
-                            $nin: userData.events
+                            $exists: true
                         }
                     }).toArray(function(err, eventList) {
                         if (err) {
