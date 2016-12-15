@@ -24,7 +24,11 @@ UGo
         2. Create Event
           a. Post '/event/:eventid'
       ii. Contributions
-        1.
+        1. Post '/search*/'
+        2. Post '/event/:eventid'
+        3. credit to Henry for fixing what I broke with those 2 things as well
+        4. updated a few other server functions
+        5. added new info for search and event objects so that they can be used later
     d. James Coyne
       i. Responsible for
         1. Profile User
