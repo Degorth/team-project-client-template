@@ -1,4 +1,5 @@
 import React from 'react';
+import {browserHistory} from 'react-router';
 import {getUserData, setUserData} from '../server.js';
 
 export default class ProfileEdit extends React.Component {
@@ -37,6 +38,7 @@ export default class ProfileEdit extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     setUserData(this.state.userid, this.state, (userData) => {this.setState(userData)});
+    browserHistory.push('/profileuser');
   }
 
   render() {
@@ -76,10 +78,9 @@ export default class ProfileEdit extends React.Component {
                   <div className="panel-footer">
                       <div className="form-group row">
                           <div className="offset-sm-2 col-sm-10">
-                          <Link to="/profileuser">
                               <button className="btn btn-primary" onClick={(e)=>this.handleSubmit(e)}>
                                   <span className="glyphicon glyphicon-pin"></span>
-                                  Save</button></Link>
+                                  Save</button>
                           </div>
                       </div>
                   </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {browserHistory} from 'react-router';
 import {setUserGroups, getGroups} from '../server.js';
 
 export default class ProfileGroupEdit extends React.Component {
@@ -11,35 +12,7 @@ export default class ProfileGroupEdit extends React.Component {
     }
   }
 
-  /*componentWillMount() {
-    getGroups((groups) => this.setState({"groups": groups}));
-  }*/
-
-  /*toggleCheckbox(val) {
-    if(this.groups.has(val)) {
-      this.groups.delete(val);
-    } else {
-      this.groups.push(val);
-    }
-
-    this.groups.sort();
-  }*/
-
-  handleChange(e, value) {
-    e.preventDefault();
-    var groups = this.state.userGroups;
-
-    if (e.target.checked) {
-      groups.push(value)
-    } else {
-      var index = groups.indexOf(value)
-      groups.splice(index, 1)
-    }
-    groups.sort();
-    this.setState({"userGroups": groups})
-  }
-
-  /*handleChange(checkbox, value) {
+  handleChange(checkbox, value) {
       if (checkbox.target.checked) {
           var arrayvar = this.state.userGroups.slice()
           arrayvar.push(value)
@@ -51,11 +24,12 @@ export default class ProfileGroupEdit extends React.Component {
       }
       arrayvar.sort();
       this.setState({userGroups: arrayvar})
-  }*/
+  }
 
   handleSubmit(e) {
     e.preventDefault();
     setUserGroups(this.state._id, this.state.userGroups, (userData) => {this.setState(userData)});
+    browserHistory.push('/profileuser');
   }
 
   displayGroups() {
