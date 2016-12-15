@@ -111,6 +111,13 @@ export function removeEventFromUser(user_id, event_id, cb) {
     });
 }
 
+export function getBoredEvents(user_id, cb) {
+    sendXHR('GET', '/user/' + user_id + '/bored', undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
+}
+
+
 export function getUpcomingEvents(user_id, cb) {
     sendXHR('GET', '/user/' + user_id + '/upcoming', undefined, (xhr) => {
         cb(JSON.parse(xhr.responseText));

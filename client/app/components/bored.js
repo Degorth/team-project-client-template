@@ -1,5 +1,5 @@
 import React from 'react';
-import {getUpcomingEvents, addEventToUser} from './../server.js';
+import {getBoredEvents, addEventToUser} from './../server.js';
 import {Link} from 'react-router';
 import {getMonthOfYear} from './../util.js';
 
@@ -16,7 +16,7 @@ export default class Bored extends React.Component {
 
     refresh() {
         if (this.state.events.length === 0) {
-            getUpcomingEvents(this.props.user, (eventsList) => this.setState({"events": eventsList, "eventObj": eventsList[this.state.randId]}));
+            getBoredEvents(this.props.user, (eventsList) => this.setState({"events": eventsList, "eventObj": eventsList[this.state.randId]}));
         } else {
             var newEventsList = [];
             if (this.state.events.length !== 1) {
