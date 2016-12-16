@@ -37,8 +37,8 @@ export default class ProfileGroupEdit extends React.Component {
     return (
         <div className="form-check">
             {this.state.groups.map((gr) => {
-                return (<label className="form-check-label">
-                  <input type="checkbox" className="form-check-input" onClick={(e) => this.handleChange(e, gr._id)} key={gr._id}/>{gr.name}</label>)
+                return (<li className="list-unstyled"><label className="form-check-label">
+                  <input type="checkbox" className="form-check-input" onClick={(e) => this.handleChange(e, gr._id)} key={gr._id}/>{gr.name}</label></li>)
             })}
         </div>
     );
