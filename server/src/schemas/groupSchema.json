@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "/",
+    "type": "object",
+    "properties": {
+        "owner": {
+          "id": "owner",
+          "type": "string"
+        },
+        "name": {
+          "id": "name",
+          "type": "string"
+        },
+        "email": {
+          "id": "email",
+          "type": "string"
+        },
+        "desc": {
+          "id": "desc",
+          "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "owner",
+        "name",
+        "email",
+        "desc"
+    ]
+}
